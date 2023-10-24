@@ -1,11 +1,17 @@
 import "@/styles/globals.css";
 
-import { Inter } from "next/font/google";
+import { Inter, Bangers } from "next/font/google";
 import { MainNav } from "@/components/main-nav";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+});
+
+export const bangers = Bangers({
+  subsets: ["latin"],
+  weight: ['400'],
+  variable: "--font-bangers",
 });
 
 export const metadata = {
@@ -21,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
+      <body className={`font-sans ${inter.variable} ${bangers.variable}`}>
         <MainNav />
         <div className="flex flex-col container py-8">
           {children}

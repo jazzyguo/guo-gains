@@ -3,19 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  h1 {
-    @apply text-2xl;
-    @apply font-bold;
-  }
-  h2 {
-    @apply text-xl;
-    @apply font-bold;
-  }
-  h3 {
-    @apply text-lg;
-    @apply font-bold;
-  }
-
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -85,5 +72,17 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  h1 {
+    @apply text-2xl;
+    @apply font-bold;
+  }
+  h2 {
+    @apply text-xl;
+    @apply font-bold;
+  }
+  h3 {
+    @apply text-lg;
+    @apply font-bold;
   }
 }

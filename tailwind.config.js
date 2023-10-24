@@ -8,6 +8,10 @@ module.exports = {
       padding: "1.5rem",
     },
     extend: {
+      fontFamily: {
+        sans: ['var(--font-sans)'],
+        bangers: ['var(--font-bangers)'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
