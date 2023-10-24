@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
         <MainNav />
-        <div className="flex flex-col container">
+        <div className="flex flex-col container py-8">
           {children}
         </div>
       </body>
