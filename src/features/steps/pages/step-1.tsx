@@ -1,17 +1,24 @@
 import { useStepsStore } from '@/features/steps';
 import { useRouter } from 'next/navigation';
 
+import { AgeSlider } from '../components/age-slider';
+
 export const Step1Page = () => {
-    const setCurrentStep = useStepsStore(state => state.setCurrentStep)
+    const setLatestStep = useStepsStore(state => state.setLatestStep)
     const router = useRouter();
 
     return (
         <div>
             Step 1
+            <form>
+                <AgeSlider />
+            </form>
             <div onClick={() => {
-                setCurrentStep(2)
+                setLatestStep(2)
                 router.push('/step/2')
-            }}>Click</div>
+            }}>
+                Click
+            </div>
         </div>
     )
 }

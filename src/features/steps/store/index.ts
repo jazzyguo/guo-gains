@@ -2,10 +2,12 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
+export const NUMBER_STEPS = 2
+
 // tracks flow of the steps form
 // as well as the form data across steps
 interface StepsState {
-  currentStep: number;
+  latestStep: number;
   units: "metric" | "imperial";
 }
 
@@ -23,7 +25,7 @@ interface FormState {
 }
 
 type Actions = {
-  setCurrentStep: (step: number) => void;
+  setLatestStep: (step: number) => void;
   updateFormData: <K extends keyof FormState>(
     key: K,
     value: FormState[K],
@@ -45,7 +47,7 @@ const initialFormData: FormState = {
 };
 
 const initialState: StepsState & FormState = {
-  currentStep: 1,
+  latestStep: 1,
   units: "metric",
   ...initialFormData,
 };
@@ -64,8 +66,8 @@ export const useStepsStore = create<
     persist(
       immer((set) => ({
         ...initialState,
-        currentStep: 1,
-        setCurrentStep: (step) => set({ currentStep: step }),
+        latestStep: 1,
+        setLatestStep: (step) => set({ latestStep: step }),
         updateFormData: (key, value) => {
           set((state: FormState) => {
             if (state.hasOwnProperty(key)) {

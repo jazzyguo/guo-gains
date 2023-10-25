@@ -20,19 +20,19 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <body className={`font-sans ${inter.variable} ${bangers.variable}`}>
-        <MainNav />
-        <div className="flex flex-col container py-8">
-          {children}
-        </div>
-      </body>
-    </html>
-  );
-}
+}) => (
+  <html lang="en">
+    <body className={`font-sans ${inter.variable} ${bangers.variable}`}>
+      <MainNav />
+      <div className="flex flex-col container py-8">
+        {children}
+      </div>
+    </body>
+  </html>
+);
+
+export default RootLayout
