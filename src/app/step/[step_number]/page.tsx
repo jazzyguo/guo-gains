@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 "use client"
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
@@ -30,6 +31,7 @@ const StepPage: NextPage<{ params: PageParams }> = ({ params }) => {
     // Load the appropriate step component
     const StepComponent = dynamic(() =>
         import(`@/features/steps/pages/step-${requestedStep}`).then(mod =>
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             mod[`Step${requestedStep}Page`]
         ).catch(_ => {
             // eslint-disable-next-line react/display-name
