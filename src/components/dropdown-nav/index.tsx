@@ -17,7 +17,7 @@ export const DropdownNav = () => (
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger>☰</NavigationMenuTrigger>
+                        <NavigationMenuTrigger className="text-xs font-bold">MENU ☰</NavigationMenuTrigger>
                         <NavigationMenuContent>
                             <Link href="/about" legacyBehavior passHref>
                                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>

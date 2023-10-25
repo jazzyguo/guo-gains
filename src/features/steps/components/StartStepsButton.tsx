@@ -1,21 +1,21 @@
-"use client"
 import { Button } from "@/components/ui/button"
 import { useStepsStore } from '@/features/steps';
 import { memo } from "react";
 import { useRouter } from "next/navigation";
 
 type Props = {
-    text?: string
+    text?: string;
+    className?: string;
 }
 
-const _StartStepsButton = ({ text = 'Get Started' }: Props) => {
+const _StartStepsButton = ({ text = 'Get Started', className }: Props) => {
     const reset = useStepsStore(state => state.reset);
     const router = useRouter()
 
     return (
         <Button
             size="lg"
-            className="text-xl mt-8 p-8 rounded-full"
+            className={`text-xl p-8 rounded-full ${className}`}
             onClick={() => {
                 reset()
                 router.push('/step/1')

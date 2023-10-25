@@ -2,6 +2,24 @@ type Props = {
     className: string
 }
 
+const bigTextClasses = "text-3xl leading-6 md:text-6xl md:leading-[3rem]"
+const smallTextClasses = "text-2xl leading-5 md:text-3xl md:leading-6"
+
+export const LogoText = ({ size = "big" }: { size?: 'big' | 'small' }) => {
+    const isBig = size === 'big'
+    return (
+        <div
+            className={`${isBig ? bigTextClasses : smallTextClasses} text-white font-bangers`}
+        >
+            <p>Guo</p>
+            <p>
+                <span className="invisible">_</span>
+                Gains
+            </p>
+        </div >
+    )
+}
+
 export const Logo = ({ className }: Props) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 58.396 756.243 881.095" className={className}>
         <path
