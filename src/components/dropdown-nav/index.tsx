@@ -29,8 +29,8 @@ export const DropdownNav = () => (
                 </NavigationMenuList>
             </NavigationMenu>
         </div>
-        <div className="hidden md:block">
-            <Link href="/about" className="hover:bg-neutral-200 p-4">
+        <div className="hidden md:block text-white">
+            <Link href="/about" className="hover:opacity-50 p-4">
                 <span className="font-bold text-xl">About</span>
             </Link>
         </div>

@@ -7,6 +7,9 @@ import { immer } from "zustand/middleware/immer";
 interface StepsState {
   currentStep: number;
   units: "metric" | "imperial";
+}
+
+interface FormState {
   age: number;
   gender: "male" | "female" | null;
   height: number | null;
@@ -19,24 +22,14 @@ interface StepsState {
   current_activity_level: string | null;
 }
 
-type FormState = Omit<StepsState, "currentStep" | "units">;
-
 type Actions = {
   setCurrentStep: (step: number) => void;
-  goToNextStep: () => void;
-  goToPreviousStep: () => void;
   updateFormData: <K extends keyof FormState>(
     key: K,
     value: FormState[K],
   ) => void;
   reset: () => void;
 };
-
-type Middleware = [
-  ["zustand/devtools", never],
-  ["zustand/persist", StepsState],
-  ["zustand/immer", never],
-];
 
 const initialFormData: FormState = {
   age: 20,
@@ -51,23 +44,28 @@ const initialFormData: FormState = {
   current_activity_level: null,
 };
 
-const initialState: StepsState = {
+const initialState: StepsState & FormState = {
   currentStep: 1,
   units: "metric",
   ...initialFormData,
 };
 
-export const useStepsStore = create<StepsState & Actions, Middleware>(
+type Middleware = [
+  ["zustand/devtools", never],
+  ["zustand/persist", StepsState],
+  ["zustand/immer", never],
+];
+
+export const useStepsStore = create<
+  StepsState & FormState & Actions,
+  Middleware
+>(
   devtools(
     persist(
       immer((set) => ({
         ...initialState,
         currentStep: 1,
         setCurrentStep: (step) => set({ currentStep: step }),
-        goToNextStep: () =>
-          set((state) => ({ currentStep: state.currentStep + 1 })),
-        goToPreviousStep: () =>
-          set((state) => ({ currentStep: state.currentStep - 1 })),
         updateFormData: (key, value) => {
           set((state: FormState) => {
             if (state.hasOwnProperty(key)) {
