@@ -26,29 +26,31 @@ export const WeightHeightSliderImperial = () => {
 
     return (
         <div className="flex flex-col gap-8">
-            <SliderInput
-                {...register("height_ft")}
-                label="What is your height?"
-                max={MAX_HEIGHT_FT}
-                min={MIN_HEIGHT_FT}
-                tag="ft"
-                value={selectedHeightFt}
-                onAdd={() => handleSelectHeightFt(selectedHeightFt + 1)}
-                onSubtract={() => handleSelectHeightFt(selectedHeightFt - 1)}
-                onSlide={(v) => handleSelectHeightFt(v!)}
+            <div className="flex flex-col md:grid md:grid-cols-2 md:items-end md:gap-6">
+                <SliderInput
+                    {...register("height_ft")}
+                    label="What is your height?"
+                    max={MAX_HEIGHT_FT}
+                    min={MIN_HEIGHT_FT}
+                    tag="ft"
+                    value={selectedHeightFt}
+                    onAdd={() => handleSelectHeightFt(selectedHeightFt + 1)}
+                    onSubtract={() => handleSelectHeightFt(selectedHeightFt - 1)}
+                    onSlide={(v) => handleSelectHeightFt(v!)}
 
-            />
-            <SliderInput
-                {...register("height_inches")}
-                max={12}
-                min={0}
-                tag="inches"
-                value={selectedHeightInches}
-                onAdd={() => handleSelectHeightInches(selectedHeightInches + 1)}
-                onSubtract={() => handleSelectHeightInches(selectedHeightInches - 1)}
-                onSlide={(v) => handleSelectHeightInches(v!)}
+                />
+                <SliderInput
+                    {...register("height_inches")}
+                    max={12}
+                    min={0}
+                    tag="inches"
+                    value={selectedHeightInches}
+                    onAdd={() => handleSelectHeightInches(selectedHeightInches + 1)}
+                    onSubtract={() => handleSelectHeightInches(selectedHeightInches - 1)}
+                    onSlide={(v) => handleSelectHeightInches(v!)}
 
-            />
+                />
+            </div>
             <SliderInput
                 {...register("weight_lbs")}
                 label="What is your weight?"

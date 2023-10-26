@@ -3,7 +3,7 @@ import { GenderSelect } from '@/features/steps/components/gender-select';
 import { WeightHeightSlider } from '@/features/steps/components/weight-height-slider';
 
 export const Step1Page = () => (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-8">
         <AgeSlider />
         <GenderSelect />
         <WeightHeightSlider />

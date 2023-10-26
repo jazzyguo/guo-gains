@@ -45,7 +45,7 @@ export const WeightHeightSlider = () => {
 
     return (
         <div className="pb-10 md:pb-16">
-            <UnitToggle onToggle={onToggle} />
+            <UnitToggle className="mb-8" onToggle={onToggle} />
             {unit === 'metric'
                 ? <WeightHeightSliderMetric />
                 : <WeightHeightSliderImperial />
