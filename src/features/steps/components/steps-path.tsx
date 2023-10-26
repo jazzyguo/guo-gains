@@ -13,7 +13,7 @@ const stepIcons: string[] = ['🚶', '🏃',]
 const stepClasses = 'rounded-full flex items-center justify-center border-2 cursor-pointer'
 const defaultColorClasses = 'border-gray-400 bg-gray-400/70'
 const activeColorClasses = 'border-gray-300 bg-white'
-const completeColorClasses = 'border-violet-400 bg-violet-400/70'
+const completeColorClasses = 'border-primary-accent/70 bg-primary-accent/50'
 
 /**
  * Visual representation of the current step and the steps in total

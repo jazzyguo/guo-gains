@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const PRIMARY_ACCENT = "#8B5CF6"
 module.exports = {
   darkMode: ["class"],
   content: ["./src/**/*.tsx"],
@@ -46,6 +47,7 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        'primary-accent': PRIMARY_ACCENT,
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -73,7 +75,7 @@ module.exports = {
         "pulsing": "pulsing 2s linear infinite",
       },
       backgroundImage: {
-        'gradient-primary': 'linear-gradient(45deg, #8B5CF6, #0F172A)',
+        'gradient-primary': `linear-gradient(45deg, ${PRIMARY_ACCENT}, #0F172A)`,
       },
     },
   },

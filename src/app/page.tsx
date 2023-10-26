@@ -8,7 +8,7 @@ const HomePage = () => (
   <div className="flex flex-col gap-6 text-center items-center max-w-screen-sm mx-auto lg:mt-16">
     <h1 className="text-4xl lg:text-6xl font-bold text-center lg:leading-tight">
       {`Create your unique `}
-      <span className="text-violet-500">Fitness Program </span>
+      <span className="text-primary-accent">Fitness Program </span>
       {` to achieve those Gains`}
       <br />
       <Lottie loop animationData={bicepAnimation} className="w-14 mt-4 lg:w-20 mx-auto" />

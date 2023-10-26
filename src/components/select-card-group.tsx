@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { type FieldValues, type RegisterOptions, useFormContext, useController } from "react-hook-form";
 import { FormError } from '@/components/form-error';
 
-const selectedClass = "border-2 border-violet-400 bg-violet-400/70"
+const selectedClass = "border-2 border-primary-accent/70 bg-primary-accent/50"
 
 type SelectCardProps = {
     value: string | number;
