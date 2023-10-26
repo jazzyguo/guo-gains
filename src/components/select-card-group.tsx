@@ -52,11 +52,10 @@ type SelectCardGroupProps = {
         "maxLength" | "minLength" | "validate" | "required"
     >
     onSelect: (value: string | number) => void;
+    label: string;
 }
 
-const MAX_COLUMNS = 3
-
-const _SelectCardGroup = ({ defaultValue, options, name, rules, onSelect, }: SelectCardGroupProps) => {
+const _SelectCardGroup = ({ defaultValue, options, name, rules, onSelect, label }: SelectCardGroupProps) => {
     const { control } = useFormContext();
 
     const {
@@ -73,12 +72,18 @@ const _SelectCardGroup = ({ defaultValue, options, name, rules, onSelect, }: Sel
         onChange(value)
     };
 
-    const numColumns = Math.min(options.length, MAX_COLUMNS);
-
     return (
         <div className="flex flex-col">
-            <FormError name={name} />
-            <div className={`flex flex-col sm:grid sm:grid-cols-${numColumns} sm:grid-flow-col gap-6`}>
+            <Label htmlFor={name} className="mb-4">
+                {label}
+            </Label>
+            <FormError name={name} className="mb-4" />
+            <div
+                className={`grid gap-6 w-full`}
+                style={{
+                    gridTemplateColumns: `repeat(auto-fill, minmax(${options.length >= 3 ? '150px' : '250px'} , 1fr))`
+                }}
+            >
                 {options.map(({ value: optionValue, label, renderContent }) => (
                     <SelectCard
                         {...field}

@@ -26,6 +26,7 @@ export const GenderSelect = () => {
             name="gender"
             rules={{ required: "Gender is required" }}
             onSelect={handleSelectGender as (value: string | number) => void}
+            label="What is your gender?"
         />
     );
 };
