@@ -78,7 +78,8 @@ export const StepFormWizard = ({ currentStep }: Props) => {
     return (
         <FormProvider {...methods}>
             <form
-                className="w-full max-w-screen-sm mx-auto"
+                // pb to account for sticky bottom nav
+                className="w-full max-w-screen-sm mx-auto pb-[140px] md:pb-[80px]"
                 onSubmit={methods.handleSubmit(onSubmit)}
             >
                 <StepComponent />

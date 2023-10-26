@@ -1,12 +1,14 @@
 import { useStepsStore } from '@/features/steps';
-import { SelectCardGroup } from '@/components/select-card-group';
+import { SelectCardGroup, type SelectGroupOptions } from '@/components/select-card-group';
 
-const genderOptions: { value: string; label: string }[] = [{
+const genderOptions: SelectGroupOptions = [{
     value: 'male',
-    label: "Male"
+    label: "Male",
+    renderContent: <span>🙋‍♂️</span>,
 }, {
     value: 'female',
-    label: 'Female'
+    label: 'Female',
+    renderContent: <span>🙋‍♀️</span>,
 }]
 
 export const GenderSelect = () => {

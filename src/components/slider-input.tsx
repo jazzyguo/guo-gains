@@ -2,6 +2,9 @@ import { IoIosAdd, IoIosRemove } from 'react-icons/io'
 import { Slider } from '@/components/ui/slider';
 import { Button } from './ui/button'
 import { memo } from 'react';
+import { Label } from '@/components/ui/label';
+
+import { FormError } from '@/components/form-error';
 
 type Props = {
     value: number,
@@ -11,6 +14,8 @@ type Props = {
     onAdd: () => void,
     onSubtract: () => void,
     onSlide: (e: number | undefined) => void,
+    name: string;
+    label?: string;
 }
 
 const _SliderInput = ({
@@ -21,11 +26,19 @@ const _SliderInput = ({
     onAdd,
     onSubtract,
     onSlide,
+    name,
+    label,
 }: Props) => {
     const canAdd = value + 1 <= max
     const canSubtract = value - 1 >= min
     return (
         <div className="flex flex-col gap-6">
+            <div>
+                <Label htmlFor={name}>
+                    {label}
+                </Label>
+                <FormError name={name} />
+            </div>
             <div className="flex flex-col gap-2 w-min mx-auto">
                 <div className="flex items-center gap-6">
                     <Button

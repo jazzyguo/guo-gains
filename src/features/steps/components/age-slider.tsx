@@ -1,10 +1,7 @@
 import { useCallback } from 'react';
 import { useStepsStore } from '@/features/steps';
-import { Label } from '@/components/ui/label';
 import { SliderInput } from '@/components/slider-input';
 import { useFormContext } from 'react-hook-form'
-import { FormError } from '@/components/form-error';
-
 
 export const AgeSlider = () => {
     const { register, setError, clearErrors } = useFormContext() // retrieve all hook methods
@@ -27,12 +24,9 @@ export const AgeSlider = () => {
 
     return (
         <div className="flex flex-col space-y-3">
-            <Label htmlFor="age">
-                How old are you? 🎂
-            </Label>
-            <FormError name="age" />
             <SliderInput
                 {...register("age")}
+                label="How old are you? 🎂"
                 max={99}
                 min={16}
                 tag="years old"

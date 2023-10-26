@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { memo } from "react"
+import { type ReactElement, memo } from "react"
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { type FieldValues, type RegisterOptions, useFormContext, useController } from "react-hook-form";
@@ -12,11 +12,12 @@ type SelectCardProps = {
     handleSelect: (value: unknown) => void
     isSelected: boolean;
     label: string;
+    renderContent?: ReactElement;
 }
 
-const SelectCard = ({ handleSelect, isSelected, label, value, ...rest }: SelectCardProps) => (
+const SelectCard = ({ handleSelect, isSelected, label, value, renderContent, ...rest }: SelectCardProps) => (
     <Card
-        className={`${isSelected ? selectedClass : ''}`}
+        className={`${isSelected ? selectedClass : ''} w-full`}
         onClick={handleSelect}
     >
         <Label className="cursor-pointer">
@@ -26,16 +27,20 @@ const SelectCard = ({ handleSelect, isSelected, label, value, ...rest }: SelectC
                 className="hidden"
                 type="radio"
             />
-            <div>
-                <span className="text-xl">{label}</span>
+            <div className="flex flex-col items-center gap-4 justify-center p-4 md:p-10 rounded-full">
+                <p className="text-6xl">
+                    {renderContent}
+                </p>
+                <span className="text-lg md:text-xl">{label}</span>
             </div>
         </Label>
     </Card>
 )
 
-type SelectGroupOptions = {
+export type SelectGroupOptions = {
     value: string | number;
-    label: string
+    label: string;
+    renderContent?: ReactElement;
 }[]
 
 type SelectCardGroupProps = {
@@ -48,6 +53,8 @@ type SelectCardGroupProps = {
     >
     onSelect: (value: string | number) => void;
 }
+
+const MAX_COLUMNS = 3
 
 const _SelectCardGroup = ({ defaultValue, options, name, rules, onSelect, }: SelectCardGroupProps) => {
     const { control } = useFormContext();
@@ -66,11 +73,13 @@ const _SelectCardGroup = ({ defaultValue, options, name, rules, onSelect, }: Sel
         onChange(value)
     };
 
+    const numColumns = Math.min(options.length, MAX_COLUMNS);
+
     return (
         <div className="flex flex-col">
             <FormError name={name} />
-            <div>
-                {options.map(({ value: optionValue, label }) => (
+            <div className={`flex flex-col sm:grid sm:grid-cols-${numColumns} sm:grid-flow-col gap-6`}>
+                {options.map(({ value: optionValue, label, renderContent }) => (
                     <SelectCard
                         {...field}
                         key={optionValue}
@@ -78,6 +87,7 @@ const _SelectCardGroup = ({ defaultValue, options, name, rules, onSelect, }: Sel
                         handleSelect={() => handleSelect(optionValue)}
                         isSelected={value === optionValue}
                         label={label}
+                        renderContent={renderContent}
                     />
                 ))}
             </div>
