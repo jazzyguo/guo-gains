@@ -1,3 +1,4 @@
+import { type MouseEvent } from 'react';
 import { useStepsStore } from '@/features/steps';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -26,14 +27,18 @@ export const StepsNavFooter = ({ currentStep }: Props) => {
 
     const isLastStep = currentStep === NUMBER_STEPS
 
-    const handlePrevious = () => {
+    const handlePrevious = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+
         // latestStep remains the same
         if (currentStep > 1) {
             router.push(`/step/${currentStep - 1}`)
         }
     };
 
-    const handleNext = () => {
+    const handleNext = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+
         // we set the latest step to the max of currentStep + 1 or the current latest step
         // so if the user is on step 3 and goes back to step 1 and clicks next again,
         // it will take the max of 1+1 or 3
@@ -42,7 +47,9 @@ export const StepsNavFooter = ({ currentStep }: Props) => {
         router.push(`/step/${stepToGo}`)
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+
         console.log('submitting')
     }
 
