@@ -23,7 +23,7 @@ export const AgeSlider = () => {
         } else {
             clearErrors('age')
         }
-    }, [updateFormData, setError])
+    }, [updateFormData, setError, clearErrors])
 
     return (
         <div className="flex flex-col space-y-3">
@@ -39,7 +39,7 @@ export const AgeSlider = () => {
                 value={currentAge}
                 onAdd={() => setAge(currentAge + 1)}
                 onSubtract={() => setAge(currentAge - 1)}
-                onSlide={(e) => Number.isNaN(e) ? undefined : setAge(e)}
+                onSlide={(e) => Number.isNaN(e) ? undefined : setAge(e ?? 0)}
             />
         </div>
     )
