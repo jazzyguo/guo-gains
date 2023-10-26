@@ -80,7 +80,7 @@ const _SliderInput = ({
             <Slider
                 defaultValue={[value]}
                 value={[value]}
-                onValueChange={(v) => Number.isNaN(v) ? undefined : onSlide(v[0] as number ?? 0)}
+                onValueChange={(v) => Number.isNaN(v) ? undefined : onSlide(v[0]! ?? 0)}
                 max={max}
                 min={min}
                 step={1}
