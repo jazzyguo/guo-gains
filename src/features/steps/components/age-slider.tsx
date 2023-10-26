@@ -9,10 +9,10 @@ import { FormError } from '@/components/form-error';
 export const AgeSlider = () => {
     const { register, setError, clearErrors } = useFormContext() // retrieve all hook methods
 
-    const currentAge = useStepsStore(state => state.age)
+    const selectedAge = useStepsStore(state => state.age)
     const updateFormData = useStepsStore(state => state.updateFormData)
 
-    const setAge = useCallback((age: number) => {
+    const handleSelectAge = useCallback((age: number) => {
         updateFormData('age', age)
 
         if (age >= 80) {
@@ -28,18 +28,18 @@ export const AgeSlider = () => {
     return (
         <div className="flex flex-col space-y-3">
             <Label htmlFor="age">
-                How old are you?
+                How old are you? 🎂
             </Label>
             <FormError name="age" />
             <SliderInput
-                {...register("age", { required: "Age is required." })}
+                {...register("age")}
                 max={99}
                 min={16}
                 tag="years old"
-                value={currentAge}
-                onAdd={() => setAge(currentAge + 1)}
-                onSubtract={() => setAge(currentAge - 1)}
-                onSlide={(e) => Number.isNaN(e) ? undefined : setAge(e ?? 0)}
+                value={selectedAge}
+                onAdd={() => handleSelectAge(selectedAge + 1)}
+                onSubtract={() => handleSelectAge(selectedAge - 1)}
+                onSlide={(e) => Number.isNaN(e) ? undefined : handleSelectAge(e ?? 0)}
             />
         </div>
     )

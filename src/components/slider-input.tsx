@@ -29,6 +29,7 @@ const _SliderInput = ({
             <div className="flex flex-col gap-2 w-min mx-auto">
                 <div className="flex items-center gap-6">
                     <Button
+                        type="button"
                         onClick={(e) => {
                             e.preventDefault()
 
@@ -46,6 +47,7 @@ const _SliderInput = ({
                         {value}
                     </div>
                     <Button
+                        type="button"
                         onClick={(e) => {
                             e.preventDefault()
 

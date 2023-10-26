@@ -1,57 +1,25 @@
-import { type MouseEvent } from 'react';
-import { useStepsStore } from '@/features/steps';
-import { useRouter } from 'next/navigation';
+import { memo, type MouseEvent } from 'react';
+import { useStepsStore, type FormState } from '@/features/steps';
 import { Button } from '@/components/ui/button';
 import { StepsPath } from './steps-path';
-import { useFormState } from "react-hook-form";
-
-import { NUMBER_STEPS } from '@/features/steps';
+import { useFormState, } from "react-hook-form";
 
 type Props = {
-    currentStep: number
+    currentStep: number;
+    isLastStep: boolean;
+    handlePrevious: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 /**
  * Footer to identify current step of the steps form 
  * as well as going to next/previous step
  */
-export const StepsNavFooter = ({ currentStep }: Props) => {
+const _StepsNavFooter = ({ currentStep, isLastStep, handlePrevious }: Props) => {
     const { errors } = useFormState()
 
-    const router = useRouter();
-
     const latestStep = useStepsStore(state => state.latestStep);
-    const setLatestStep = useStepsStore(state => state.setLatestStep)
 
     const canSubmit = !Object.keys(errors).length
-
-    const isLastStep = currentStep === NUMBER_STEPS
-
-    const handlePrevious = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-
-        // latestStep remains the same
-        if (currentStep > 1) {
-            router.push(`/step/${currentStep - 1}`)
-        }
-    };
-
-    const handleNext = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-
-        // we set the latest step to the max of currentStep + 1 or the current latest step
-        // so if the user is on step 3 and goes back to step 1 and clicks next again,
-        // it will take the max of 1+1 or 3
-        const stepToGo = Math.max(latestStep, currentStep + 1)
-        setLatestStep(stepToGo)
-        router.push(`/step/${stepToGo}`)
-    };
-
-    const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-
-        console.log('submitting')
-    }
 
     return (
         <div
@@ -68,7 +36,7 @@ export const StepsNavFooter = ({ currentStep }: Props) => {
                 )}
                 <StepsPath currentStep={currentStep} latestStep={latestStep} />
                 <Button
-                    onClick={isLastStep ? handleSubmit : handleNext}
+                    type="submit"
                     className={`${canSubmit && 'bg-gradient-primary'} hover:bg-blue-600 text-white px-8 py-4 rounded-md md:text-xl ml-auto`}
                     disabled={!canSubmit}
                 >
@@ -78,3 +46,5 @@ export const StepsNavFooter = ({ currentStep }: Props) => {
         </div>
     );
 }
+
+export const StepsNavFooter = memo(_StepsNavFooter)
