@@ -32,7 +32,7 @@ const FormSchema = z.object({
   current_activity_level: z.string().nullable().default(null),
 });
 
-type FormState = z.infer<typeof FormSchema>;
+export type FormState = z.infer<typeof FormSchema>;
 
 type Actions = {
   setLatestStep: (step: number) => void;
