@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
+import { getImperialHeightFromMetric, convertWeight } from "@/lib/unitsConvert";
 
 export const NUMBER_STEPS = 2;
 
@@ -13,11 +14,11 @@ interface StepsState {
 export interface FormState {
   age: number;
   gender: "male" | "female" | null;
-  height_cm: number | null;
-  height_ft: number | null;
-  height_inches: number | null;
-  weight_kg: number | null;
-  weight_lbs: number | null;
+  height_cm: number;
+  height_ft: number;
+  height_inches: number;
+  weight_kg: number;
+  weight_lbs: number;
   body_fat_range: [number, number] | null;
   fitness_goal: string | null;
   target_workout_days: number;
@@ -35,15 +36,18 @@ type Actions = {
 
 const BASE_HEIGHT_CM = 175;
 const BASE_WEIGHT_KG = 70;
+export const [BASE_HEIGHT_FT, BASE_HEIGHT_INCHES] =
+  getImperialHeightFromMetric(BASE_HEIGHT_CM);
+export const BASE_WEIGHT_LBS = convertWeight(BASE_WEIGHT_KG, "metric");
 
 const initialFormData: FormState = {
   age: 20,
   gender: null,
   height_cm: BASE_HEIGHT_CM,
-  height_ft: null,
-  height_inches: null,
+  height_ft: BASE_HEIGHT_FT,
+  height_inches: BASE_HEIGHT_INCHES,
   weight_kg: BASE_WEIGHT_KG,
-  weight_lbs: null,
+  weight_lbs: BASE_WEIGHT_LBS,
   body_fat_range: null,
   fitness_goal: null,
   target_workout_days: 3,

@@ -11,7 +11,6 @@ export const WeightHeightSliderMetric = () => {
 
     const updateFormData = useStepsStore(state => state.updateFormData)
 
-    // clear metric values and populate imperial ones with converted units
     const handleSelectWeightKg = (value: number) => {
         updateFormData('weight_kg', value)
     };
@@ -28,9 +27,9 @@ export const WeightHeightSliderMetric = () => {
                 max={MAX_HEIGHT_CM}
                 min={MIN_HEIGHT_CM}
                 tag="cm"
-                value={selectedHeightCm!}
-                onAdd={() => handleSelectHeightCm(selectedHeightCm! + 1)}
-                onSubtract={() => handleSelectHeightCm(selectedHeightCm! - 1)}
+                value={selectedHeightCm}
+                onAdd={() => handleSelectHeightCm(selectedHeightCm + 1)}
+                onSubtract={() => handleSelectHeightCm(selectedHeightCm - 1)}
                 onSlide={(v) => handleSelectHeightCm(v!)}
 
             />
@@ -40,9 +39,9 @@ export const WeightHeightSliderMetric = () => {
                 max={MAX_WEIGHT_KG}
                 min={MIN_WEIGHT_KG}
                 tag="kg"
-                value={selectedWeightKg!}
-                onAdd={() => handleSelectWeightKg(selectedWeightKg! + 1)}
-                onSubtract={() => handleSelectWeightKg(selectedWeightKg! - 1)}
+                value={selectedWeightKg}
+                onAdd={() => handleSelectWeightKg(selectedWeightKg + 1)}
+                onSubtract={() => handleSelectWeightKg(selectedWeightKg - 1)}
                 onSlide={(v) => handleSelectWeightKg(v!)}
 
             />

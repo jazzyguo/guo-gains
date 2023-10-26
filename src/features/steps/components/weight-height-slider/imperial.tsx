@@ -12,15 +12,12 @@ export const WeightHeightSliderImperial = () => {
 
     const updateFormData = useStepsStore(state => state.updateFormData)
 
-    // clear imperial values and populate metric ones with converted units
     const handleSelectWeight = (value: number) => {
         updateFormData('weight_lbs', value)
-
     };
 
     const handleSelectHeightFt = (value: number) => {
         updateFormData('height_ft', value)
-
     };
 
     const handleSelectHeightInches = (value: number) => {
@@ -35,9 +32,9 @@ export const WeightHeightSliderImperial = () => {
                 max={MAX_HEIGHT_FT}
                 min={MIN_HEIGHT_FT}
                 tag="ft"
-                value={selectedHeightFt!}
-                onAdd={() => handleSelectHeightFt(selectedHeightFt! + 1)}
-                onSubtract={() => handleSelectHeightFt(selectedHeightFt! - 1)}
+                value={selectedHeightFt}
+                onAdd={() => handleSelectHeightFt(selectedHeightFt + 1)}
+                onSubtract={() => handleSelectHeightFt(selectedHeightFt - 1)}
                 onSlide={(v) => handleSelectHeightFt(v!)}
 
             />
@@ -46,9 +43,9 @@ export const WeightHeightSliderImperial = () => {
                 max={12}
                 min={0}
                 tag="inches"
-                value={selectedHeightInches!}
-                onAdd={() => handleSelectHeightInches(selectedHeightInches! + 1)}
-                onSubtract={() => handleSelectHeightInches(selectedHeightInches! - 1)}
+                value={selectedHeightInches}
+                onAdd={() => handleSelectHeightInches(selectedHeightInches + 1)}
+                onSubtract={() => handleSelectHeightInches(selectedHeightInches - 1)}
                 onSlide={(v) => handleSelectHeightInches(v!)}
 
             />
@@ -58,9 +55,9 @@ export const WeightHeightSliderImperial = () => {
                 min={MIN_WEIGHT_LBS}
                 max={MAX_WEIGHT_LBS}
                 tag="lbs"
-                value={selectedWeightLbs!}
-                onAdd={() => handleSelectWeight(selectedWeightLbs! + 1)}
-                onSubtract={() => handleSelectWeight(selectedWeightLbs! - 1)}
+                value={selectedWeightLbs}
+                onAdd={() => handleSelectWeight(selectedWeightLbs + 1)}
+                onSubtract={() => handleSelectWeight(selectedWeightLbs - 1)}
                 onSlide={(v) => handleSelectWeight(v!)}
             />
         </div>

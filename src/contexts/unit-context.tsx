@@ -1,6 +1,6 @@
 import { createContext, useContext, type ReactNode, useState, type Dispatch, type SetStateAction, useEffect } from 'react';
 
-type Unit = 'metric' | 'imperial';
+export type Unit = 'metric' | 'imperial';
 
 const LOCAL_STORAGE_KEY = 'selectedUnits';
 
