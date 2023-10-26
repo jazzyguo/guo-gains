@@ -1,6 +1,7 @@
 import { useStepsStore } from '@/features/steps';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { StepsPath } from './steps-path';
 
 import { NUMBER_STEPS } from '@/features/steps';
 
@@ -42,22 +43,25 @@ export const StepsNavFooter = ({ currentStep }: Props) => {
 
     return (
         <div
-            className="fixed bottom-0 left-0 w-full bg-neutral-100 border-t border-gray-200 p-4 flex justify-between w-full"
+            className="pt-16 md:pt-0 fixed bottom-0 left-0 w-full bg-neutral-100 border-t border-gray-200 w-full"
         >
-            {currentStep > 1 && (
+            <div className="container py-4 mx-auto flex justify-between items-center relative">
+                {currentStep > 1 && (
+                    <Button
+                        onClick={handlePrevious}
+                        className="bg-neutral-500 text-white px-8 py-4 rounded-md md:text-xl"
+                    >
+                        Previous
+                    </Button>
+                )}
+                <StepsPath currentStep={currentStep} latestStep={latestStep} />
                 <Button
-                    onClick={handlePrevious}
-                    className="bg-neutral-500 text-white px-8 py-4 rounded-md md:text-xl"
+                    onClick={isLastStep ? handleSubmit : handleNext}
+                    className="bg-gradient-primary hover:bg-blue-600 text-white px-8 py-4 rounded-md md:text-xl ml-auto"
                 >
-                    Previous
+                    {isLastStep ? 'Submit' : 'Next'}
                 </Button>
-            )}
-            <Button
-                onClick={isLastStep ? handleSubmit : handleNext}
-                className="bg-gradient-primary hover:bg-blue-600 text-white px-8 py-4 rounded-md md:text-xl ml-auto"
-            >
-                {isLastStep ? 'Submit' : 'Next'}
-            </Button>
+            </div>
         </div>
     );
 }
