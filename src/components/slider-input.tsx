@@ -29,7 +29,9 @@ const _SliderInput = ({
             <div className="flex flex-col gap-2 w-min mx-auto">
                 <div className="flex items-center gap-6">
                     <Button
-                        onClick={() => {
+                        onClick={(e) => {
+                            e.preventDefault()
+
                             if (canSubtract) {
                                 onSubtract()
                             }
@@ -44,7 +46,9 @@ const _SliderInput = ({
                         {value}
                     </div>
                     <Button
-                        onClick={() => {
+                        onClick={(e) => {
+                            e.preventDefault()
+
                             if (canAdd) {
                                 onAdd()
                             }

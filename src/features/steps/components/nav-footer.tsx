@@ -2,6 +2,7 @@ import { useStepsStore } from '@/features/steps';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { StepsPath } from './steps-path';
+import { useFormState } from "react-hook-form";
 
 import { NUMBER_STEPS } from '@/features/steps';
 
@@ -14,10 +15,14 @@ type Props = {
  * as well as going to next/previous step
  */
 export const StepsNavFooter = ({ currentStep }: Props) => {
+    const { errors } = useFormState()
+
     const router = useRouter();
 
     const latestStep = useStepsStore(state => state.latestStep);
     const setLatestStep = useStepsStore(state => state.setLatestStep)
+
+    const canSubmit = !Object.keys(errors).length
 
     const isLastStep = currentStep === NUMBER_STEPS
 
@@ -57,7 +62,8 @@ export const StepsNavFooter = ({ currentStep }: Props) => {
                 <StepsPath currentStep={currentStep} latestStep={latestStep} />
                 <Button
                     onClick={isLastStep ? handleSubmit : handleNext}
-                    className="bg-gradient-primary hover:bg-blue-600 text-white px-8 py-4 rounded-md md:text-xl ml-auto"
+                    className={`${canSubmit && 'bg-gradient-primary'} hover:bg-blue-600 text-white px-8 py-4 rounded-md md:text-xl ml-auto`}
+                    disabled={!canSubmit}
                 >
                     {isLastStep ? 'Submit' : 'Next'}
                 </Button>

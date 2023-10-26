@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
-export const NUMBER_STEPS = 2
+export const NUMBER_STEPS = 2;
 
 // tracks flow of the steps form
 // as well as the form data across steps
@@ -11,7 +11,7 @@ interface StepsState {
   units: "metric" | "imperial";
 }
 
-interface FormState {
+export interface FormState {
   age: number;
   gender: "male" | "female" | null;
   height: number | null;
