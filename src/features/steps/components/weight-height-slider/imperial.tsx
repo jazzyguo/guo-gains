@@ -41,7 +41,7 @@ export const WeightHeightSliderImperial = () => {
                 />
                 <SliderInput
                     {...register("height_inches")}
-                    max={12}
+                    max={11}
                     min={0}
                     tag="inches"
                     value={selectedHeightInches}
