@@ -8,16 +8,16 @@ export const NUMBER_STEPS = 2;
 // as well as the form data across steps
 interface StepsState {
   latestStep: number;
-  units: "metric" | "imperial";
 }
 
 export interface FormState {
   age: number;
   gender: "male" | "female" | null;
-  height: number | null;
+  height_cm: number | null;
   height_ft: number | null;
   height_inches: number | null;
-  weight: number | null;
+  weight_kg: number | null;
+  weight_lbs: number | null;
   body_fat_range: [number, number] | null;
   fitness_goal: string | null;
   target_workout_days: number;
@@ -33,13 +33,17 @@ type Actions = {
   reset: () => void;
 };
 
+const BASE_HEIGHT_CM = 175;
+const BASE_WEIGHT_KG = 70;
+
 const initialFormData: FormState = {
   age: 20,
   gender: null,
-  height: 175,
+  height_cm: BASE_HEIGHT_CM,
   height_ft: null,
   height_inches: null,
-  weight: 70,
+  weight_kg: BASE_WEIGHT_KG,
+  weight_lbs: null,
   body_fat_range: null,
   fitness_goal: null,
   target_workout_days: 3,
@@ -48,7 +52,6 @@ const initialFormData: FormState = {
 
 const initialState: StepsState & FormState = {
   latestStep: 1,
-  units: "metric",
   ...initialFormData,
 };
 

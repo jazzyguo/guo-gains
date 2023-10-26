@@ -2,6 +2,7 @@
 
 import { type NextPage } from "next";
 import { StepFormWizard } from '@/features/steps/components/step-form-wizard';
+import { UnitProvider } from "@/contexts/unit-context";
 
 interface PageParams {
     step_number: string;
@@ -13,7 +14,9 @@ const StepPage: NextPage<{ params: PageParams }> = ({ params }) => {
     const currentStep = parseInt(step_number, 10);
 
     return (
-        <StepFormWizard currentStep={currentStep} />
+        <UnitProvider>
+            <StepFormWizard currentStep={currentStep} />
+        </UnitProvider>
     )
 };
 

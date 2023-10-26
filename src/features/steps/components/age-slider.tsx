@@ -33,7 +33,7 @@ export const AgeSlider = () => {
                 value={selectedAge}
                 onAdd={() => handleSelectAge(selectedAge + 1)}
                 onSubtract={() => handleSelectAge(selectedAge - 1)}
-                onSlide={(e) => Number.isNaN(e) ? undefined : handleSelectAge(e ?? 0)}
+                onSlide={(v) => handleSelectAge(v!)}
             />
         </div>
     )
