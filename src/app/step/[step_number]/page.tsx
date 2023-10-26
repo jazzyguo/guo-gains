@@ -3,7 +3,6 @@
 import { type NextPage } from "next";
 import { StepFormWizard } from '@/features/steps/components/step-form-wizard';
 
-
 interface PageParams {
     step_number: string;
 }

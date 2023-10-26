@@ -1,9 +1,9 @@
-
 import { useEffect, type MouseEvent, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { useStepsStore, type FormState, NUMBER_STEPS } from '@/features/steps';
 import { useForm, FormProvider } from 'react-hook-form';
+import { Loading } from '@/components/ui/loading';
 
 import { StepsNavFooter } from '@/features/steps';
 
@@ -72,8 +72,10 @@ export const StepFormWizard = ({ currentStep }: Props) => {
             router.push(`/step/${latestStep}`)
             // eslint-disable-next-line react/display-name
             return () => <></>;
-        })
-    );
+        }), {
+        loading: Loading,
+        ssr: false,
+    });
 
     return (
         <FormProvider {...methods}>

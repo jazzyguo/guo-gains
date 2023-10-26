@@ -1,7 +1,5 @@
-export const Step2Page = () => {
-    return (
-        <div>
-            Step 2
-        </div>
-    )
-}
+export const Step2Page = () => (
+    <div>
+        Step 2
+    </div>
+)
