@@ -27,8 +27,6 @@ const StepPage: NextPage<{ params: PageParams }> = ({ params }) => {
 
     const currentStep = parseInt(step_number, 10);
 
-    console.log({ store: useStepsStore() })
-
     // prevent users from inputting steps in the url greater than their latest step
     useEffect(() => {
         if (currentStep > latestStep) {
@@ -49,10 +47,10 @@ const StepPage: NextPage<{ params: PageParams }> = ({ params }) => {
     );
 
     return (
-        <>
+        <div className="w-full max-w-screen-sm mx-auto">
             <StepComponent />
             <StepsNavFooter currentStep={currentStep} />
-        </>
+        </div>
     )
 
 };

@@ -1,7 +1,7 @@
+import { memo } from 'react';
 import { useRouter } from 'next/navigation';
 import { NUMBER_STEPS } from '@/features/steps';
-import { BarPath } from './bar-path';
-import { memo } from 'react';
+import { BarPath } from '@/components/bar-path';
 
 type Props = {
     currentStep: number;
