@@ -1,7 +1,5 @@
 import { memo } from 'react';
 import { useRouter } from 'next/navigation';
-import { NUMBER_STEPS } from '@/features/steps';
-import { BarPath } from '@/components/bar-path';
 
 type Props = {
     currentStep: number;
@@ -15,6 +13,12 @@ const stepClasses = 'w-12 h-12 rounded-full flex items-center justify-center bor
 const defaultColorClasses = 'border-gray-400 bg-gray-400/70'
 const activeColorClasses = 'border-gray-300 bg-white'
 const completeColorClasses = 'border-primary-accent/70 bg-primary-accent/50'
+
+const BarPath = ({ active = false, className }: { active?: boolean, className?: string }) => (
+    <div
+        className={`absolute w-10 h-1 ${active ? 'bg-primary-accent/70' : 'bg-gray-400'} ${className} top-0 bottom-0 my-auto z-[-1] rounded-full`}
+    />
+)
 
 /**
  * Visual representation of the current step and the steps in total
@@ -39,8 +43,6 @@ const _StepsPath = ({ currentStep, latestStep, className }: Props) => {
             {stepIcons.map((stepIcon, idx) => {
                 const isActiveStep = idx + 1 === currentStep
                 const isCompleteStep = latestStep > idx + 1
-                const isFirstStep = idx === 0
-                const isLastStep = idx + 1 === NUMBER_STEPS
                 return (
                     <>
                         <div

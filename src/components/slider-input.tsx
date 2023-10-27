@@ -34,7 +34,7 @@ const _SliderInput = ({
     return (
         <div className="flex flex-col gap-6">
             <div>
-                <Label htmlFor={name}>
+                <Label htmlFor={name} className='whitespace-nowrap'>
                     {label}
                 </Label>
                 <FormError name={name} />
