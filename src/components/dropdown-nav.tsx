@@ -10,6 +10,7 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import MenuIcon from '@mui/icons-material/Menu';
 
 export const DropdownNav = () => (
     <>
@@ -17,7 +18,9 @@ export const DropdownNav = () => (
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger className="text-xs font-bold">MENU ☰</NavigationMenuTrigger>
+                        <NavigationMenuTrigger className="text-xs">
+                            <MenuIcon />
+                        </NavigationMenuTrigger>
                         <NavigationMenuContent>
                             <Link href="/about" legacyBehavior passHref>
                                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
