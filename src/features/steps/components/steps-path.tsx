@@ -35,8 +35,9 @@ const _StepsPath = ({ currentStep, latestStep, className }: Props) => {
         <div
             className={`flex ${className} items-center text-3xl w-[270px] gap-8 mx-auto absolute left-0 right-0`}
         >
-            <div>🧍</div>
-            <BarPath className="left-[40px]" active={latestStep > 1} />
+            <div className="relative">
+                🧍
+            </div>
             {stepIcons.map((stepIcon, idx) => {
                 const isActiveStep = idx + 1 === currentStep
                 const isCompleteStep = latestStep > idx + 1
@@ -47,6 +48,10 @@ const _StepsPath = ({ currentStep, latestStep, className }: Props) => {
                             onClick={() => handleClickStep(idx + 1)}
                             className="relative bg-neutral-100"
                         >
+                            {idx === 0 &&
+                                // line coming into the first step
+                                <BarPath className="right-[40px]" active={latestStep > 1} />
+                            }
                             <div
                                 onClick={() => handleClickStep(idx + 1)}
                                 className={`
@@ -66,13 +71,18 @@ const _StepsPath = ({ currentStep, latestStep, className }: Props) => {
                                 // line connecting the steps to represent completion
                                 <BarPath active={isCompleteStep} className={"left-[40px]"} />
                             }
+                            {idx + 1 === NUMBER_STEPS &&
+                                // line coming out the end of the last step
+                                <BarPath className="left-[40px]" active={latestStep > 1} />
+                            }
                         </div>
                     </>
-
                 )
             })}
-            <BarPath className="right-[40px]" />
-            <div>🏋️</div>
+            <div className="relative">
+                🏋️
+                <BarPath className="right-[40px]" />
+            </div>
         </div>
     );
 }
