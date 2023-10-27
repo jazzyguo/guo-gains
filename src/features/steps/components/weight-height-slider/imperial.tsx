@@ -26,7 +26,7 @@ export const WeightHeightSliderImperial = () => {
 
     return (
         <div className="flex flex-col gap-8">
-            <div className="flex flex-col xs:grid xs:grid-cols-2 xs:items-end xs:gap-6">
+            <div className="flex flex-col xs:grid xs:grid-cols-2 xs:items-end xs:gap-4">
                 <SliderInput
                     {...register("height_ft")}
                     label="What is your height?"

@@ -1,12 +1,16 @@
-Created using T3 stack
-(TypeScript, React, Nextjs app router, Tailwind, Prisma)
+Fully mobile responsive web app created using T3 stack
+(TypeScript, React, Nextjs, Tailwind, Prisma, tRPC)
 
-Shadcn/ui and Lottie for ui
+Shadcn/ui for ui
 
-Zustand for state management
+Zustand/context for state management
+
+react-hook-form for form validation/error handling 
 
 Input some physical information like your age, weight, and height and your fitness goals in order to get tailored workout plans and caloric needs to help achieve those gains.
 
-Excercises can be swapped out for similiar ones to best suit your preferences as well. 
+Alternate excercises for each variation can be viewed as well to best suit your preferences.
 
-Created workout plans can be shared with unique urls.
+Generated workout plans can be shared with unique urls.
+
+[Live Demo](https://guo-gains.vercel.app/)

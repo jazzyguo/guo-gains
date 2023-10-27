@@ -51,12 +51,12 @@ const _SliderInput = ({
                             }
                         }}
                         variant="outline"
-                        className="rounded-full w-10 h-10 p-2 text-2xl"
+                        className="rounded-full w-8 h-8 sm:w-10 sm:h-10 p-2 text-2xl"
                         disabled={!canSubtract}
                     >
                         <IoIosRemove />
                     </Button>
-                    <div className="text-5xl font-bold">
+                    <div className="text-4xl sm:text-5xl font-bold">
                         {value}
                     </div>
                     <Button
@@ -69,7 +69,7 @@ const _SliderInput = ({
                             }
                         }}
                         variant="outline"
-                        className="rounded-full w-10 h-10 p-2 text-2xl"
+                        className="rounded-full w-8 h-8 sm:w-10 sm:h-10 p-2 text-2xl"
                         disabled={!canAdd}
                     >
                         <IoIosAdd />
