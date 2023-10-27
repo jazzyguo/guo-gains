@@ -10,7 +10,7 @@ module.exports = {
     },
     extend: {
       screens: {
-        'xs': '425px',
+        'xs': '375px',
       },
       fontFamily: {
         sans: ['var(--font-sans)'],
