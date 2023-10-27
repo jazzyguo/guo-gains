@@ -26,7 +26,7 @@ export const WeightHeightSliderImperial = () => {
 
     return (
         <div className="flex flex-col gap-8">
-            <div className="flex flex-col md:grid md:grid-cols-2 md:items-end md:gap-6">
+            <div className="flex flex-col xs:grid xs:grid-cols-2 xs:items-end xs:gap-6">
                 <SliderInput
                     {...register("height_ft")}
                     label="What is your height?"
@@ -37,7 +37,6 @@ export const WeightHeightSliderImperial = () => {
                     onAdd={() => handleSelectHeightFt(selectedHeightFt + 1)}
                     onSubtract={() => handleSelectHeightFt(selectedHeightFt - 1)}
                     onSlide={(v) => handleSelectHeightFt(v!)}
-
                 />
                 <SliderInput
                     {...register("height_inches")}
@@ -48,7 +47,6 @@ export const WeightHeightSliderImperial = () => {
                     onAdd={() => handleSelectHeightInches(selectedHeightInches + 1)}
                     onSubtract={() => handleSelectHeightInches(selectedHeightInches - 1)}
                     onSlide={(v) => handleSelectHeightInches(v!)}
-
                 />
             </div>
             <SliderInput

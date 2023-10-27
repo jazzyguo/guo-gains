@@ -9,6 +9,9 @@ module.exports = {
       padding: "1.5rem",
     },
     extend: {
+      screens: {
+        'xs': '425px',
+      },
       fontFamily: {
         sans: ['var(--font-sans)'],
         bangers: ['var(--font-bangers)'],
