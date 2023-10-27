@@ -65,16 +65,9 @@ const _StepsPath = ({ currentStep, latestStep, className }: Props) => {
                                     }`}
                             >
                                 {stepIcon}
-
                             </div>
-                            {idx + 1 !== NUMBER_STEPS &&
-                                // line connecting the steps to represent completion
-                                <BarPath active={isCompleteStep} className={"left-[40px]"} />
-                            }
-                            {idx + 1 === NUMBER_STEPS &&
-                                // line coming out the end of the last step
-                                <BarPath className="left-[40px]" active={latestStep > 1} />
-                            }
+                            {/* line connecting the steps to represent completion */}
+                            <BarPath active={isCompleteStep} className={"left-[40px]"} />
                         </div>
                     </>
                 )
