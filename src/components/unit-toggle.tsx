@@ -35,11 +35,11 @@ export const UnitToggle = ({ onToggle, className }: Props) => {
             <Button
                 type="button"
                 className={`
-                ${unit === 'imperial'
+                    ${unit === 'imperial'
                         ? 'bg-primary-accent/70 border-primary-accent'
                         : 'bg-gray-300 border-gray-400'
                     } 
-                border border-l-0 text-white font-semibold px-4 py-2 rounded-r-lg rounded-l-none`
+                    border border-l-0 text-white font-semibold px-4 py-2 rounded-r-lg rounded-l-none`
                 }
                 onClick={handleToggle}
             >

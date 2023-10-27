@@ -11,7 +11,7 @@ export const MainNav = () => (
                     <LogoText size="small" />
                 </div>
             </Link>
-            <div>
+            <div className="z-20">
                 <DropdownNav />
             </div>
         </div>
