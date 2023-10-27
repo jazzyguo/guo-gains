@@ -1,5 +1,5 @@
 import { memo, type MouseEvent } from 'react';
-import { useStepsStore, type FormState } from '@/features/steps';
+import { useStepsStore } from '@/features/steps';
 import { Button } from '@/components/ui/button';
 import { StepsPath } from './steps-path';
 import { useFormState, } from "react-hook-form";
@@ -23,9 +23,14 @@ const _StepsNavFooter = ({ currentStep, isLastStep, handlePrevious }: Props) => 
 
     return (
         <div
-            className="pt-16 md:pt-0 fixed bottom-0 left-0 w-full bg-neutral-100 border-t border-gray-200 w-full"
+            className="fixed bottom-0 left-0 w-full bg-neutral-100 border-t border-gray-200 w-full flex flex-col items-center py-4"
         >
-            <div className="container py-4 mx-auto flex justify-between items-center relative">
+            {!canSubmit &&
+                <span className="text-sm text-red-500 pb-4">
+                    Please fix errors
+                </span>
+            }
+            <div className="container mx-auto flex justify-between items-center relative">
                 {currentStep > 1 && (
                     <Button
                         onClick={handlePrevious}
@@ -34,7 +39,11 @@ const _StepsNavFooter = ({ currentStep, isLastStep, handlePrevious }: Props) => 
                         Previous
                     </Button>
                 )}
-                <StepsPath currentStep={currentStep} latestStep={latestStep} />
+                <StepsPath
+                    className="hidden md:flex"
+                    currentStep={currentStep}
+                    latestStep={latestStep}
+                />
                 <Button
                     type="submit"
                     className={`${canSubmit && 'bg-gradient-primary'} hover:bg-blue-600 text-white px-8 py-4 rounded-md md:text-xl ml-auto`}

@@ -28,7 +28,7 @@ const RootLayout = ({
   <html lang="en">
     <body className={`font-sans ${inter.variable} ${bangers.variable}`}>
       <MainNav />
-      <div className="flex flex-col container py-8">
+      <div className="flex flex-col">
         {children}
       </div>
     </body>

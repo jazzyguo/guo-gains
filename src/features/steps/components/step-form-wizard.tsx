@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { useStepsStore, type FormState, NUMBER_STEPS } from '@/features/steps';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Loading } from '@/components/ui/loading';
-
+import { MobileHeader } from './mobile-header';
 import { StepsNavFooter } from '@/features/steps';
 
 type Props = {
@@ -81,10 +81,17 @@ export const StepFormWizard = ({ currentStep }: Props) => {
         <FormProvider {...methods}>
             <form
                 // pb to account for sticky bottom nav
-                className="w-full max-w-screen-sm mx-auto pb-[140px] md:pb-[80px]"
+                className="w-full max-w-screen-sm mx-auto pb-36"
                 onSubmit={methods.handleSubmit(onSubmit)}
             >
-                <StepComponent />
+                {/* StepsPath is rendered on top for mobile, and inside the nav footer on desktop */}
+                <MobileHeader
+                    currentStep={currentStep}
+                    latestStep={latestStep}
+                />
+                <div className="container pt-6 md:pt-8" >
+                    <StepComponent />
+                </div>
                 <StepsNavFooter
                     currentStep={currentStep}
                     handlePrevious={handlePrevious}

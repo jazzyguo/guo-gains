@@ -5,7 +5,7 @@ import { StartStepsButton } from "@/features/steps"
 import bicepAnimation from '@/animations/bicep.json';
 
 const HomePage = () => (
-  <div className="flex flex-col gap-6 text-center items-center max-w-screen-sm mx-auto lg:mt-16">
+  <div className="container py-8 flex flex-col gap-6 text-center items-center max-w-screen-sm mx-auto lg:mt-16">
     <h1 className="text-4xl lg:text-6xl font-bold text-center lg:leading-tight">
       {`Create your unique `}
       <span className="text-primary-accent">Fitness Program </span>

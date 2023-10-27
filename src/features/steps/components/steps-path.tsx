@@ -6,6 +6,7 @@ import { BarPath } from '@/components/bar-path';
 type Props = {
     currentStep: number;
     latestStep: number;
+    className?: string;
 }
 
 const stepIcons: string[] = ['🚶', '🏃',]
@@ -20,7 +21,7 @@ const completeColorClasses = 'border-primary-accent/70 bg-primary-accent/50'
  * Clicking can navigate to steps as long as the user doesn't try to access an uncomplete step
  * active, complete, and uncomplete steps all have different color schemes
  */
-const _StepsPath = ({ currentStep, latestStep }: Props) => {
+const _StepsPath = ({ currentStep, latestStep, className }: Props) => {
     const router = useRouter();
 
     // only allows navigation to completed step - stepTo < latestStep
@@ -32,7 +33,7 @@ const _StepsPath = ({ currentStep, latestStep }: Props) => {
 
     return (
         <div
-            className="flex items-center text-3xl absolute left-0 right-0 bottom-[72px] md:bottom-auto w-max gap-8 mx-auto"
+            className={`flex ${className} items-center text-3xl w-[270px] gap-8 mx-auto absolute left-0 right-0`}
         >
             <div>🧍</div>
             <BarPath className="left-[40px]" active={latestStep > 1} />

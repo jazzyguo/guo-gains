@@ -1,7 +1,7 @@
 import { Logo, LogoText } from "@/components/logo"
 
 const AboutPage = () => (
-    <div className="text-lg text-neutral-500 flex flex-col items-center max-w-screen-sm mx-auto">
+    <div className="container py-8 text-lg text-neutral-500 flex flex-col items-center max-w-screen-sm mx-auto">
         <div className="w-full bg-gradient-primary py-8 mb-8 flex">
             <div className="flex items-center mx-auto">
                 <Logo className="w-[120px] h-[120px] md:w-[200px] md:h-[200px]" />
