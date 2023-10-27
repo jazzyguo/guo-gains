@@ -11,7 +11,7 @@ type Props = {
 
 const stepIcons: string[] = ['🚶', '🏃',]
 
-const stepClasses = 'rounded-full flex items-center justify-center border-2 cursor-pointer'
+const stepClasses = 'w-12 h-12 rounded-full flex items-center justify-center border-2 cursor-pointer'
 const defaultColorClasses = 'border-gray-400 bg-gray-400/70'
 const activeColorClasses = 'border-gray-300 bg-white'
 const completeColorClasses = 'border-primary-accent/70 bg-primary-accent/50'
@@ -35,12 +35,12 @@ const _StepsPath = ({ currentStep, latestStep, className }: Props) => {
         <div
             className={`flex ${className} items-center text-3xl w-[270px] gap-8 mx-auto absolute left-0 right-0`}
         >
-            <div className="relative">
-                🧍
-            </div>
+            <div className="relative">🧍</div>
             {stepIcons.map((stepIcon, idx) => {
                 const isActiveStep = idx + 1 === currentStep
                 const isCompleteStep = latestStep > idx + 1
+                const isFirstStep = idx === 0
+                const isLastStep = idx + 1 === NUMBER_STEPS
                 return (
                     <>
                         <div
@@ -50,13 +50,13 @@ const _StepsPath = ({ currentStep, latestStep, className }: Props) => {
                         >
                             {idx === 0 &&
                                 // line coming into the first step
-                                <BarPath className="right-[40px]" active={latestStep > 1} />
+                                <BarPath className={`right-[40px]`} active={latestStep > 1} />
                             }
                             <div
                                 onClick={() => handleClickStep(idx + 1)}
                                 className={`
                                 ${stepClasses} 
-                                ${isActiveStep ? 'w-12 h-12 animate-pulsing' : 'w-11 h-11'}
+                                ${isActiveStep && 'animate-pulsing'}
                                 ${isCompleteStep
                                         ? completeColorClasses
                                         : isActiveStep
@@ -67,15 +67,12 @@ const _StepsPath = ({ currentStep, latestStep, className }: Props) => {
                                 {stepIcon}
                             </div>
                             {/* line connecting the steps to represent completion */}
-                            <BarPath active={isCompleteStep} className={"left-[40px]"} />
+                            <BarPath active={isCompleteStep} className={`left-[40px]`} />
                         </div>
                     </>
                 )
             })}
-            <div className="relative">
-                🏋️
-                <BarPath className="right-[40px]" />
-            </div>
+            <div className="relative">🏋️</div>
         </div>
     );
 }
