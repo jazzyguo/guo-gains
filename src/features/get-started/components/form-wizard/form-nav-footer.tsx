@@ -1,7 +1,7 @@
 import { memo, type MouseEvent } from 'react';
-import { useStepsStore } from '@/features/steps';
+import { useStepsStore } from '@/features/get-started';
 import { Button } from '@/components/ui/button';
-import { StepsPath } from './steps-path';
+import { FormPath } from './form-path';
 import { useFormState, } from "react-hook-form";
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
  * Footer to identify current step of the steps form 
  * as well as going to next/previous step
  */
-const _StepsNavFooter = ({ currentStep, isLastStep, handlePrevious }: Props) => {
+const _FormNavFooter = ({ currentStep, isLastStep, handlePrevious }: Props) => {
     const { errors } = useFormState()
 
     const latestStep = useStepsStore(state => state.latestStep);
@@ -39,7 +39,7 @@ const _StepsNavFooter = ({ currentStep, isLastStep, handlePrevious }: Props) => 
                         Previous
                     </Button>
                 )}
-                <StepsPath
+                <FormPath
                     className="hidden md:flex"
                     currentStep={currentStep}
                     latestStep={latestStep}
@@ -56,4 +56,4 @@ const _StepsNavFooter = ({ currentStep, isLastStep, handlePrevious }: Props) => 
     );
 }
 
-export const StepsNavFooter = memo(_StepsNavFooter)
+export const FormNavFooter = memo(_FormNavFooter)

@@ -1,9 +1,9 @@
 import Lottie from 'lottie-react'
-import { useStepsStore } from '@/features/steps';
 import { SelectCardGroup, type SelectGroupOptions } from '@/components/select-card-group';
 import bicepAnimation from '@/animations/bicep.json';
 import fireAnimation from '@/animations/fire.json'
 import balanceAnimation from '@/animations/balance.json'
+import { useStepsStore } from '../store';
 
 const goalOptions: SelectGroupOptions = [{
     value: 'lose-weight',

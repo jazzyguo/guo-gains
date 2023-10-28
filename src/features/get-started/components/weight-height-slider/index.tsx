@@ -4,7 +4,7 @@ import { WeightHeightSliderMetric } from './metric';
 import { useUnit, type Unit } from '@/contexts/unit-context';
 import { getImperialHeightFromMetric, convertWeight, getMetricHeightFromImperial } from '@/lib/unitsConvert'
 import { UnitToggle } from '@/components/unit-toggle';
-import { useStepsStore } from '@/features/steps';
+import { useStepsStore } from '../../store';
 
 export const MAX_HEIGHT_CM = 240
 export const MAX_WEIGHT_KG = 175

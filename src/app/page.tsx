@@ -1,7 +1,7 @@
 "use client"
 
 import Lottie from 'lottie-react'
-import { StartStepsButton } from "@/features/steps"
+import { GetStartedButton } from '@/components/get-started-button';
 import bicepAnimation from '@/animations/bicep.json';
 
 const HomePage = () => (
@@ -18,7 +18,7 @@ const HomePage = () => (
     >
       Discover your untapped potential and steer your fitness journey towards greatness using our cutting-edge fitness program generator. Whether you&apos;re striving to build muscle, shed weight, or boost your overall wellness, our intuitive app is your perfect companion. Take the reins of your health and fitness transformation – it all begins here.
     </p>
-    <StartStepsButton className="md:mt-8" />
+    <GetStartedButton className="md:mt-8" />
   </div >
 )
 

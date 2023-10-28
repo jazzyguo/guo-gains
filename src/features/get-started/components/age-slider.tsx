@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
-import { useStepsStore } from '@/features/steps';
-import { SliderInput } from '@/components/slider-input';
 import { useFormContext } from 'react-hook-form'
+import { useStepsStore } from '../store';
+import { SliderInput } from '@/components/slider-input';
 
 export const AgeSlider = () => {
     const { setError, clearErrors } = useFormContext()

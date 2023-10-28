@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useStepsStore } from '@/features/steps';
+import { useStepsStore } from '../store';
 import { SliderInput } from '@/components/slider-input';
 
 export const DaysCountSlider = () => {

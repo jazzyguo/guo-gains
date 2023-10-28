@@ -1,4 +1,4 @@
-import { useStepsStore } from '@/features/steps';
+import { useStepsStore } from '../store';
 import { SelectCardGroup, type SelectGroupOptions } from '@/components/select-card-group';
 
 const genderOptions: SelectGroupOptions = [{
@@ -11,7 +11,7 @@ const genderOptions: SelectGroupOptions = [{
     renderContent: <span>🙋‍♀️</span>,
 }]
 
-export const GenderSelect = () => {
+export const GenderSelector = () => {
     const selectedGender = useStepsStore(state => state.gender)
     const updateFormData = useStepsStore(state => state.updateFormData)
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { type NextPage } from "next";
-import { StepFormWizard } from '@/features/steps/components/step-form-wizard';
+import { GetStartedFormWizard } from '@/features/get-started';
 import { UnitProvider } from "@/contexts/unit-context";
 
 interface PageParams {
@@ -15,7 +15,7 @@ const StepPage: NextPage<{ params: PageParams }> = ({ params }) => {
 
     return (
         <UnitProvider>
-            <StepFormWizard currentStep={currentStep} />
+            <GetStartedFormWizard currentStep={currentStep} />
         </UnitProvider>
     )
 };

@@ -1,15 +1,17 @@
 import { useEffect, type MouseEvent, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
-import { useStepsStore, type FormState, NUMBER_STEPS } from '@/features/steps';
+import { useStepsStore, type FormState, NUMBER_STEPS } from '@/features/get-started';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Loading } from '@/components/ui/loading';
-import { MobileHeader } from './mobile-header';
-import { StepsNavFooter } from '@/features/steps';
+import { FormMobileHeader } from './form-mobile-header';
+import { FormNavFooter } from './form-nav-footer';
 
 type Props = {
     currentStep: number;
 }
+
+export const BASE_URL = '/get-started'
 
 /**
  * Renders the appropriate step in the current form
@@ -18,7 +20,7 @@ type Props = {
  * 
  * react-hook-form handles form validation/errors
  */
-export const StepFormWizard = ({ currentStep }: Props) => {
+export const GetStartedFormWizard = ({ currentStep }: Props) => {
     const router = useRouter();
 
     const methods = useForm<FormState>()
@@ -31,7 +33,7 @@ export const StepFormWizard = ({ currentStep }: Props) => {
     // prevent users from inputting steps in the url greater than their latest step
     useEffect(() => {
         if (currentStep > latestStep) {
-            router.push(`/step/${latestStep}`)
+            router.push(`${BASE_URL}/${latestStep}`)
         }
     }, [router, latestStep, currentStep])
 
@@ -41,7 +43,7 @@ export const StepFormWizard = ({ currentStep }: Props) => {
 
         // latestStep remains the same
         if (currentStep > 1) {
-            router.push(`/step/${currentStep - 1}`)
+            router.push(`${BASE_URL}/${currentStep - 1}`)
         }
     }, [currentStep, router]);
 
@@ -51,7 +53,7 @@ export const StepFormWizard = ({ currentStep }: Props) => {
         // it will take the max of 1+1 or 3
         const stepToGo = Math.max(latestStep, currentStep + 1)
         setLatestStep(stepToGo)
-        router.push(`/step/${stepToGo}`)
+        router.push(`${BASE_URL}/${stepToGo}`)
     }, [latestStep, currentStep, router, setLatestStep])
 
     const onSubmit = useCallback((values: FormState) => {
@@ -65,11 +67,11 @@ export const StepFormWizard = ({ currentStep }: Props) => {
 
     // Load the appropriate step component
     const StepComponent = dynamic(() =>
-        import(`@/features/steps/pages/step-${currentStep}`).then(mod =>
+        import(`@/features/get-started/pages/step-${currentStep}`).then(mod =>
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
             mod[`Step${currentStep}Page`]
         ).catch(_ => {
-            router.push(`/step/${latestStep}`)
+            router.push(`${BASE_URL}/${latestStep}`)
             // eslint-disable-next-line react/display-name
             return () => <></>;
         }), {
@@ -85,14 +87,14 @@ export const StepFormWizard = ({ currentStep }: Props) => {
                 onSubmit={methods.handleSubmit(onSubmit)}
             >
                 {/* StepsPath is rendered on top for mobile, and inside the nav footer on desktop */}
-                <MobileHeader
+                <FormMobileHeader
                     currentStep={currentStep}
                     latestStep={latestStep}
                 />
                 <div className="container pt-6 md:pt-8" >
                     <StepComponent />
                 </div>
-                <StepsNavFooter
+                <FormNavFooter
                     currentStep={currentStep}
                     handlePrevious={handlePrevious}
                     isLastStep={isLastStep}

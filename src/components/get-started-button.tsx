@@ -1,15 +1,16 @@
-import { Button } from "@/components/ui/button"
-import { useStepsStore } from '@/features/steps';
 import { memo } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button"
+import { useStepsStore } from '@/features/get-started';
 import { cn } from "@/lib/utils"
+import { BASE_URL } from "@/features/get-started";
 
 type Props = {
     text?: string;
     className?: string;
 }
 
-const _StartStepsButton = ({ text = 'Get Started', className }: Props) => {
+const _GetStartedButton = ({ text = 'Get Started', className }: Props) => {
     const reset = useStepsStore(state => state.reset);
     const router = useRouter()
 
@@ -19,7 +20,7 @@ const _StartStepsButton = ({ text = 'Get Started', className }: Props) => {
             className={cn("text-xl p-8 rounded-full", className)}
             onClick={() => {
                 reset()
-                router.push('/step/1')
+                router.push(`${BASE_URL}/1`)
             }}
         >
             {text}
@@ -27,4 +28,4 @@ const _StartStepsButton = ({ text = 'Get Started', className }: Props) => {
     )
 }
 
-export const StartStepsButton = memo(_StartStepsButton)
+export const GetStartedButton = memo(_GetStartedButton)

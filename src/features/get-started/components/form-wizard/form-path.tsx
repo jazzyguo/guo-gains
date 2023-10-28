@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { useRouter } from 'next/navigation';
 import { cn } from "@/lib/utils"
+import { BASE_URL } from '.';
 
 type Props = {
     currentStep: number;
@@ -26,13 +27,13 @@ const BarPath = ({ active = false, className }: { active?: boolean, className?: 
  * Clicking can navigate to steps as long as the user doesn't try to access an uncomplete step
  * active, complete, and uncomplete steps all have different color schemes
  */
-const _StepsPath = ({ currentStep, latestStep, className }: Props) => {
+const _FormPath = ({ currentStep, latestStep, className }: Props) => {
     const router = useRouter();
 
     // only allows navigation to completed step - stepTo < latestStep
     const handleClickStep = (step: number) => {
         if (step <= latestStep) {
-            router.push(`/step/${step}`)
+            router.push(`${BASE_URL}/${step}`)
         }
     }
 
@@ -81,4 +82,4 @@ const _StepsPath = ({ currentStep, latestStep, className }: Props) => {
     );
 }
 
-export const StepsPath = memo(_StepsPath)
+export const FormPath = memo(_FormPath)

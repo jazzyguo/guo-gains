@@ -1,4 +1,4 @@
-import { useStepsStore } from '@/features/steps';
+import { useStepsStore } from '../../store';
 import { SliderInput } from '@/components/slider-input';
 import { MAX_HEIGHT_CM, MIN_HEIGHT_CM, MAX_WEIGHT_KG, MIN_WEIGHT_KG } from '.';
 

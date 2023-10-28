@@ -1,4 +1,4 @@
-import { useStepsStore } from '@/features/steps';
+import { useStepsStore } from '../store';
 import { SelectCardGroup, type SelectGroupOptions } from '@/components/select-card-group';
 
 const cardContentClass = "text-sm text-center"
