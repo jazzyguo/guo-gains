@@ -1,22 +1,25 @@
 import { IoIosAdd, IoIosRemove } from 'react-icons/io'
 import { Slider } from '@/components/ui/slider';
 import { Button } from './ui/button'
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { Label } from '@/components/ui/label';
+import { type FieldValues, type RegisterOptions, useFormContext, useController } from 'react-hook-form'
 
 import { FormError } from '@/components/form-error';
 
 type Props = {
+    name: string;
     value: number,
     max: number,
     min: number,
     tag: string
-    onAdd: () => void,
-    onSubtract: () => void,
-    onSlide: (e: number | undefined) => void,
-    name: string;
+    onChange: (value: number) => void,
     label?: string;
     labelClassName?: string;
+    rules?: Pick<
+        RegisterOptions<FieldValues>,
+        "maxLength" | "minLength" | "validate" | "required"
+    >
 }
 
 const _SliderInput = ({
@@ -24,15 +27,41 @@ const _SliderInput = ({
     max,
     min,
     tag,
-    onAdd,
-    onSubtract,
-    onSlide,
     name,
     label,
     labelClassName,
+    onChange,
+    rules,
 }: Props) => {
+    const { control, setValue } = useFormContext()
+
+    const { field } = useController({
+        control,
+        name,
+        defaultValue: value,
+        rules,
+    });
+
+    const handleSlide = useCallback((newValue: number) => {
+        onChange(newValue)
+        setValue(name, newValue)
+    }, [name, setValue, onChange])
+
+    const onSubtract = useCallback(() => {
+        const updatedValue = value - 1
+        onChange(updatedValue)
+        field.onChange(updatedValue)
+    }, [onChange, field, value])
+
+    const onAdd = useCallback(() => {
+        const updatedValue = value + 1
+        onChange(updatedValue)
+        field.onChange(updatedValue)
+    }, [onChange, field, value])
+
     const canAdd = value + 1 <= max
     const canSubtract = value - 1 >= min
+
     return (
         <div className="flex flex-col gap-6">
             <div>
@@ -82,7 +111,7 @@ const _SliderInput = ({
             <Slider
                 defaultValue={[value]}
                 value={[value]}
-                onValueChange={(v) => Number.isNaN(v) ? undefined : onSlide(v[0]! ?? 0)}
+                onValueChange={(v) => Number.isNaN(v) ? undefined : handleSlide(v[0]! ?? 0)}
                 max={max}
                 min={min}
                 step={1}

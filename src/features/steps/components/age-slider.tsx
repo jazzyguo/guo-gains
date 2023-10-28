@@ -4,7 +4,7 @@ import { SliderInput } from '@/components/slider-input';
 import { useFormContext } from 'react-hook-form'
 
 export const AgeSlider = () => {
-    const { register, setError, clearErrors } = useFormContext()
+    const { setError, clearErrors } = useFormContext()
 
     const selectedAge = useStepsStore(state => state.age)
     const updateFormData = useStepsStore(state => state.updateFormData)
@@ -25,15 +25,13 @@ export const AgeSlider = () => {
     return (
         <div className="flex flex-col space-y-3">
             <SliderInput
-                {...register("age")}
+                name="age"
                 label="How old are you? 🎂"
                 max={99}
                 min={16}
                 tag="years old"
                 value={selectedAge}
-                onAdd={() => handleSelectAge(selectedAge + 1)}
-                onSubtract={() => handleSelectAge(selectedAge - 1)}
-                onSlide={(v) => handleSelectAge(v!)}
+                onChange={handleSelectAge}
             />
         </div>
     )
