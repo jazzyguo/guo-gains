@@ -57,6 +57,8 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
     }, [latestStep, currentStep, router, setLatestStep])
 
     const onSubmit = useCallback((values: FormState) => {
+        // only pass in the units provided for the relevant selected unit
+        // ie. weight_lbs with unit === imperial
         console.log({ values })
         if (isLastStep) {
             console.log(" submitting all steps")
