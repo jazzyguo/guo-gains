@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
 import { useFormContext } from 'react-hook-form'
-import { useStepsStore } from '../store';
+import { useGetStartedStore } from '../store';
 import { SliderInput } from '@/components/slider-input';
 
 export const AgeSlider = () => {
     const { setError, clearErrors } = useFormContext()
 
-    const selectedAge = useStepsStore(state => state.age)
-    const updateFormData = useStepsStore(state => state.updateFormData)
+    const selectedAge = useGetStartedStore(state => state.age)
+    const updateFormData = useGetStartedStore(state => state.updateFormData)
 
     const handleSelectAge = useCallback((age: number) => {
         updateFormData('age', age)

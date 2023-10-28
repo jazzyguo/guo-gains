@@ -1,5 +1,5 @@
 import { memo, type MouseEvent } from 'react';
-import { useStepsStore } from '@/features/get-started';
+import { useGetStartedStore } from '@/features/get-started';
 import { Button } from '@/components/ui/button';
 import { FormPath } from './form-path';
 import { useFormState, } from "react-hook-form";
@@ -17,7 +17,7 @@ type Props = {
 const _FormNavFooter = ({ currentStep, isLastStep, handlePrevious }: Props) => {
     const { errors } = useFormState()
 
-    const latestStep = useStepsStore(state => state.latestStep);
+    const latestStep = useGetStartedStore(state => state.latestStep);
 
     const canSubmit = !Object.keys(errors).length
 

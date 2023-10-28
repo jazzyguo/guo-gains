@@ -1,4 +1,4 @@
-import { type ReactElement, memo } from "react"
+import { type ReactElement, memo, forwardRef } from "react"
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import {
@@ -25,7 +25,7 @@ type SelectCardProps = {
     infoContent?: ReactElement;
 }
 
-export const _SelectCard = ({ handleSelect, isSelected, label, value, renderContent, infoContent, ...rest }: SelectCardProps) => (
+const _SelectCard = forwardRef(({ handleSelect, isSelected, label, value, renderContent, infoContent, ...rest }: SelectCardProps, _) => (
     <Card
         className={`${isSelected ? selectedClass : ''} w-full p-4 relative`}
         onClick={handleSelect}
@@ -62,13 +62,15 @@ export const _SelectCard = ({ handleSelect, isSelected, label, value, renderCont
             <div
                 className="flex flex-col items-center gap-4 justify-between rounded-full h-full"
             >
-                <p className={`${isSelected ? 'text-white' : 'text-secondary-text'} text-6xl`}>
+                <div className={`${isSelected ? 'text-white' : 'text-secondary-text'} text-6xl`}>
                     {renderContent}
-                </p>
+                </div>
                 <div className="text-lg text-center whitespace-nowrap">{label}</div>
             </div>
         </Label>
     </Card>
-)
+))
+
+_SelectCard.displayName = 'SelectCard';
 
 export const SelectCard = memo(_SelectCard)

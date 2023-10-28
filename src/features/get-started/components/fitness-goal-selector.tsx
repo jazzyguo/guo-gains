@@ -3,7 +3,7 @@ import { SelectCardGroup, type SelectGroupOptions } from '@/components/select-ca
 import bicepAnimation from '@/animations/bicep.json';
 import fireAnimation from '@/animations/fire.json'
 import balanceAnimation from '@/animations/balance.json'
-import { useStepsStore } from '../store';
+import { useGetStartedStore } from '../store';
 
 const goalOptions: SelectGroupOptions = [{
     value: 'lose-weight',
@@ -24,8 +24,8 @@ const goalOptions: SelectGroupOptions = [{
 }]
 
 export const FitnessGoalSelector = () => {
-    const selectedFitnessGoal = useStepsStore(state => state.fitness_goal)
-    const updateFormData = useStepsStore(state => state.updateFormData)
+    const selectedFitnessGoal = useGetStartedStore(state => state.fitness_goal)
+    const updateFormData = useGetStartedStore(state => state.updateFormData)
 
     const handleSelectFitnessGoal = (goal: string) => {
         updateFormData("fitness_goal", goal);

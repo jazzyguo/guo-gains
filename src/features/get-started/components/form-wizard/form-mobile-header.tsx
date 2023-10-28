@@ -15,5 +15,4 @@ export const FormMobileHeader = ({ currentStep, latestStep }: Props) => (
             latestStep={latestStep}
         />
     </div>
-
 )

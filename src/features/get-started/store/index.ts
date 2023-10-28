@@ -56,7 +56,9 @@ type Middleware = [
   ["zustand/immer", never],
 ];
 
-export const useStepsStore = create<StepsState & FormState & Actions,Middleware>(
+type StoreState = StepsState & FormState & Actions;
+
+export const useGetStartedStore = create<StoreState, Middleware>(
   devtools(
     persist(
       immer((set) => ({
@@ -74,6 +76,7 @@ export const useStepsStore = create<StepsState & FormState & Actions,Middleware>
       })),
       {
         name: "steps-store",
+        skipHydration: true,
       },
     ),
   ),

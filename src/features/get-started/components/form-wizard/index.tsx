@@ -1,7 +1,7 @@
 import { useEffect, type MouseEvent, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
-import { useStepsStore, type FormState, NUMBER_STEPS } from '@/features/get-started';
+import { useGetStartedStore, type FormState, NUMBER_STEPS } from '@/features/get-started';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Loading } from '@/components/ui/loading';
 import { FormMobileHeader } from './form-mobile-header';
@@ -25,8 +25,8 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
 
     const methods = useForm<FormState>()
 
-    const latestStep = useStepsStore(state => state.latestStep);
-    const setLatestStep = useStepsStore(state => state.setLatestStep)
+    const latestStep = useGetStartedStore(state => state.latestStep);
+    const setLatestStep = useGetStartedStore(state => state.setLatestStep)
 
     const isLastStep = currentStep === NUMBER_STEPS
 

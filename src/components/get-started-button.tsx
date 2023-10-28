@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button"
-import { useStepsStore } from '@/features/get-started';
+import { useGetStartedStore } from '@/features/get-started';
 import { cn } from "@/lib/utils"
 import { BASE_URL } from "@/features/get-started";
 
@@ -11,7 +11,7 @@ type Props = {
 }
 
 const _GetStartedButton = ({ text = 'Get Started', className }: Props) => {
-    const reset = useStepsStore(state => state.reset);
+    const reset = useGetStartedStore(state => state.reset);
     const router = useRouter()
 
     return (

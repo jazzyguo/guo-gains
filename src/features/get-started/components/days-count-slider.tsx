@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
-import { useStepsStore } from '../store';
+import { useGetStartedStore } from '../store';
 import { SliderInput } from '@/components/slider-input';
 
 export const DaysCountSlider = () => {
-    const selectedDaysCount = useStepsStore(state => state.days_count_goal)
-    const updateFormData = useStepsStore(state => state.updateFormData)
+    const selectedDaysCount = useGetStartedStore(state => state.days_count_goal)
+    const updateFormData = useGetStartedStore(state => state.updateFormData)
 
     const handleSelectDaysCount = useCallback((daysCount: number) => {
         updateFormData('days_count_goal', daysCount)

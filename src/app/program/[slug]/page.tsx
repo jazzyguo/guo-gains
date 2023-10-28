@@ -5,6 +5,6 @@
 // else if(!weight_kg) -> weight_kg = calculate with weight_lbs
 // else if(!weight_lbs) -> weight_lbs = calculate with weight_kg
 // we can then render all information as needed based on chosen units
-const Page = () => <div>hi</div>
+const ProgramPage = () => <div>hi</div>
 
-export default Page
+export default ProgramPage

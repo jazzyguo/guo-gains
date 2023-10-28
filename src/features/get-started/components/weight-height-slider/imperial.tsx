@@ -1,13 +1,13 @@
-import { useStepsStore } from '../../store';
+import { useGetStartedStore } from '../../store';
 import { SliderInput } from '@/components/slider-input';
 import { MAX_HEIGHT_FT, MAX_WEIGHT_LBS, MIN_HEIGHT_FT, MIN_WEIGHT_LBS } from '.';
 
 export const WeightHeightSliderImperial = () => {
-    const selectedWeightLbs = useStepsStore((state) => state.weight_lbs);
-    const selectedHeightFt = useStepsStore((state) => state.height_ft);
-    const selectedHeightInches = useStepsStore((state) => state.height_inches);
+    const selectedWeightLbs = useGetStartedStore((state) => state.weight_lbs);
+    const selectedHeightFt = useGetStartedStore((state) => state.height_ft);
+    const selectedHeightInches = useGetStartedStore((state) => state.height_inches);
 
-    const updateFormData = useStepsStore(state => state.updateFormData)
+    const updateFormData = useGetStartedStore(state => state.updateFormData)
 
     const handleSelectWeightLbs = (value: number) => {
         updateFormData('weight_lbs', value)

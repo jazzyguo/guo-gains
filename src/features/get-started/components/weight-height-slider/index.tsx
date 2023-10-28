@@ -4,7 +4,7 @@ import { WeightHeightSliderMetric } from './metric';
 import { useUnit, type Unit } from '@/contexts/unit-context';
 import { getImperialHeightFromMetric, convertWeight, getMetricHeightFromImperial } from '@/lib/unitsConvert'
 import { UnitToggle } from '@/components/unit-toggle';
-import { useStepsStore } from '../../store';
+import { useGetStartedStore } from '../../store';
 
 export const MAX_HEIGHT_CM = 240
 export const MAX_WEIGHT_KG = 175
@@ -19,13 +19,13 @@ export const MIN_WEIGHT_LBS = convertWeight(MIN_WEIGHT_KG, 'metric')
 export const WeightHeightSlider = () => {
     const { unit } = useUnit()
 
-    const selectedWeightLbs = useStepsStore((state) => state.weight_lbs);
-    const selectedHeightFt = useStepsStore((state) => state.height_ft);
-    const selectedHeightInches = useStepsStore((state) => state.height_inches);
-    const selectedWeightKg = useStepsStore((state) => state.weight_kg);
-    const selectedHeightCm = useStepsStore((state) => state.height_cm);
+    const selectedWeightLbs = useGetStartedStore((state) => state.weight_lbs);
+    const selectedHeightFt = useGetStartedStore((state) => state.height_ft);
+    const selectedHeightInches = useGetStartedStore((state) => state.height_inches);
+    const selectedWeightKg = useGetStartedStore((state) => state.weight_kg);
+    const selectedHeightCm = useGetStartedStore((state) => state.height_cm);
 
-    const updateFormData = useStepsStore(state => state.updateFormData)
+    const updateFormData = useGetStartedStore(state => state.updateFormData)
 
     // convert units as they are toggled
     const onToggle = useCallback((newUnit: Unit) => {

@@ -1,4 +1,4 @@
-import { useStepsStore } from '../store';
+import { useGetStartedStore } from '../store';
 import { SelectCardGroup, type SelectGroupOptions } from '@/components/select-card-group';
 
 const genderOptions: SelectGroupOptions = [{
@@ -12,8 +12,8 @@ const genderOptions: SelectGroupOptions = [{
 }]
 
 export const GenderSelector = () => {
-    const selectedGender = useStepsStore(state => state.gender)
-    const updateFormData = useStepsStore(state => state.updateFormData)
+    const selectedGender = useGetStartedStore(state => state.gender)
+    const updateFormData = useGetStartedStore(state => state.updateFormData)
 
     const handleSelectGender = (gender: 'male' | 'female') => {
         updateFormData("gender", gender);
