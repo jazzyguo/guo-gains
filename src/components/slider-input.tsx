@@ -16,6 +16,7 @@ type Props = {
     onSlide: (e: number | undefined) => void,
     name: string;
     label?: string;
+    labelClassName?: string;
 }
 
 const _SliderInput = ({
@@ -28,13 +29,14 @@ const _SliderInput = ({
     onSlide,
     name,
     label,
+    labelClassName,
 }: Props) => {
     const canAdd = value + 1 <= max
     const canSubtract = value - 1 >= min
     return (
         <div className="flex flex-col gap-6">
             <div>
-                <Label htmlFor={name} className='whitespace-nowrap'>
+                <Label htmlFor={name} className={labelClassName}>
                     {label}
                 </Label>
                 <FormError name={name} />

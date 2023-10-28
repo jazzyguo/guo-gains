@@ -19,12 +19,17 @@ interface UnitProviderProps {
 
 export function UnitProvider({ children }: UnitProviderProps) {
     const [unit, setUnit] = useState<Unit>(() => {
-        const storedUnits = localStorage.getItem(LOCAL_STORAGE_KEY);
+        let storedUnits
+        if (typeof window !== 'undefined') {
+            storedUnits = localStorage.getItem(LOCAL_STORAGE_KEY);
+        }
         return (storedUnits as Unit) || 'metric';
     });
 
     useEffect(() => {
-        localStorage.setItem(LOCAL_STORAGE_KEY, unit);
+        if (typeof window !== 'undefined') {
+            localStorage.setItem(LOCAL_STORAGE_KEY, unit);
+        }
     }, [unit]);
 
     return (

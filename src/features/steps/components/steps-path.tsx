@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { useRouter } from 'next/navigation';
+import { cn } from "@/lib/utils"
 
 type Props = {
     currentStep: number;
@@ -16,7 +17,7 @@ const completeColorClasses = 'border-primary-accent/70 bg-primary-accent/50'
 
 const BarPath = ({ active = false, className }: { active?: boolean, className?: string }) => (
     <div
-        className={`absolute w-10 h-1 ${active ? 'bg-primary-accent/70' : 'bg-gray-400'} ${className} top-0 bottom-0 my-auto z-[-1] rounded-full`}
+        className={cn(`absolute w-10 h-1 ${active ? 'bg-primary-accent/70' : 'bg-gray-400'} top-0 bottom-0 my-auto z-[-1] rounded-full`, className)}
     />
 )
 
@@ -37,7 +38,7 @@ const _StepsPath = ({ currentStep, latestStep, className }: Props) => {
 
     return (
         <div
-            className={`flex ${className} items-center text-3xl w-[270px] gap-8 mx-auto absolute left-0 right-0`}
+            className={cn("flex items-center text-3xl w-[270px] gap-8 mx-auto absolute left-0 right-0", className)}
         >
             <div className="relative">🧍</div>
             {stepIcons.map((stepIcon, idx) => {
@@ -56,15 +57,16 @@ const _StepsPath = ({ currentStep, latestStep, className }: Props) => {
                             }
                             <div
                                 onClick={() => handleClickStep(idx + 1)}
-                                className={`
-                                ${stepClasses} 
-                                ${isActiveStep && 'animate-pulsing'}
-                                ${isCompleteStep
+                                className={cn(
+                                    stepClasses,
+                                    isActiveStep && 'animate-pulsing',
+                                    isCompleteStep
                                         ? completeColorClasses
                                         : isActiveStep
                                             ? activeColorClasses
                                             : defaultColorClasses
-                                    }`}
+
+                                )}
                             >
                                 {stepIcon}
                             </div>

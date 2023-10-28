@@ -27,6 +27,7 @@ export const GenderSelect = () => {
             rules={{ required: "Gender is required" }}
             onSelect={handleSelectGender as (value: string | number) => void}
             label="What is your gender?"
+            gridTemplateColumns="1fr 1fr"
         />
     );
 };

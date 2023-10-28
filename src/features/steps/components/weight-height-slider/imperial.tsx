@@ -37,6 +37,7 @@ export const WeightHeightSliderImperial = () => {
                     onAdd={() => handleSelectHeightFt(selectedHeightFt + 1)}
                     onSubtract={() => handleSelectHeightFt(selectedHeightFt - 1)}
                     onSlide={(v) => handleSelectHeightFt(v!)}
+                    labelClassName='whitespace-nowrap'
                 />
                 <SliderInput
                     {...register("height_inches")}

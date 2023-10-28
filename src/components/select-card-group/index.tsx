@@ -1,46 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type ReactElement, memo } from "react"
-import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { type FieldValues, type RegisterOptions, useFormContext, useController } from "react-hook-form";
 import { FormError } from '@/components/form-error';
-
-const selectedClass = "border-2 border-primary-accent/70 bg-primary-accent/50"
-
-type SelectCardProps = {
-    value: string | number;
-    handleSelect: (value: unknown) => void
-    isSelected: boolean;
-    label: string;
-    renderContent?: ReactElement;
-}
-
-const SelectCard = ({ handleSelect, isSelected, label, value, renderContent, ...rest }: SelectCardProps) => (
-    <Card
-        className={`${isSelected ? selectedClass : ''} w-full`}
-        onClick={handleSelect}
-    >
-        <Label className="cursor-pointer">
-            <input
-                {...rest}
-                value={value}
-                className="hidden"
-                type="radio"
-            />
-            <div className="flex flex-col items-center gap-4 justify-center p-4 md:p-10 rounded-full">
-                <p className="text-6xl">
-                    {renderContent}
-                </p>
-                <span className="text-lg md:text-xl">{label}</span>
-            </div>
-        </Label>
-    </Card>
-)
+import { SelectCard } from "./select-card";
 
 export type SelectGroupOptions = {
     value: string | number;
     label: string;
     renderContent?: ReactElement;
+    infoContent?: ReactElement;
 }[]
 
 type SelectCardGroupProps = {
@@ -53,9 +22,18 @@ type SelectCardGroupProps = {
     >
     onSelect: (value: string | number) => void;
     label: string;
+    gridTemplateColumns?: string;
 }
 
-const _SelectCardGroup = ({ defaultValue, options, name, rules, onSelect, label }: SelectCardGroupProps) => {
+const _SelectCardGroup = ({
+    defaultValue,
+    options,
+    name,
+    rules,
+    onSelect,
+    label,
+    gridTemplateColumns = "repeat(auto-fill, minmax(200px, 1fr))"
+}: SelectCardGroupProps) => {
     const { control } = useFormContext();
 
     const {
@@ -74,17 +52,17 @@ const _SelectCardGroup = ({ defaultValue, options, name, rules, onSelect, label 
 
     return (
         <div className="flex flex-col">
-            <Label htmlFor={name} className="mb-4">
+            <Label htmlFor={name} className="mb-4 whitespace-nowrap">
                 {label}
             </Label>
             <FormError name={name} className="mb-4" />
             <div
-                className={`grid gap-6 w-full`}
+                className={`flex flex-col xs:grid gap-6 w-full`}
                 style={{
-                    gridTemplateColumns: `repeat(auto-fill, minmax(${options.length >= 3 ? '150px' : '250px'} , 1fr))`
+                    gridTemplateColumns,
                 }}
             >
-                {options.map(({ value: optionValue, label, renderContent }) => (
+                {options.map(({ value: optionValue, label, renderContent, infoContent }) => (
                     <SelectCard
                         {...field}
                         key={optionValue}
@@ -93,6 +71,7 @@ const _SelectCardGroup = ({ defaultValue, options, name, rules, onSelect, label 
                         isSelected={value === optionValue}
                         label={label}
                         renderContent={renderContent}
+                        infoContent={infoContent}
                     />
                 ))}
             </div>

@@ -81,7 +81,7 @@ export const StepFormWizard = ({ currentStep }: Props) => {
         <FormProvider {...methods}>
             <form
                 // pb to account for sticky bottom nav
-                className="w-full max-w-screen-sm mx-auto pb-36"
+                className="w-full max-w-screen-md mx-auto pb-36"
                 onSubmit={methods.handleSubmit(onSubmit)}
             >
                 {/* StepsPath is rendered on top for mobile, and inside the nav footer on desktop */}

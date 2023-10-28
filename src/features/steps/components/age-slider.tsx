@@ -4,7 +4,7 @@ import { SliderInput } from '@/components/slider-input';
 import { useFormContext } from 'react-hook-form'
 
 export const AgeSlider = () => {
-    const { register, setError, clearErrors } = useFormContext() // retrieve all hook methods
+    const { register, setError, clearErrors } = useFormContext()
 
     const selectedAge = useStepsStore(state => state.age)
     const updateFormData = useStepsStore(state => state.updateFormData)

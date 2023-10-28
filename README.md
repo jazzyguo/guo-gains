@@ -1,7 +1,7 @@
 Fully mobile responsive web app created using T3 stack
 (TypeScript, React, Nextjs, Tailwind, Prisma, tRPC)
 
-Shadcn/ui for ui
+Shadcn/ui for ui components
 
 Zustand/context for state management
 

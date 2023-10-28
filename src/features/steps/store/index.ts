@@ -28,7 +28,7 @@ const FormSchema = z.object({
   weight_lbs: z.number().default(BASE_WEIGHT_LBS),
   body_fat_range: z.tuple([z.number(), z.number()]).nullable().default(null),
   fitness_goal: z.string().nullable().default(null),
-  target_workout_days: z.number().default(3),
+  days_count_goal: z.number().default(3),
   current_activity_level: z.string().nullable().default(null),
 });
 
@@ -56,10 +56,7 @@ type Middleware = [
   ["zustand/immer", never],
 ];
 
-export const useStepsStore = create<
-  StepsState & FormState & Actions,
-  Middleware
->(
+export const useStepsStore = create<StepsState & FormState & Actions,Middleware>(
   devtools(
     persist(
       immer((set) => ({

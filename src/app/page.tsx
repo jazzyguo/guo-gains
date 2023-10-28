@@ -14,7 +14,7 @@ const HomePage = () => (
       <Lottie loop animationData={bicepAnimation} className="w-14 mt-4 lg:w-20 mx-auto" />
     </h1>
     <p
-      className="text-lg text-neutral-400"
+      className="text-lg text-secondary-text"
     >
       Discover your untapped potential and steer your fitness journey towards greatness using our cutting-edge fitness program generator. Whether you&apos;re striving to build muscle, shed weight, or boost your overall wellness, our intuitive app is your perfect companion. Take the reins of your health and fitness transformation – it all begins here.
     </p>

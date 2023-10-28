@@ -1,5 +1,6 @@
 import { useUnit, type Unit } from '@/contexts/unit-context';
 import { Button } from './ui/button';
+import { cn } from "@/lib/utils"
 
 type Props = {
     onToggle: (newUnit: Unit) => void;
@@ -18,7 +19,7 @@ export const UnitToggle = ({ onToggle, className }: Props) => {
     };
 
     return (
-        <div className={`${className} flex justify-center`}>
+        <div className={cn("flex justify-center", className)}>
             <Button
                 type="button"
                 className={`
@@ -45,6 +46,6 @@ export const UnitToggle = ({ onToggle, className }: Props) => {
             >
                 ft&apos;in/lbs
             </Button>
-        </div>
+        </div >
     );
 };
