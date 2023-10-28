@@ -33,7 +33,10 @@ export const _SelectCard = ({ handleSelect, isSelected, label, value, renderCont
         {/** Popover only appears on mobile */}
         {!!infoContent &&
             <Popover>
-                <PopoverTrigger className="md:hidden absolute right-[-.125rem] top-[-.125rem] w-10 h-10">
+                <PopoverTrigger
+                    className="md:hidden absolute right-[-.125rem] top-[-.125rem] w-10 h-10"
+                    onClick={e => e.stopPropagation()}
+                >
                     <InfoIcon />
                 </PopoverTrigger>
                 <PopoverContent align="end" className="md:hidden">{infoContent}</PopoverContent>
