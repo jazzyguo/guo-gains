@@ -14,7 +14,7 @@ import {
 
 import InfoIcon from '@mui/icons-material/Info';
 
-const selectedClass = "border-2 border-primary-accent/70 bg-primary-accent/50"
+const selectedClass = "border-primary-accent/70 bg-primary-accent/50"
 
 type SelectCardProps = {
     value: string | number;
