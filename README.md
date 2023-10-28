@@ -3,9 +3,9 @@ Fully mobile responsive web app created using T3 stack
 
 Shadcn/ui for ui components
 
-Zustand/context for state management
+Zustand/context using local storage for state management
 
-react-hook-form for form validation/error handling 
+react-hook-form for forms with validation/error handling 
 
 Input some physical information like your age, weight, and height and your fitness goals in order to get tailored workout plans and caloric needs to help achieve those gains.
 
