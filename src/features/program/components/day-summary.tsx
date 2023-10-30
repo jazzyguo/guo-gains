@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { type Day, type Workout } from "../types/program";
 import { ExerciseVideo } from "./exercise-video";
+import { RestDay } from "./rest-day";
 
 type Props = {
     day: Day;
@@ -49,9 +50,7 @@ const _DaySummary = ({ day }: Props) => (
                     </div>
                 )
             })
-        ) : (
-            <div>REST</div>
-        )}
+        ) : <RestDay />}
     </div>
 );
 
