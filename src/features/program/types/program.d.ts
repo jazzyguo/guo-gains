@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 import type { User, Exercise, UserInformation, Program } from "@prisma/client";
 
 type ExerciseWithAlternatives = Exercise & {

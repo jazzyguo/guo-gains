@@ -14,7 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 export const DropdownNav = () => (
     <>
-        <div className="block md:hidden z-[100]">
+        <div className="block lg:hidden z-[100]">
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
@@ -24,7 +24,7 @@ export const DropdownNav = () => (
                         <NavigationMenuContent>
                             <Link href="/about" legacyBehavior passHref>
                                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                    About
+                                    <b>About</b>
                                 </NavigationMenuLink>
                             </Link>
                         </NavigationMenuContent>
@@ -32,7 +32,7 @@ export const DropdownNav = () => (
                 </NavigationMenuList>
             </NavigationMenu>
         </div>
-        <div className="hidden md:block text-white">
+        <div className="hidden lg:block text-white">
             <Link href="/about" className="hover:opacity-50 p-4">
                 <span className="font-bold text-xl">About</span>
             </Link>

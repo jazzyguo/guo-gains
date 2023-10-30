@@ -10,7 +10,7 @@ datasource db {
 
 model BaseTag {
     id   String @id @default(cuid())
-    slug String
+    slug String @unique
 }
 
 model User {
@@ -63,7 +63,8 @@ model ExerciseTag {
 
 model WorkoutDay {
     id              String            @id @default(cuid())
-    name            String            @unique
+    slug            String
+    name            String
     tags            WorkoutDayTag[]   @relation("TagsToWorkoutDay")
     requiredTags    WorkoutDayTag[]   @relation("RequiredTagsToWorkoutDay")
     WorkoutSplitDay WorkoutSplitDay[]
@@ -80,7 +81,8 @@ model WorkoutDayTag {
 
 model WorkoutSplit {
     id        String            @id @default(cuid())
-    name      String            @unique
+    name      String
+    slug      String
     daysCount Int
     days      WorkoutSplitDay[]
 }

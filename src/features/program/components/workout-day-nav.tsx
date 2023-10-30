@@ -6,12 +6,10 @@ import Link from "next/link"
 import {
     NavigationMenu,
     NavigationMenuContent,
-    NavigationMenuIndicator,
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
     NavigationMenuTrigger,
-    NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils"
 
@@ -28,9 +26,9 @@ type Props = {
  */
 const _WorkoutDayNav = ({ days, programId, selectedDayNumber }: Props) => {
     return (
-        <div className="py-4 md:py-0 w-full flex justify-center sticky top-0 bg-neutral-100 border-t border-gray-200 z-[60]">
+        <div className="py-4 lg:py-0 w-full flex justify-center sticky top-0 bg-neutral-100 border-t border-gray-200 z-[60]">
             <div
-                className="hidden md:grid w-full gap-6 container max-w-screen-lg"
+                className="hidden lg:grid w-full gap-6 container max-w-screen-lg container"
                 style={{
                     gridTemplateColumns: "repeat(auto-fill, minmax(115px, 1fr))"
                 }}
@@ -56,7 +54,7 @@ const _WorkoutDayNav = ({ days, programId, selectedDayNumber }: Props) => {
                     )
                 })}
             </div>
-            <div className="relative w-full flex md:hidden gap-4 px-4 justify-end">
+            <div className="relative w-full flex lg:hidden gap-4 px-4 justify-end container">
                 <div className="text-xl font-bold">
                     {days[selectedDayNumber as DayNumber]?.name || 'Rest'}
                 </div>
@@ -79,10 +77,10 @@ const _WorkoutDayNav = ({ days, programId, selectedDayNumber }: Props) => {
                                                 key={`${programId}-${dayNumber}`}
                                                 href={`/program/${programId}/${dayNumber}`}
                                             >
-                                                <p className="font-bold text-xl">
+                                                <p className="font-bold text-base">
                                                     Day {dayNumber}
                                                 </p>
-                                                <p className="whitespace-nowrap text-neutral-500">
+                                                <p className="text-base whitespace-nowrap text-neutral-500">
                                                     {days[dayNumber as DayNumber]?.name || 'Rest'}
                                                 </p>
                                             </Link>

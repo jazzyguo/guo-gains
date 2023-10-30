@@ -43,6 +43,21 @@ const exercises: ExerciseSeed[] = [
     slug: "incline-barbell-bench-press",
   },
   {
+    name: "Barbell Overhead Press",
+    poster:
+      "https://media.musclewiki.com/media/uploads/og-male-barbell-overhead-press-front_wHKQjdY.png",
+    gifUrl:
+      "https://media.musclewiki.com/media/uploads/videos/branded/male-barbell-overhead-press-front_wHKQjdY.mp4#t=0.1",
+    description:
+      "The barbell overhead press with a barbell focuses on the shoulders.",
+    directions:
+      "Stand upright with a barbell to your upper chest, ideally placed on a power rack, then push it up until your arms are fully extended and back down.",
+    alternatives: [],
+    tags: ["push", "deltoids-front", "deltoids-side"],
+    category: "compound",
+    slug: "barbell-overhead-press",
+  },
+  {
     name: "Flat Dumbbell Press",
     poster:
       "https://media.musclewiki.com/media/uploads/og-male-dumbbell-bench-press-side_rqe1iTe.png",

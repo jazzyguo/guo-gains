@@ -36,11 +36,11 @@ const _DaySummary = ({ day }: Props) => (
                         <div className="flex w-full justify-between">
                             <p>
                                 <span className="font-bold">Sets: </span>
-                                <span>{sets}</span>
+                                <span className="text-neutral-500">{sets}</span>
                             </p>
                             <p>
                                 <span className="font-bold">Reps: </span>
-                                <span>{reps - 4} - {reps}</span>
+                                <span className="text-neutral-500">{reps - 4} - {reps}</span>
                             </p>
                         </div>
                         <p className="font-bold">Description:</p>
