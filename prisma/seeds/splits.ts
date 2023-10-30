@@ -5,6 +5,8 @@ import {
   PULL_DAY_B,
   REST_DAY,
   PULL_DAY_A,
+  UPPER_BODY_DAY,
+  FULL_BODY_DAY,
 } from "./days";
 
 const PPL_SIX_DAY_SPLIT: WORKOUT_SPLIT = {

@@ -21,15 +21,14 @@ interface StepsState {
 const FormSchema = z.object({
   age: z.number().default(20),
   gender: z.enum(["male", "female"]).nullable().default(null),
-  height_cm: z.number().default(BASE_HEIGHT_CM),
-  height_ft: z.number().default(BASE_HEIGHT_FT),
-  height_inches: z.number().default(BASE_HEIGHT_INCHES),
-  weight_kg: z.number().default(BASE_WEIGHT_KG),
-  weight_lbs: z.number().default(BASE_WEIGHT_LBS),
-  body_fat_range: z.tuple([z.number(), z.number()]).nullable().default(null),
-  fitness_goal: z.string().nullable().default(null),
-  days_count_goal: z.number().default(3),
-  current_activity_level: z.string().nullable().default(null),
+  heightCm: z.number().default(BASE_HEIGHT_CM),
+  heightFt: z.number().default(BASE_HEIGHT_FT),
+  heightInches: z.number().default(BASE_HEIGHT_INCHES),
+  weightKg: z.number().default(BASE_WEIGHT_KG),
+  weightLbs: z.number().default(BASE_WEIGHT_LBS),
+  fitnessGoal: z.string().nullable().default(null),
+  daysCountGoal: z.number().default(3),
+  currentActivityLevel: z.string().nullable().default(null),
 });
 
 export type FormState = z.infer<typeof FormSchema>;

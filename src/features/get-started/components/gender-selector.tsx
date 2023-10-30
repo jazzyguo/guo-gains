@@ -11,19 +11,21 @@ const genderOptions: SelectGroupOptions = [{
     renderContent: <span>🙋‍♀️</span>,
 }]
 
+const formKey = "gender"
+
 export const GenderSelector = () => {
-    const selectedGender = useGetStartedStore(state => state.gender)
+    const selectedGender = useGetStartedStore(state => state[formKey])
     const updateFormData = useGetStartedStore(state => state.updateFormData)
 
     const handleSelectGender = (gender: 'male' | 'female') => {
-        updateFormData("gender", gender);
+        updateFormData(formKey, gender);
     };
 
     return (
         <SelectCardGroup
             defaultValue={selectedGender as string}
             options={genderOptions}
-            name="gender"
+            name={formKey}
             rules={{ required: "Gender is required" }}
             onSelect={handleSelectGender as (value: string | number) => void}
             label="What is your gender?"

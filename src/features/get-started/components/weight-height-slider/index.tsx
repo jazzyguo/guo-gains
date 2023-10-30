@@ -19,11 +19,11 @@ export const MIN_WEIGHT_LBS = convertWeight(MIN_WEIGHT_KG, 'metric')
 export const WeightHeightSlider = () => {
     const { unit } = useUnit()
 
-    const selectedWeightLbs = useGetStartedStore((state) => state.weight_lbs);
-    const selectedHeightFt = useGetStartedStore((state) => state.height_ft);
-    const selectedHeightInches = useGetStartedStore((state) => state.height_inches);
-    const selectedWeightKg = useGetStartedStore((state) => state.weight_kg);
-    const selectedHeightCm = useGetStartedStore((state) => state.height_cm);
+    const selectedWeightLbs = useGetStartedStore((state) => state.weightLbs);
+    const selectedHeightFt = useGetStartedStore((state) => state.heightFt);
+    const selectedHeightInches = useGetStartedStore((state) => state.heightInches);
+    const selectedWeightKg = useGetStartedStore((state) => state.weightKg);
+    const selectedHeightCm = useGetStartedStore((state) => state.heightCm);
 
     const updateFormData = useGetStartedStore(state => state.updateFormData)
 
@@ -32,14 +32,14 @@ export const WeightHeightSlider = () => {
         if (newUnit === 'metric') {
             const height_cm = getMetricHeightFromImperial(selectedHeightFt, selectedHeightInches)
             const weight_kg = convertWeight(selectedWeightLbs, 'imperial')
-            updateFormData('weight_kg', weight_kg)
-            updateFormData('height_cm', height_cm)
+            updateFormData('weightKg', weight_kg)
+            updateFormData('heightCm', height_cm)
         } else {
             const [height_ft, height_inches] = getImperialHeightFromMetric(selectedHeightCm)
             const weight_lbs = convertWeight(selectedWeightKg, 'metric')
-            updateFormData('weight_lbs', weight_lbs)
-            updateFormData('height_ft', height_ft)
-            updateFormData('height_inches', height_inches)
+            updateFormData('weightLbs', weight_lbs)
+            updateFormData('heightFt', height_ft)
+            updateFormData('heightInches', height_inches)
         }
     }, [selectedHeightCm, selectedHeightFt, selectedHeightInches, selectedWeightKg, selectedWeightLbs, updateFormData])
 

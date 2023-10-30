@@ -44,19 +44,21 @@ const activityLevelOptions: SelectGroupOptions = [{
     ),
 }];
 
+const formKey = 'currentActivityLevel'
+
 export const ActivityLevelSelector = () => {
-    const selectedActivityLevel = useGetStartedStore(state => state.current_activity_level)
+    const selectedActivityLevel = useGetStartedStore(state => state[formKey])
     const updateFormData = useGetStartedStore(state => state.updateFormData)
 
     const handleSelectActivityLevel = (activityLevel: string) => {
-        updateFormData("current_activity_level", activityLevel);
+        updateFormData(formKey, activityLevel);
     };
 
     return (
         <SelectCardGroup
             defaultValue={selectedActivityLevel!}
             options={activityLevelOptions}
-            name="current_activity_level"
+            name={formKey}
             rules={{ required: "Activity level is required" }}
             onSelect={handleSelectActivityLevel as (value: string | number) => void}
             label="What is your current activity level?"

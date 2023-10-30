@@ -23,19 +23,21 @@ const goalOptions: SelectGroupOptions = [{
     infoContent: <p className="text-sm">You want to gain muscle and achieve a sculpted physique.</p>,
 }]
 
+const formKey = "fitnessGoal"
+
 export const FitnessGoalSelector = () => {
-    const selectedFitnessGoal = useGetStartedStore(state => state.fitness_goal)
+    const selectedFitnessGoal = useGetStartedStore(state => state[formKey])
     const updateFormData = useGetStartedStore(state => state.updateFormData)
 
     const handleSelectFitnessGoal = (goal: string) => {
-        updateFormData("fitness_goal", goal);
+        updateFormData(formKey, goal);
     };
 
     return (
         <SelectCardGroup
             defaultValue={selectedFitnessGoal!}
             options={goalOptions}
-            name="fitness_goal"
+            name={formKey}
             rules={{ required: "Fitness goal is required" }}
             onSelect={handleSelectFitnessGoal as (value: string | number) => void}
             label="What is your fitness goal? 🎯"

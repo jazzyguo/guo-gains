@@ -1,20 +1,121 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
     provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = env("DATABASE_URL")
+    provider  = "postgresql"
+    url       = env("POSTGRES_PRISMA_URL")
+    directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model BaseTag {
+    id   String @id @default(cuid())
+    slug String
+}
 
-    @@index([name])
+model User {
+    id              String            @id @default(cuid())
+    program         Program?          @relation(fields: [programId], references: [id], onDelete: NoAction)
+    programId       String            @unique
+    userInformation UserInformation[]
+}
+
+model UserInformation {
+    id                   String  @id @default(cuid())
+    user                 User    @relation(fields: [userId], references: [id])
+    userId               String
+    age                  Int
+    gender               String?
+    heightCm             Int
+    heightFt             Int
+    heightInches         Int
+    weightKg             Float
+    weightLbs            Float
+    fitnessGoal          String?
+    daysCountGoal        Int
+    currentActivityLevel String?
+}
+
+model Exercise {
+    id                   String        @id @default(cuid())
+    name                 String
+    slug                 String
+    description          String
+    directions           String
+    thumbnail            String?
+    videoUrls            String[]
+    alternatives         Exercise[]    @relation("alternatives")
+    alternativeExercises Exercise[]    @relation("alternatives")
+    tags                 ExerciseTag[]
+    category             String
+
+    programDayWorkoutExercise ProgramDayWorkoutExercise[]
+}
+
+model ExerciseTag {
+    id   String @id @default(cuid())
+    slug String
+
+    exercise   Exercise? @relation(fields: [exerciseId], references: [id])
+    exerciseId String?
+}
+
+model WorkoutDay {
+    id           String          @id @default(cuid())
+    name         String          @unique
+    tags         WorkoutDayTag[] @relation("TagsToWorkoutDay")
+    requiredTags WorkoutDayTag[] @relation("RequiredTagsToWorkoutDay")
+
+    workoutSplit   WorkoutSplit? @relation(fields: [workoutSplitId], references: [id])
+    workoutSplitId String?
+}
+
+model WorkoutDayTag {
+    id                 String      @id @default(cuid())
+    slug               String
+    workoutDayTag      WorkoutDay? @relation("TagsToWorkoutDay", fields: [workoutDayTagId], references: [id])
+    workoutDayTagId    String?
+    workoutDayReqTag   WorkoutDay? @relation("RequiredTagsToWorkoutDay", fields: [workoutDayReqTagId], references: [id])
+    workoutDayReqTagId String?
+}
+
+model WorkoutSplit {
+    id   String       @id @default(cuid())
+    name String       @unique
+    days WorkoutDay[]
+}
+
+model Program {
+    id          String       @id @default(cuid())
+    user        User?
+    programDays ProgramDay[]
+}
+
+model ProgramDay {
+    id                  String            @id @default(cuid())
+    name                String
+    program             Program           @relation(fields: [programId], references: [id], onDelete: Cascade)
+    programId           String
+    day                 Int
+    programDayWorkout   ProgramDayWorkout @relation(fields: [programDayWorkoutId], references: [id])
+    programDayWorkoutId String            @unique
+}
+
+model ProgramDayWorkout {
+    id                          String                    @id @default(cuid())
+    programDay                  ProgramDay?
+    programDayId                String
+    order                       Int
+    reps                        Int
+    sets                        Int
+    programDayWorkoutExercise   ProgramDayWorkoutExercise @relation(fields: [programDayWorkoutExerciseId], references: [id])
+    programDayWorkoutExerciseId String                    @unique
+}
+
+model ProgramDayWorkoutExercise {
+    id String @id @default(cuid())
+
+    exercise          Exercise           @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+    exerciseId        String
+    programDayWorkout ProgramDayWorkout?
 }
