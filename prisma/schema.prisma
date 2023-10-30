@@ -42,7 +42,8 @@ model Exercise {
     slug                 String
     description          String
     directions           String
-    thumbnail            String?
+    poster               String?
+    gifUrl               String?
     videoUrls            String[]
     alternatives         Exercise[]    @relation("alternatives")
     alternativeExercises Exercise[]    @relation("alternatives")
@@ -61,13 +62,11 @@ model ExerciseTag {
 }
 
 model WorkoutDay {
-    id           String          @id @default(cuid())
-    name         String          @unique
-    tags         WorkoutDayTag[] @relation("TagsToWorkoutDay")
-    requiredTags WorkoutDayTag[] @relation("RequiredTagsToWorkoutDay")
-
-    workoutSplit   WorkoutSplit? @relation(fields: [workoutSplitId], references: [id])
-    workoutSplitId String?
+    id              String            @id @default(cuid())
+    name            String            @unique
+    tags            WorkoutDayTag[]   @relation("TagsToWorkoutDay")
+    requiredTags    WorkoutDayTag[]   @relation("RequiredTagsToWorkoutDay")
+    WorkoutSplitDay WorkoutSplitDay[]
 }
 
 model WorkoutDayTag {
@@ -80,9 +79,20 @@ model WorkoutDayTag {
 }
 
 model WorkoutSplit {
-    id   String       @id @default(cuid())
-    name String       @unique
-    days WorkoutDay[]
+    id        String            @id @default(cuid())
+    name      String            @unique
+    daysCount Int
+    days      WorkoutSplitDay[]
+}
+
+model WorkoutSplitDay {
+    id  String @id @default(cuid())
+    day Int
+
+    workoutSplit   WorkoutSplit? @relation(fields: [workoutSplitId], references: [id])
+    workoutSplitId String?
+    workoutDay     WorkoutDay?   @relation(fields: [workoutDayId], references: [id])
+    workoutDayId   String?
 }
 
 model Program {

@@ -14,7 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 export const DropdownNav = () => (
     <>
-        <div className="block md:hidden">
+        <div className="block md:hidden z-[100]">
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>

@@ -15,7 +15,7 @@ const GetStartedPage: NextPage<{ params: PageParams }> = ({ params }) => {
     const { step_number } = params;
     const [hasHydrated, setHasHydrated] = useState<boolean>(false);
 
-    const currentStep = parseInt(step_number, 10);
+    const currentStep = parseInt(step_number);
 
     useEffect(() => {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
