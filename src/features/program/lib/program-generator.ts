@@ -1,4 +1,5 @@
 import { FormState } from "@/features/get-started";
+import { type GeneratedProgram } from "../types/program";
 
 /**
  * Depending on days count and also current intensity current goal, we bucket these into predetermined workout splits
@@ -9,16 +10,14 @@ import { FormState } from "@/features/get-started";
 const programGenerator = (formData: FormState): GeneratedProgram => {
   // choose split based on day
   // get intensity
-  // for each day in split 
+  // for each day in split
   //   add main exercise
   //   add random lifts that are required
   //   if light
-  //       - add 1 bodyweight  
+  //       - add 1 bodyweight
   //   if moderate
   //       - add 1 body weight and 1 extra accessory
   //   if heavy
   //       - add 1 body weight and 2 extra accessory
   //   order workouts based on EXERCISE_ORDER
 };
-
-
