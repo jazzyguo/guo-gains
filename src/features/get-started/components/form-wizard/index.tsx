@@ -43,7 +43,7 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
 
         // latestStep remains the same
         if (currentStep > 1) {
-            router.push(`${BASE_URL}/${currentStep - 1}`)
+            router.push(`${BASE_URL}/${currentStep - 1}`, { scroll: true })
         }
     }, [currentStep, router]);
 
@@ -53,7 +53,7 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
         // it will take the max of 1+1 or 3
         const stepToGo = Math.max(latestStep, currentStep + 1)
         setLatestStep(stepToGo)
-        router.push(`${BASE_URL}/${stepToGo}`)
+        router.push(`${BASE_URL}/${stepToGo}`, { scroll: true })
     }, [latestStep, currentStep, router, setLatestStep])
 
     const onSubmit = useCallback((values: FormState) => {

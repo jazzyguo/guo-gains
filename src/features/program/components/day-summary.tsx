@@ -7,31 +7,48 @@ type Props = {
 };
 
 const _DaySummary = ({ day }: Props) => (
-    <div>
+    <div className="max-w-screen-sm flex flex-col gap-8">
         {day ? (
-            <div>
-                {day.workouts.map((workout: Workout) => {
-                    const { order, reps, sets, exercise } = workout
+            day.workouts.map((workout: Workout) => {
+                const { order, reps, sets, exercise } = workout
 
-                    if (!exercise) {
-                        return null
-                    }
+                if (!exercise) {
+                    return null
+                }
 
-                    const { name, description, directions } = exercise
+                const { name, description, directions } = exercise
 
-                    return (
-                        <div key={order}>
-                            <h3>Workout {order}</h3>
-                            <p>Reps: {reps - 4} - {reps}</p>
-                            <p>Sets: {sets}</p>
-                            <p>Exercise Name: {name}</p>
-                            <p>Description: {description}</p>
-                            <p>Directions: {directions}</p>
-                            <ExerciseVideo exercise={exercise} />
+                return (
+                    <div key={order} className="text-base">
+                        <div className="text-lg mb-2 md:flex md:items-center font-bold">
+                            <span className="md:mr-2 text-primary-accent">
+                                Workout {order}
+                            </span>
+                            <span className="md:hidden">
+                                <br />
+                            </span>
+                            <span className="hidden md:inline-block mr-1">-</span>
+                            <span>
+                                {name}
+                            </span>
+                        </div>                        <ExerciseVideo exercise={exercise} />
+                        <div className="flex w-full justify-between">
+                            <p>
+                                <span className="font-bold">Sets: </span>
+                                <span>{sets}</span>
+                            </p>
+                            <p>
+                                <span className="font-bold">Reps: </span>
+                                <span>{reps - 4} - {reps}</span>
+                            </p>
                         </div>
-                    )
-                })}
-            </div>
+                        <p className="font-bold">Description:</p>
+                        <p className="text-neutral-500">{description}</p>
+                        <p className="font-bold">Directions:</p>
+                        <p className="text-neutral-500">{directions}</p>
+                    </div>
+                )
+            })
         ) : (
             <div>REST</div>
         )}

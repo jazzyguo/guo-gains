@@ -33,7 +33,7 @@ const _FormPath = ({ currentStep, latestStep, className }: Props) => {
     // only allows navigation to completed step - stepTo < latestStep
     const handleClickStep = (step: number) => {
         if (step <= latestStep) {
-            router.push(`${BASE_URL}/${step}`)
+            router.push(`${BASE_URL}/${step}`, { scroll: true })
         }
     }
 
