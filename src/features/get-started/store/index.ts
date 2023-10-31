@@ -3,7 +3,6 @@ import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { getImperialHeightFromMetric, convertWeight } from "@/lib/unitsConvert";
 import { z } from "zod";
-import { useUnit } from "@/contexts/unit-context";
 
 export const NUMBER_STEPS = 2;
 

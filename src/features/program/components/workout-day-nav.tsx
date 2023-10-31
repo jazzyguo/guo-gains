@@ -1,7 +1,7 @@
 "use client"
 
 import { memo } from "react"
-import { type DayNumber, type ProgramDays } from "../types/program"
+import { type DayNumber, type ProgramDays } from "../types"
 import Link from "next/link"
 import {
     NavigationMenu,

@@ -1,5 +1,5 @@
 import { FormState } from "@/features/get-started";
-import { type GeneratedProgram } from "../types/program";
+import { type GeneratedProgram } from "../types";
 
 /**
  * Depending on days count and also current intensity current goal, we bucket these into predetermined workout splits

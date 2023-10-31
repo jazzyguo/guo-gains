@@ -1,4 +1,4 @@
-import { type GeneratedProgram } from "@/features/program/types/program";
+import { type GeneratedProgram } from "@/features/program/types";
 
 export const mockProgram: GeneratedProgram = {
   id: "test-program",

@@ -1,5 +1,5 @@
 import { memo } from "react"
-import { type GeneratedProgram, type DayNumber } from "../types/program"
+import { type GeneratedProgram, type DayNumber } from "../types"
 import { DaySummary } from "./day-summary"
 
 type Props = {

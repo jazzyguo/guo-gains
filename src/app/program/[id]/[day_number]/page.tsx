@@ -2,7 +2,7 @@ import { mockProgram } from "@/mocks/program"
 import { ProgramSummary, WorkoutDayNav } from "@/features/program"
 import { type NextPage } from "next";
 import { redirect } from 'next/navigation'
-import { type DayNumber } from "@/features/program/types/program";
+import { type DayNumber } from "@/features/program/types";
 
 interface PageParams {
     id: string;

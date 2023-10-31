@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { type Day, type Workout } from "../types/program";
+import { type Day, type Workout } from "../types";
 import { ExerciseVideo } from "./exercise-video";
 import { RestDay } from "./rest-day";
 
