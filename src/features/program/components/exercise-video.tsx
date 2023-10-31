@@ -3,10 +3,8 @@ import { type Exercise } from "@prisma/client"
 import Link from "next/link";
 import YouTubeIcon from '@mui/icons-material/YouTube';
 
-const videoUrls = ["https://www.youtube.com/watch?v=bur4QUG8S1A"]
-
 export const _ExerciseVideo = ({ exercise }: { exercise: Exercise }) => {
-    const { gifUrl, poster } = exercise
+    const { gifUrl, poster, videoUrls } = exercise
     return (
         <div>
             <video muted playsInline autoPlay loop poster={poster!}>
