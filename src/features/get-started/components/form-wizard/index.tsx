@@ -6,7 +6,6 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { Loading } from '@/components/ui/loading';
 import { FormMobileHeader } from './form-mobile-header';
 import { FormNavFooter } from './form-nav-footer';
-import { useUnit } from '@/contexts/unit-context';
 
 type Props = {
     currentStep: number;

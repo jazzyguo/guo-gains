@@ -88,8 +88,9 @@ model WorkoutSplit {
 }
 
 model WorkoutSplitDay {
-    id  String @id @default(cuid())
-    day Int
+    id              String  @id @default(cuid())
+    day             Int
+    hasMainExercise Boolean @default(true)
 
     workoutSplit   WorkoutSplit? @relation(fields: [workoutSplitId], references: [id])
     workoutSplitId String?

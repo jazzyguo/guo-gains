@@ -12,19 +12,19 @@ export type Workout = {
   exercise: ExerciseWithAlternatives;
 };
 
-export type Day =
-  | {
-      name: string;
-      workouts: Workout[];
-    }
-  | null
-  | undefined;
+export type RestDay = {
+  name: "Rest";
+};
 
-export type DayNumber = "1" | "2" | "3" | "4" | "5" | "6" | "7";
+export type WorkoutDay = {
+  day: number;
+  name: string;
+  workouts: Workout[];
+};
 
-export type ProgramDays = Record<DayNumber, Day | null>;
+export type ProgramDay = WorkoutDay | RestDay;
 
 export type GeneratedProgram = Program & {
   user: Omit<User, "programId"> & Omit<UserInformation, "userId">;
-  days: ProgramDays;
+  days: Day[];
 };

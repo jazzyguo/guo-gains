@@ -1,3 +1,5 @@
+import { type RestDay } from "@/features/program/types";
+
 export const EXERCISE_ORDER: string[] = [
   "compound",
 
@@ -21,3 +23,7 @@ export const EXERCISE_ORDER: string[] = [
 
   "body-weight",
 ];
+
+export const REST_DAY: RestDay = {
+  name: "Rest",
+};

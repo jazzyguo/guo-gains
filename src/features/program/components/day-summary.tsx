@@ -1,16 +1,17 @@
 import { memo } from "react";
-import { type Day, type Workout } from "../types";
+import { type ProgramDay, type Workout, type WorkoutDay } from "../types";
 import { ExerciseVideo } from "./exercise-video";
 import { RestDay } from "./rest-day";
+import { REST_DAY } from "../lib/consts";
 
 type Props = {
-    day: Day;
+    day: ProgramDay;
 };
 
 const _DaySummary = ({ day }: Props) => (
     <div className="max-w-screen-sm flex flex-col gap-8">
-        {day ? (
-            day.workouts.map((workout: Workout) => {
+        {day.name !== REST_DAY.name ? (
+            (day as WorkoutDay).workouts.map((workout: Workout) => {
                 const { order, reps, sets, exercise } = workout
 
                 if (!exercise) {
@@ -32,7 +33,8 @@ const _DaySummary = ({ day }: Props) => (
                             <span>
                                 {name}
                             </span>
-                        </div>                        <ExerciseVideo exercise={exercise} />
+                        </div>
+                        <ExerciseVideo exercise={exercise} />
                         <div className="flex w-full justify-between">
                             <p>
                                 <span className="font-bold">Sets: </span>

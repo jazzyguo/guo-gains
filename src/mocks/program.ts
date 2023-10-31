@@ -15,10 +15,9 @@ export const mockProgram: GeneratedProgram = {
     daysCountGoal: 3,
     fitnessGoal: "maintain",
   },
-  days: {
-    1: null,
-    2: null,
-    3: {
+  days: [
+    {
+      day: 3,
       name: "Push A",
       workouts: [
         {
@@ -141,8 +140,8 @@ export const mockProgram: GeneratedProgram = {
         },
       ],
     },
-    4: null,
-    5: {
+    {
+      day: 5,
       name: "Upper Body",
       workouts: [
         {
@@ -264,7 +263,5 @@ export const mockProgram: GeneratedProgram = {
         },
       ],
     },
-    6: null,
-    7: null,
-  },
+  ],
 };

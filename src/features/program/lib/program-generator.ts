@@ -1,5 +1,6 @@
 import { FormState } from "@/features/get-started";
 import { type GeneratedProgram } from "../types";
+import { mockProgram } from "@/mocks/program";
 
 /**
  * Depending on days count and also current intensity current goal, we bucket these into predetermined workout splits
@@ -20,4 +21,5 @@ const programGenerator = (formData: FormState): GeneratedProgram => {
   //   if heavy
   //       - add 1 body weight and 2 extra accessory
   //   order workouts based on EXERCISE_ORDER
+  return mockProgram;
 };

@@ -2,7 +2,7 @@ export const RestDay = () => (
     <div className="text-neutral-500">
         <h2 className="text-2xl font-bold mb-4 text-black">It&apos;s Rest Day! 🌿</h2>
         <p>
-            Hey there, champ! Today is all about giving your hardworking muscles the love they deserve. 🤗 It's your well-earned break to help them grow stronger for your next workouts.
+            Hey there, champ! Today is all about giving your hardworking muscles the love they deserve. 🤗 It&apos;s your well-earned break to help them grow stronger for your next workouts.
         </p>
         <p>
             On your rest day, you can:

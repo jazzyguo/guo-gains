@@ -1,23 +1,19 @@
 import { memo } from "react"
-import { type GeneratedProgram, type DayNumber } from "../types"
+import { type GeneratedProgram, type ProgramDay } from "../types"
 import { DaySummary } from "./day-summary"
 
 type Props = {
     program: GeneratedProgram;
-    selectedDayNumber?: DayNumber;
+    selectedDay?: ProgramDay;
 }
 
-const _ProgramSummary = ({ program, selectedDayNumber }: Props) => {
+const _ProgramSummary = ({ program, selectedDay }: Props) => {
     const { user, days } = program
-
-    const selectedDayData = selectedDayNumber && days[selectedDayNumber]
-
-    console.log({ selectedDayData })
 
     return (
         <div>
-            {selectedDayNumber &&
-                <DaySummary day={selectedDayData} />
+            {selectedDay &&
+                <DaySummary day={selectedDay} />
             }
         </div>
     )
