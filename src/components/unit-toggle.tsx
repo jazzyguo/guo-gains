@@ -3,11 +3,15 @@ import { Button } from './ui/button';
 import { cn } from "@/lib/utils"
 
 type Props = {
-    onToggle: (newUnit: Unit) => void;
+    onToggle?: (newUnit: Unit) => void;
     className?: string;
 }
 
-export const UnitToggle = ({ onToggle, className }: Props) => {
+export const UnitToggle = ({
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    onToggle = (_) => { },
+    className,
+}: Props) => {
     const { unit, setUnit } = useUnit()
 
     const handleToggle = () => {

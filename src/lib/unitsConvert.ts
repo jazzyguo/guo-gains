@@ -3,8 +3,12 @@
 // returns [feet,inches]
 export const getImperialHeightFromMetric = (cm: number): [number, number] => {
   const totalInches = cm / 2.54;
-  const feet = Math.floor(totalInches / 12);
-  const inches = Math.ceil(totalInches % 12);
+  let feet = Math.floor(totalInches / 12);
+  let inches = Math.ceil(totalInches % 12);
+  if (inches === 12) {
+    feet += 1;
+    inches = 0;
+  }
   return [feet, inches];
 };
 

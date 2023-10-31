@@ -3,6 +3,7 @@ import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { getImperialHeightFromMetric, convertWeight } from "@/lib/unitsConvert";
 import { z } from "zod";
+import { useUnit } from "@/contexts/unit-context";
 
 export const NUMBER_STEPS = 2;
 
@@ -39,6 +40,7 @@ type Actions = {
     key: K,
     value: FormState[K],
   ) => void;
+  submitForm: () => void;
   reset: () => void;
 };
 
@@ -60,7 +62,7 @@ type StoreState = StepsState & FormState & Actions;
 export const useGetStartedStore = create<StoreState, Middleware>(
   devtools(
     persist(
-      immer((set) => ({
+      immer((set, get) => ({
         ...initialState,
         latestStep: 1,
         setLatestStep: (step) => set({ latestStep: step }),
@@ -70,6 +72,37 @@ export const useGetStartedStore = create<StoreState, Middleware>(
               state[key] = value;
             }
           });
+        },
+        submitForm: () => {
+          const state = get();
+
+          const {
+            age,
+            gender,
+            heightCm,
+            heightFt,
+            heightInches,
+            weightKg,
+            weightLbs,
+            fitnessGoal,
+            daysCountGoal,
+            currentActivityLevel,
+          } = state;
+
+          const formData = {
+            age,
+            gender,
+            heightCm,
+            heightFt,
+            heightInches,
+            weightKg,
+            weightLbs,
+            fitnessGoal,
+            daysCountGoal,
+            currentActivityLevel,
+          };
+
+          console.log("Form State:", formData);
         },
         reset: () => set(() => ({ ...initialState })),
       })),

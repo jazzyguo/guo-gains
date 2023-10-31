@@ -1,6 +1,8 @@
 import { useGetStartedStore } from '../../store';
 import { SliderInput } from '@/components/slider-input';
 import { MAX_HEIGHT_CM, MIN_HEIGHT_CM, MAX_WEIGHT_KG, MIN_WEIGHT_KG } from '.';
+import { useCallback } from 'react';
+import { getImperialHeightFromMetric, convertWeight } from '@/lib/unitsConvert'
 
 export const WeightHeightSliderMetric = () => {
     const selectedWeightKg = useGetStartedStore((state) => state.weightKg);
@@ -8,13 +10,27 @@ export const WeightHeightSliderMetric = () => {
 
     const updateFormData = useGetStartedStore(state => state.updateFormData)
 
-    const handleSelectWeightKg = (value: number) => {
-        updateFormData('weightKg', value)
-    };
+    const updateHeightImperial = useCallback((value: number) => {
+        const [heightFt, heightInches] = getImperialHeightFromMetric(value)
+        updateFormData('heightFt', heightFt)
+        updateFormData('heightInches', heightInches)
 
-    const handleSelectHeightCm = (value: number) => {
+    }, [updateFormData])
+
+    const updateWeightImperial = useCallback((value: number) => {
+        const weightLbs = convertWeight(value, 'metric')
+        updateFormData('weightLbs', weightLbs)
+    }, [updateFormData])
+
+    const handleSelectWeightKg = useCallback((value: number) => {
+        updateFormData('weightKg', value)
+        updateWeightImperial(value)
+    }, [updateFormData, updateWeightImperial]);
+
+    const handleSelectHeightCm = useCallback((value: number) => {
         updateFormData('heightCm', value)
-    };
+        updateHeightImperial(value)
+    }, [updateFormData, updateHeightImperial])
 
     return (
         <div className="flex flex-col gap-8">

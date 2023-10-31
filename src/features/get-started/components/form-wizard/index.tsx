@@ -6,6 +6,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { Loading } from '@/components/ui/loading';
 import { FormMobileHeader } from './form-mobile-header';
 import { FormNavFooter } from './form-nav-footer';
+import { useUnit } from '@/contexts/unit-context';
 
 type Props = {
     currentStep: number;
@@ -27,6 +28,7 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
 
     const latestStep = useGetStartedStore(state => state.latestStep);
     const setLatestStep = useGetStartedStore(state => state.setLatestStep)
+    const submitForm = useGetStartedStore(state => state.submitForm)
 
     const isLastStep = currentStep === NUMBER_STEPS
 
@@ -56,16 +58,16 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
         router.push(`${BASE_URL}/${stepToGo}`, { scroll: true })
     }, [latestStep, currentStep, router, setLatestStep])
 
-    const onSubmit = useCallback((values: FormState) => {
+    const onSubmit = useCallback(() => {
         // only pass in the units provided for the relevant selected unit
         // ie. weight_lbs with unit === imperial
-        console.log({ values })
         if (isLastStep) {
             console.log(" submitting all steps")
+            submitForm()
         } else {
             handleNext()
         }
-    }, [isLastStep, handleNext])
+    }, [isLastStep, handleNext, submitForm])
 
     // Load the appropriate step component
     const StepComponent = dynamic(() =>
