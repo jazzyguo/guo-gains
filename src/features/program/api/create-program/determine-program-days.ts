@@ -112,7 +112,7 @@ const getRandomRequiredExercises = async (
       requiredExercises.push({
         reps: 8,
         sets: 4,
-        exercise: randomReqExercise!,
+        exercise: randomReqExercise,
       });
     }
   }
