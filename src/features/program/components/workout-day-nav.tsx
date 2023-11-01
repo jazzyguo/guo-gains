@@ -39,7 +39,7 @@ const _WorkoutDayNav = ({ dayNumberInt, days, programId, selectedDay }: Props) =
             }}
         >
             <CopyButton
-                textToCopy={`${process.env.NEXT_BASE_URL}/program/${programId}`}
+                textToCopy={`${process.env.NEXT_PUBLIC_BASE_URL}/program/${programId}`}
                 label="Share this program"
                 textToShow="Click to copy URL"
                 className="absolute top-40 right-[0]"
@@ -68,7 +68,7 @@ const _WorkoutDayNav = ({ dayNumberInt, days, programId, selectedDay }: Props) =
         </div>
         <div className="relative w-full flex lg:hidden gap-4 px-4 justify-end container">
             <CopyButton
-                textToCopy={`${process.env.VERCEL_URL}/program/${programId}`}
+                textToCopy={`${process.env.NEXT_PUBLIC_BASE_URL}/program/${programId}`}
                 label="Share"
                 className="absolute top-14 right-0"
             />

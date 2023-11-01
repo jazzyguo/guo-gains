@@ -8,7 +8,7 @@ await import("./src/env.mjs");
 const config = {
     experimental: {
         serverActions: true
-    }
+    },
 };
 
 export default config;
