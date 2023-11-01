@@ -5,6 +5,8 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 
 export const _ExerciseVideo = ({ exercise }: { exercise: Exercise }) => {
     const { gifUrl, poster, videoUrls } = exercise
+    console.log({ videoUrls })
+
     return (
         <div>
             <video muted playsInline autoPlay loop poster={poster!}>
@@ -20,9 +22,9 @@ export const _ExerciseVideo = ({ exercise }: { exercise: Exercise }) => {
                     Source
                 </Link>
             </div>
-            <div className="flex items-center text-sm gap-1">
-                <span>Video Tutorials:</span>
-                {videoUrls && !!videoUrls.length && (
+            {videoUrls && !!videoUrls.length && (
+                <div className="flex items-center text-sm gap-1">
+                    <span>Video Tutorials:</span>
                     <div className="flex gap-2">
                         {videoUrls.map((url, index) => (
                             <Link
@@ -38,8 +40,8 @@ export const _ExerciseVideo = ({ exercise }: { exercise: Exercise }) => {
                             </Link>
                         ))}
                     </div>
-                )}
-            </div>
+                </div>
+            )}
         </div>
     )
 }

@@ -776,6 +776,7 @@ export const SeedExercises = async () => {
       gifUrl,
       description,
       directions,
+      videoUrls,
       tags: tagSlugs,
     } of exercises) {
       // find tags
@@ -793,6 +794,7 @@ export const SeedExercises = async () => {
           gifUrl,
           description,
           directions,
+          videoUrls,
           tags: {
             create: tags.map((t) => ({ slug: t.slug })),
           },
