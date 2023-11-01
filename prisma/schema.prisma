@@ -50,7 +50,7 @@ model Exercise {
     tags                 ExerciseTag[]
     category             String
 
-    programDayWorkoutExercise ProgramDayWorkoutExercise[]
+    ProgramDayWorkout ProgramDayWorkout[]
 }
 
 model ExerciseTag {
@@ -105,30 +105,22 @@ model Program {
 }
 
 model ProgramDay {
-    id                  String            @id @default(cuid())
-    name                String
-    program             Program           @relation(fields: [programId], references: [id], onDelete: Cascade)
-    programId           String
-    day                 Int
-    programDayWorkout   ProgramDayWorkout @relation(fields: [programDayWorkoutId], references: [id])
-    programDayWorkoutId String            @unique
+    id                 String              @id @default(cuid())
+    name               String
+    day                Int
+    program            Program             @relation(fields: [programId], references: [id], onDelete: Cascade)
+    programId          String
+    programDayWorkouts ProgramDayWorkout[]
 }
 
 model ProgramDayWorkout {
-    id                          String                    @id @default(cuid())
-    programDay                  ProgramDay?
-    programDayId                String
-    order                       Int
-    reps                        Int
-    sets                        Int
-    programDayWorkoutExercise   ProgramDayWorkoutExercise @relation(fields: [programDayWorkoutExerciseId], references: [id])
-    programDayWorkoutExerciseId String                    @unique
-}
+    id    String @id @default(cuid())
+    order Int
+    reps  Int
+    sets  Int
 
-model ProgramDayWorkoutExercise {
-    id String @id @default(cuid())
-
-    exercise          Exercise           @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
-    exerciseId        String
-    programDayWorkout ProgramDayWorkout?
+    exercise     Exercise?   @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+    exerciseId   String?
+    ProgramDay   ProgramDay? @relation(fields: [programDayId], references: [id])
+    programDayId String?
 }

@@ -4,7 +4,7 @@ import { ProgramSummary, WorkoutDayNav } from "@/features/program"
 import { type NextPage } from "next";
 import { redirect } from 'next/navigation'
 import { type ProgramDay } from "@/features/program/types";
-import { getDayData } from '@/features/program/lib/getDayData';
+import { getDayData } from '@/features/program/lib/utils';
 
 interface PageParams {
     id: string;

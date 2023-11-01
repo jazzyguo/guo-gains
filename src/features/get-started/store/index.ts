@@ -1,16 +1,8 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { getImperialHeightFromMetric, convertWeight } from "@/lib/unitsConvert";
-import { z } from "zod";
-
-export const NUMBER_STEPS = 2;
-
-const BASE_HEIGHT_CM = 175;
-const BASE_WEIGHT_KG = 70;
-export const [BASE_HEIGHT_FT, BASE_HEIGHT_INCHES] =
-  getImperialHeightFromMetric(BASE_HEIGHT_CM);
-export const BASE_WEIGHT_LBS = convertWeight(BASE_WEIGHT_KG, "metric");
+import { FormSchema, type FormSchemaType } from "../lib/schema";
+import Router from "next/router";
 
 // tracks flow of the steps form
 // as well as the form data across steps
@@ -18,34 +10,22 @@ interface StepsState {
   latestStep: number;
 }
 
-const FormSchema = z.object({
-  age: z.number().default(20),
-  gender: z.enum(["male", "female"]).nullable().default(null),
-  heightCm: z.number().default(BASE_HEIGHT_CM),
-  heightFt: z.number().default(BASE_HEIGHT_FT),
-  heightInches: z.number().default(BASE_HEIGHT_INCHES),
-  weightKg: z.number().default(BASE_WEIGHT_KG),
-  weightLbs: z.number().default(BASE_WEIGHT_LBS),
-  fitnessGoal: z.string().nullable().default(null),
-  daysCountGoal: z.number().default(3),
-  currentActivityLevel: z.string().nullable().default(null),
-});
-
-export type FormState = z.infer<typeof FormSchema>;
-
 type Actions = {
   setLatestStep: (step: number) => void;
-  updateFormData: <K extends keyof FormState>(
+  updateFormData: <K extends keyof FormSchemaType>(
     key: K,
-    value: FormState[K],
+    value: FormSchemaType[K],
   ) => void;
-  submitForm: () => void;
+  submitForm: () => Promise<{
+    programId?: string | undefined;
+    error?: string | undefined;
+  }>;
   reset: () => void;
 };
 
-const initialFormData: FormState = FormSchema.parse({});
+const initialFormData: FormSchemaType = FormSchema.parse({});
 
-const initialState: StepsState & FormState = {
+const initialState: StepsState & FormSchemaType = {
   latestStep: 1,
   ...initialFormData,
 };
@@ -56,7 +36,7 @@ type Middleware = [
   ["zustand/immer", never],
 ];
 
-type StoreState = StepsState & FormState & Actions;
+type StoreState = StepsState & FormSchemaType & Actions;
 
 export const useGetStartedStore = create<StoreState, Middleware>(
   devtools(
@@ -64,44 +44,38 @@ export const useGetStartedStore = create<StoreState, Middleware>(
       immer((set, get) => ({
         ...initialState,
         latestStep: 1,
-        setLatestStep: (step) => set({ latestStep: step }),
-        updateFormData: (key, value) => {
-          set((state: FormState) => {
+        setLatestStep: (step: number) => set({ latestStep: step }),
+        updateFormData: <K extends keyof FormSchemaType>(
+          key: K,
+          value: FormSchemaType[K],
+        ) => {
+          set((state: FormSchemaType) => {
             if (state.hasOwnProperty(key)) {
               state[key] = value;
             }
           });
         },
-        submitForm: () => {
+        submitForm: async () => {
           const state = get();
 
-          const {
-            age,
-            gender,
-            heightCm,
-            heightFt,
-            heightInches,
-            weightKg,
-            weightLbs,
-            fitnessGoal,
-            daysCountGoal,
-            currentActivityLevel,
-          } = state;
+          const formData = FormSchema.parse(state);
 
-          const formData = {
-            age,
-            gender,
-            heightCm,
-            heightFt,
-            heightInches,
-            weightKg,
-            weightLbs,
-            fitnessGoal,
-            daysCountGoal,
-            currentActivityLevel,
-          };
+          console.log("Submitting Form:", formData);
 
-          console.log("Form State:", formData);
+          const response = await fetch("/api/get-started", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          });
+
+          if (response.status === 200) {
+            const data = await response.json();
+            const programId = data.program.id;
+            return { programId };
+          }
+          return { error: "Failed to submit." };
         },
         reset: () => set(() => ({ ...initialState })),
       })),

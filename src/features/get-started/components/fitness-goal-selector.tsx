@@ -29,7 +29,7 @@ export const FitnessGoalSelector = () => {
     const selectedFitnessGoal = useGetStartedStore(state => state[formKey])
     const updateFormData = useGetStartedStore(state => state.updateFormData)
 
-    const handleSelectFitnessGoal = (goal: string) => {
+    const handleSelectFitnessGoal = (goal: "lose-weight" | "maintain" | "build-muscle") => {
         updateFormData(formKey, goal);
     };
 

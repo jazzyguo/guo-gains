@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { SliderInput } from '@/components/slider-input';
-import { getImperialHeightFromMetric, convertWeight } from '@/lib/unitsConvert'
+import { getImperialHeightFromMetric, convertWeight } from '@/lib/utils/units-convert'
 import { useGetStartedStore } from '../../store';
 import { MAX_HEIGHT_CM, MIN_HEIGHT_CM, MAX_WEIGHT_KG, MIN_WEIGHT_KG } from '.';
 

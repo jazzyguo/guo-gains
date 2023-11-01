@@ -50,7 +50,7 @@ export const ActivityLevelSelector = () => {
     const selectedActivityLevel = useGetStartedStore(state => state[formKey])
     const updateFormData = useGetStartedStore(state => state.updateFormData)
 
-    const handleSelectActivityLevel = (activityLevel: string) => {
+    const handleSelectActivityLevel = (activityLevel: "none" | "light" | "moderate" | "heavy") => {
         updateFormData(formKey, activityLevel);
     };
 

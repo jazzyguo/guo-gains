@@ -1,3 +1,4 @@
+"use client"
 import { FitnessGoalSelector } from "../components/fitness-goal-selector"
 import { ActivityLevelSelector } from '../components/activity-level-selector'
 import { DaysCountSlider } from "../components/days-count-slider"

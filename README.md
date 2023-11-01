@@ -1,9 +1,9 @@
-Fully mobile responsive web app created using T3 stack
-(TypeScript, React, Nextjs, Tailwind, Prisma, tRPC)
+Fully mobile responsive web app created using
+TypeScript, React, Nextjs App router/Server Actions, Tailwind, Prisma
 
 Shadcn/ui for ui components
 
-Zustand/context using local storage for state management
+Zustand/context using local storage for client side state management
 
 react-hook-form for forms with validation/error handling 
 

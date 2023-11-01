@@ -1,8 +1,7 @@
-import { useCallback } from 'react';
 import { WeightHeightSliderImperial } from './imperial';
 import { WeightHeightSliderMetric } from './metric';
 import { useUnit } from '@/contexts/unit-context';
-import { getImperialHeightFromMetric, convertWeight } from '@/lib/unitsConvert'
+import { getImperialHeightFromMetric, convertWeight } from '@/lib/utils/units-convert'
 import { UnitToggle } from '@/components/unit-toggle';
 
 export const MAX_HEIGHT_CM = 240

@@ -1,7 +1,7 @@
 import { useEffect, type MouseEvent, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
-import { useGetStartedStore, type FormState, NUMBER_STEPS } from '@/features/get-started';
+import { useGetStartedStore, type FormSchemaType, NUMBER_STEPS } from '@/features/get-started';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Loading } from '@/components/ui/loading';
 import { FormMobileHeader } from './form-mobile-header';
@@ -23,7 +23,7 @@ export const BASE_URL = '/get-started'
 export const GetStartedFormWizard = ({ currentStep }: Props) => {
     const router = useRouter();
 
-    const methods = useForm<FormState>()
+    const methods = useForm<FormSchemaType>()
 
     const latestStep = useGetStartedStore(state => state.latestStep);
     const setLatestStep = useGetStartedStore(state => state.setLatestStep)
@@ -57,12 +57,16 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
         router.push(`${BASE_URL}/${stepToGo}`, { scroll: true })
     }, [latestStep, currentStep, router, setLatestStep])
 
-    const onSubmit = useCallback(() => {
+    const onSubmit = useCallback(async () => {
         // only pass in the units provided for the relevant selected unit
         // ie. weight_lbs with unit === imperial
         if (isLastStep) {
-            console.log(" submitting all steps")
-            submitForm()
+            const { programId, error } = await submitForm()
+            if (programId) {
+                router.push(`/program/${programId}`)
+            } else {
+                // set error
+            }
         } else {
             handleNext()
         }

@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useEffect } from "react";
 import { type NextPage } from "next";
 import { GetStartedFormWizard } from '@/features/get-started';

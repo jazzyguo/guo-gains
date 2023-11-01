@@ -1,3 +1,4 @@
+"use client"
 import { createContext, useContext, type ReactNode, useState, type Dispatch, type SetStateAction, useEffect } from 'react';
 
 export type Unit = 'metric' | 'imperial';

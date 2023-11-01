@@ -1,7 +1,7 @@
 "use client"
 
 import { memo } from "react"
-import { type ProgramDay, type WorkoutDay } from "../types"
+import { type ProgramDay, type ProgramWorkoutDay } from "../types"
 import Link from "next/link"
 import {
     NavigationMenu,
@@ -12,10 +12,10 @@ import {
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils"
-import { getDayData } from '@/features/program/lib/getDayData';
+import { getDayData } from '@/features/program/lib/utils';
 
 type Props = {
-    days: WorkoutDay[];
+    days: ProgramWorkoutDay[];
     programId: string;
     selectedDay: ProgramDay;
     dayNumberInt: number,

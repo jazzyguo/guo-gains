@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useGetStartedStore } from '../../store';
 import { SliderInput } from '@/components/slider-input';
 import { MAX_HEIGHT_FT, MAX_WEIGHT_LBS, MIN_HEIGHT_FT, MIN_WEIGHT_LBS } from '.';
-import { convertWeight, getMetricHeightFromImperial } from '@/lib/unitsConvert'
+import { convertWeight, getMetricHeightFromImperial } from '@/lib/utils/units-convert'
 
 export const WeightHeightSliderImperial = () => {
     const selectedWeightLbs = useGetStartedStore((state) => state.weightLbs);
