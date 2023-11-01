@@ -88,7 +88,7 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
             // eslint-disable-next-line react/display-name
             return () => <></>;
         }), {
-        loading: Loading,
+        loading: () => <Loading />,
         ssr: false,
     });
 
@@ -106,7 +106,10 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
                     isSubmitting={isSubmitting}
                 />
                 <div className="container pt-6 md:pt-8" >
-                    {isSubmitting ? <Loading /> : <StepComponent />}
+                    {isSubmitting
+                        ? <Loading label="Generating the ideal workout..." />
+                        : <StepComponent />
+                    }
                 </div>
                 <FormNavFooter
                     currentStep={currentStep}
