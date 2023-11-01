@@ -33,7 +33,7 @@ const _FormNavFooter = ({ currentStep, isLastStep, handlePrevious, submitError, 
                 </span>
             }
             <div className="container mx-auto flex justify-between items-center relative">
-                {currentStep > 1 && (
+                {(currentStep > 1 && !submitting) && (
                     <Button
                         onClick={handlePrevious}
                         className="bg-neutral-500 text-white px-8 py-4 rounded-md md:text-xl"
