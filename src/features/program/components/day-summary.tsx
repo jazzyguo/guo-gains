@@ -13,7 +13,7 @@ const _DaySummary = ({ day }: Props) => (
         {day.name !== REST_DAY.name ? (
             (day as ProgramWorkoutDay).workouts.map((workout: Workout) => {
                 const { order, reps, sets, exercise } = workout
-                console.log(workout)
+
                 if (!exercise) {
                     return null
                 }
@@ -42,7 +42,7 @@ const _DaySummary = ({ day }: Props) => (
                             </p>
                             <p>
                                 <span className="font-bold">Reps: </span>
-                                <span className="text-neutral-500">{reps - 4} - {reps}</span>
+                                <span className="text-neutral-500">{reps} - {reps + 4}</span>
                             </p>
                         </div>
                         <p className="font-bold">Description:</p>

@@ -25,22 +25,22 @@ type CreatedProgramDay = {
 const sortAndOrderExercises = (
   exercises: CreatedExercise[],
 ): CreatedExercise[] => {
-  const sortedExercises = [];
-  const uniqueExercises = new Set();
+  const sortedExercises = [...exercises];
+  // const uniqueExercises = new Set();
 
-  for (const order of EXERCISE_ORDER) {
-    for (const exercise of exercises) {
-      if (
-        (exercise.exercise.category === order ||
-          (exercise.exercise.category === "accessory" &&
-            exercise.exercise.tags!.some((tag) => tag.slug === order))) &&
-        !uniqueExercises.has(exercise.exercise.id)
-      ) {
-        sortedExercises.push(exercise);
-        uniqueExercises.add(exercise.exercise.id);
-      }
-    }
-  }
+  // for (const order of EXERCISE_ORDER) {
+  //   for (const exercise of exercises) {
+  //     if (
+  //       (exercise.exercise.category === order ||
+  //         (exercise.exercise.category === "accessory" &&
+  //           exercise.exercise.tags!.some((tag) => tag.slug === order))) &&
+  //       !uniqueExercises.has(exercise.exercise.id)
+  //     ) {
+  //       sortedExercises.push(exercise);
+  //       uniqueExercises.add(exercise.exercise.id);
+  //     }
+  //   }
+  // }
 
   const mappedExercises = sortedExercises.map((exercise, index) => ({
     ...exercise,
@@ -84,32 +84,17 @@ const getMainCompoundExercise = async (
 const getRandomRequiredExercises = async (
   requiredTags: BaseTag[],
 ): Promise<CreatedExercise[]> => {
-  const randomExercises = [];
-  const reqTagSlugs = requiredTags.map((tag) => tag.slug);
-
-  // set up count and skip for choosing a random exercise for each req tag
-  const requiredExercisesCount = await prisma.exercise.count({
-    where: {
-      slug: {
-        in: reqTagSlugs,
-      },
-    },
-  });
+  const requiredExercises = [];
 
   // add exercises based on required tags
   for (const requiredTag of [...requiredTags, { slug: "body-weight" }]) {
-    const randomReqExerciseSkip = Math.floor(
-      Math.random() * requiredExercisesCount,
-    );
-
     // Find exercises with required tags and add them to the program
     const exercisesByRequiredTag = await prisma.exercise.findMany({
-      take: 1,
-      skip: randomReqExerciseSkip,
       include: {
         tags: true,
       },
       where: {
+        category: "accessory",
         tags: {
           some: {
             slug: requiredTag.slug,
@@ -118,15 +103,21 @@ const getRandomRequiredExercises = async (
       },
     });
 
-    if (!!exercisesByRequiredTag.length) {
-      randomExercises.push({
+    const randomReqExercise =
+      exercisesByRequiredTag[
+        Math.floor(Math.random() * exercisesByRequiredTag.length)
+      ];
+
+    if (randomReqExercise) {
+      requiredExercises.push({
         reps: 8,
         sets: 4,
-        exercise: exercisesByRequiredTag[0]!,
+        exercise: randomReqExercise!,
       });
     }
   }
-  return randomExercises;
+  console.log({ requiredExercises });
+  return requiredExercises;
 };
 
 const getAdditionalExercises = async (
@@ -244,6 +235,12 @@ export const determineProgramDays = async (
         day: dayNumber,
         workouts: orderedExercises,
       };
+
+      console.log({
+        createdProgramDay,
+        exercisesToAdd,
+        requiredExercisesToAdd,
+      });
 
       createdDays.push(createdProgramDay);
     }
