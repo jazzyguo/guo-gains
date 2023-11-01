@@ -70,7 +70,6 @@ const _FormPath = ({ currentStep, latestStep, className, isSubmitting }: Props) 
                                 `,
                                 isSubmitting && completeColorClasses, !
                                 isSubmitting && isActiveStep && 'animate-pulsing',
-
                             )}
                         >
                             {stepIcon}
