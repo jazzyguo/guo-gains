@@ -8,9 +8,9 @@ import { NextResponse } from "next/server";
 
 export const POST = async (request: Request): Promise<any> => {
   try {
-    let formData: CreateProgramSchemaType = await request.json();
+    const formData: CreateProgramSchemaType = await request.json();
 
-    // form validation 
+    // form validation
     const parsed = CreateProgramSchema.parse(formData);
 
     const program = await createProgram(parsed);
@@ -18,7 +18,7 @@ export const POST = async (request: Request): Promise<any> => {
     return NextResponse.json({
       program,
     });
-  } catch (e: unknown) {
+  } catch (e: any) {
     if (e instanceof ZodError) {
       return NextResponse.json(
         {

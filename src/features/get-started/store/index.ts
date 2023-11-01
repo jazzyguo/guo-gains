@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { FormSchema, type FormSchemaType } from "../lib/schema";
-import Router from "next/router";
 
 // tracks flow of the steps form
 // as well as the form data across steps

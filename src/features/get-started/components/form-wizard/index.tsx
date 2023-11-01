@@ -1,8 +1,8 @@
-import { useEffect, type MouseEvent, useCallback } from 'react';
+import { useEffect, type MouseEvent, useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { useGetStartedStore, NUMBER_STEPS } from '@/features/get-started';
-import { FormSchemaType } from '../../lib/schema';
+import { type FormSchemaType } from '../../lib/schema';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Loading } from '@/components/ui/loading';
 import { FormMobileHeader } from './form-mobile-header';
@@ -23,6 +23,9 @@ export const BASE_URL = '/get-started'
  */
 export const GetStartedFormWizard = ({ currentStep }: Props) => {
     const router = useRouter();
+
+    const [submitting, setSubmitting] = useState<boolean>(false)
+    const [submitError, setSubmitError] = useState<string | null>(null)
 
     const methods = useForm<FormSchemaType>()
 
@@ -62,11 +65,13 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
         // only pass in the units provided for the relevant selected unit
         // ie. weight_lbs with unit === imperial
         if (isLastStep) {
+            setSubmitting(true)
             const { programId, error } = await submitForm()
             if (programId) {
                 router.push(`/program/${programId}`)
             } else {
-                // set error
+                setSubmitting(false)
+                setSubmitError(error)
             }
         } else {
             handleNext()
@@ -100,12 +105,14 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
                     latestStep={latestStep}
                 />
                 <div className="container pt-6 md:pt-8" >
-                    <StepComponent />
+                    {submitting ? <Loading /> : <StepComponent />}
                 </div>
                 <FormNavFooter
                     currentStep={currentStep}
                     handlePrevious={handlePrevious}
                     isLastStep={isLastStep}
+                    submitError={submitError}
+                    submitting={submitting}
                 />
             </form>
         </FormProvider>

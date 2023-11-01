@@ -8,13 +8,15 @@ type Props = {
     currentStep: number;
     isLastStep: boolean;
     handlePrevious: (e: MouseEvent<HTMLButtonElement>) => void;
+    submitError: string | null;
+    submitting: boolean;
 }
 
 /**
  * Footer to identify current step of the steps form 
  * as well as going to next/previous step
  */
-const _FormNavFooter = ({ currentStep, isLastStep, handlePrevious }: Props) => {
+const _FormNavFooter = ({ currentStep, isLastStep, handlePrevious, submitError, submitting }: Props) => {
     const { errors } = useFormState()
 
     const latestStep = useGetStartedStore(state => state.latestStep);
@@ -25,9 +27,9 @@ const _FormNavFooter = ({ currentStep, isLastStep, handlePrevious }: Props) => {
         <div
             className="fixed bottom-0 left-0 w-full bg-neutral-100 border-t border-gray-200 w-full flex flex-col items-center py-4"
         >
-            {!canSubmit &&
+            {(!canSubmit || submitError) &&
                 <span className="text-sm text-red-500 pb-4">
-                    Please fix errors
+                    {submitError ?? 'Please fix errors'}
                 </span>
             }
             <div className="container mx-auto flex justify-between items-center relative">
@@ -47,12 +49,12 @@ const _FormNavFooter = ({ currentStep, isLastStep, handlePrevious }: Props) => {
                 <Button
                     type="submit"
                     className={`${canSubmit && 'bg-gradient-primary'} hover:bg-blue-600 text-white px-8 py-4 rounded-md md:text-xl ml-auto`}
-                    disabled={!canSubmit}
+                    disabled={!canSubmit || submitting}
                 >
                     {isLastStep ? 'Submit' : 'Next'}
                 </Button>
             </div>
-        </div>
+        </div >
     );
 }
 
