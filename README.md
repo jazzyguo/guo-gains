@@ -13,6 +13,4 @@ Alternate exercises for each variation can be viewed as well to best suit your p
 
 Generated workout plans can be shared with unique urls.
 
-Exercise GIF examples taken from https://exrx.net/
-
 [Live Demo](https://guo-gains.vercel.app/)
