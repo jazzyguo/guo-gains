@@ -8,7 +8,7 @@ type Props = {
     currentStep: number;
     isLastStep: boolean;
     handlePrevious: (e: MouseEvent<HTMLButtonElement>) => void;
-    submitError: string | null;
+    submitError: string | undefined;
     submitting: boolean;
 }
 

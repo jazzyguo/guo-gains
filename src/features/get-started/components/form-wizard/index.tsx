@@ -25,7 +25,7 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
     const router = useRouter();
 
     const [submitting, setSubmitting] = useState<boolean>(false)
-    const [submitError, setSubmitError] = useState<string | null>(null)
+    const [submitError, setSubmitError] = useState<string | undefined>(undefined)
 
     const methods = useForm<FormSchemaType>()
 

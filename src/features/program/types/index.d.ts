@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 import type {
   User,
   Exercise,
@@ -33,10 +32,12 @@ export type ProgramWorkoutDay = {
 
 export type ProgramDay = ProgramWorkoutDay | RestDay;
 
+export type UserWithInformation = User & {
+  info: UserInformation;
+};
+
 export type GeneratedProgram = Program & {
-  user: Omit<User, "programId"> & {
-    userInformation: Omit<UserInformation, "userId">;
-  };
+  user: UserWithInformation;
   days: ProgramWorkoutDay[];
 };
 

@@ -7,16 +7,12 @@ type Props = {
     selectedDay?: ProgramDay;
 }
 
-const _ProgramSummary = ({ program, selectedDay }: Props) => {
-    const { user, days } = program
-
-    return (
-        <div>
-            {selectedDay &&
-                <DaySummary day={selectedDay} />
-            }
-        </div>
-    )
-}
+const _ProgramSummary = ({ program, selectedDay }: Props) => (
+    <div>
+        {selectedDay &&
+            <DaySummary day={selectedDay} />
+        }
+    </div>
+)
 
 export const ProgramSummary = memo(_ProgramSummary)

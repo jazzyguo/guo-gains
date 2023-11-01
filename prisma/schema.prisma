@@ -14,16 +14,15 @@ model BaseTag {
 }
 
 model User {
-    id              String            @id @default(cuid())
-    program         Program?          @relation(fields: [programId], references: [id], onDelete: NoAction)
-    programId       String            @unique
-    userInformation UserInformation[]
+    id        String          @id @default(cuid())
+    program   Program?        @relation(fields: [programId], references: [id], onDelete: NoAction)
+    programId String          @unique
+    info      UserInformation @relation(fields: [infoId], references: [id])
+    infoId    String          @unique
 }
 
 model UserInformation {
     id                   String  @id @default(cuid())
-    user                 User    @relation(fields: [userId], references: [id])
-    userId               String
     age                  Int
     gender               String?
     heightCm             Int
@@ -34,6 +33,7 @@ model UserInformation {
     fitnessGoal          String?
     daysCountGoal        Int
     currentActivityLevel String?
+    User                 User?
 }
 
 model Exercise {

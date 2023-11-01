@@ -40,7 +40,7 @@ export const createProgram = async (
       data: {
         user: {
           create: {
-            userInformation: {
+            info: {
               create: formData,
             },
           },
@@ -51,7 +51,7 @@ export const createProgram = async (
             day: programDay.day,
             workouts: {
               create: programDay.workouts.map((programDayWorkout) => ({
-                order: programDayWorkout.order,
+                order: programDayWorkout.order!,
                 reps: programDayWorkout.reps,
                 sets: programDayWorkout.sets,
                 exercise: {

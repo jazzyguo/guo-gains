@@ -9,14 +9,18 @@ export const getProgram = async (programId: string): Promise<GeneratedProgram | 
         include: {
             user: {
                 include: {
-                    userInformation: true,
+                    info: true,
                 }
             },
             days: {
                 include: {
                     workouts: {
                         include: {
-                            exercise: true,
+                            exercise: {
+                                include: {
+                                    alternatives: true
+                                }
+                            },
                         },
                         orderBy: {
                             order: 'asc'

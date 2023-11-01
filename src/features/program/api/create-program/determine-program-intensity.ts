@@ -48,10 +48,10 @@ export const determineProgramIntensity = (
   let intensity = "low";
 
   for (const level in intensityLevels) {
-    if (intensityScore >= intensityLevels[level]) {
+    if (intensityScore >= intensityLevels[level]!) {
       intensity = level;
     }
   }
 
-  return intensity;
+  return intensity as ProgramIntensity;
 };

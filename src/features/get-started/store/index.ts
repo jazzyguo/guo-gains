@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { FormSchema, type FormSchemaType } from "../lib/schema";
+import { type GeneratedProgram } from "@/features/program/types";
 
 // tracks flow of the steps form
 // as well as the form data across steps
@@ -68,7 +69,9 @@ export const useGetStartedStore = create<StoreState, Middleware>(
           });
 
           if (response.status === 200) {
-            const data = await response.json();
+            const data = (await response.json()) as {
+              program: GeneratedProgram;
+            };
             const programId = data.program.id;
             return { programId };
           }
