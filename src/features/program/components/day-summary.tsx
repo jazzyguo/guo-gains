@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { type ProgramDay, type Workout, type WorkoutDay } from "../types";
+import { type ProgramDay, type Workout, type ProgramWorkoutDay } from "../types";
 import { ExerciseVideo } from "./exercise-video";
 import { RestDay } from "./rest-day";
 import { REST_DAY } from "../lib/consts";
@@ -11,7 +11,7 @@ type Props = {
 const _DaySummary = ({ day }: Props) => (
     <div className="max-w-screen-sm flex flex-col gap-8">
         {day.name !== REST_DAY.name ? (
-            (day as WorkoutDay).workouts.map((workout: Workout) => {
+            (day as ProgramWorkoutDay).workouts.map((workout: Workout) => {
                 const { order, reps, sets, exercise } = workout
 
                 if (!exercise) {

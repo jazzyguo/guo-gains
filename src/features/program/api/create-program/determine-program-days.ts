@@ -136,6 +136,7 @@ const getAdditionalExercises = async (
             slug: randomTagSlug,
           },
         },
+        category: "accessory",
       },
       take: 1,
       skip: randomExerciseSkip,

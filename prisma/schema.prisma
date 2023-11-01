@@ -99,18 +99,18 @@ model WorkoutSplitDay {
 }
 
 model Program {
-    id          String       @id @default(cuid())
-    user        User?
-    programDays ProgramDay[]
+    id   String       @id @default(cuid())
+    user User?
+    days ProgramDay[]
 }
 
 model ProgramDay {
-    id                 String              @id @default(cuid())
-    name               String
-    day                Int
-    program            Program             @relation(fields: [programId], references: [id], onDelete: Cascade)
-    programId          String
-    programDayWorkouts ProgramDayWorkout[]
+    id        String              @id @default(cuid())
+    name      String
+    day       Int
+    program   Program             @relation(fields: [programId], references: [id], onDelete: Cascade)
+    programId String
+    workouts  ProgramDayWorkout[]
 }
 
 model ProgramDayWorkout {

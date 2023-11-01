@@ -34,7 +34,9 @@ export type ProgramWorkoutDay = {
 export type ProgramDay = ProgramWorkoutDay | RestDay;
 
 export type GeneratedProgram = Program & {
-  user: Omit<User, "programId"> & Omit<UserInformation, "userId">;
+  user: Omit<User, "programId"> & {
+    userInformation: Omit<UserInformation, "userId">;
+  };
   days: ProgramWorkoutDay[];
 };
 

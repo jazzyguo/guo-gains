@@ -1,7 +1,8 @@
 import { useEffect, type MouseEvent, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
-import { useGetStartedStore, type FormSchemaType, NUMBER_STEPS } from '@/features/get-started';
+import { useGetStartedStore, NUMBER_STEPS } from '@/features/get-started';
+import { FormSchemaType } from '../../lib/schema';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Loading } from '@/components/ui/loading';
 import { FormMobileHeader } from './form-mobile-header';
@@ -70,7 +71,7 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
         } else {
             handleNext()
         }
-    }, [isLastStep, handleNext, submitForm])
+    }, [isLastStep, handleNext, submitForm, router])
 
     // Load the appropriate step component
     const StepComponent = dynamic(() =>

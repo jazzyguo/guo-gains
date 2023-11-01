@@ -349,7 +349,7 @@ const exercises: ExerciseSeed[] = [
       "Stand with a barbell on the floor, bend at the hips and knees, and lift the barbell by extending your hips and knees.",
     slug: "deadlift",
     category: "compound",
-    tags: ["pull", "hamstrings", "back-upper", "back-lower"],
+    tags: ["pull", "back-upper", "back-lower"],
     alternatives: [],
     videoUrls: [
       "https://www.youtube.com/watch?v=wYREQkVtvEc&ab_channel=AlanThrall",

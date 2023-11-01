@@ -45,11 +45,11 @@ export const createProgram = async (
             },
           },
         },
-        programDays: {
+        days: {
           create: programDays.map((programDay) => ({
             name: programDay.name,
             day: programDay.day,
-            programDayWorkouts: {
+            workouts: {
               create: programDay.workouts.map((programDayWorkout) => ({
                 order: programDayWorkout.order,
                 reps: programDayWorkout.reps,

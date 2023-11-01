@@ -1,21 +1,24 @@
-import { useMemo } from 'react'
-import { mockProgram } from "@/mocks/program"
 import { ProgramSummary, WorkoutDayNav } from "@/features/program"
 import { type NextPage } from "next";
 import { redirect } from 'next/navigation'
 import { type ProgramDay } from "@/features/program/types";
 import { getDayData } from '@/features/program/lib/utils';
+import { getProgram } from '@/features/program/api/get-program';
 
 interface PageParams {
     id: string;
     day_number: string;
 }
 
-const ProgramPage: NextPage<{ params: PageParams }> = ({ params }) => {
+const ProgramPage: NextPage<{ params: PageParams }> = async ({ params }) => {
     const { day_number: dayNumber, id } = params
 
-    const program = mockProgram
+    const program = await getProgram(id)
 
+    if (!program) {
+        throw new Error('Program not found')
+    }
+    console.log({ program })
     const { days } = program
 
     const dayNumberInt = Number(dayNumber)
@@ -24,10 +27,7 @@ const ProgramPage: NextPage<{ params: PageParams }> = ({ params }) => {
         redirect(`/program/${id}/1`)
     }
 
-    const selectedDay: ProgramDay = useMemo(() =>
-        getDayData(days, dayNumberInt)
-        , [days, dayNumberInt]
-    )
+    const selectedDay: ProgramDay = getDayData(days, dayNumberInt)
 
     return (
         <div className="w-full flex flex-col gap-8 items-center pb-8">
