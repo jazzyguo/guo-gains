@@ -7,6 +7,7 @@ type Props = {
     currentStep: number;
     latestStep: number;
     className?: string;
+    isSubmitting: boolean;
 }
 
 const stepIcons: string[] = ['🚶', '🏃',]
@@ -27,7 +28,7 @@ const BarPath = ({ active = false, className }: { active?: boolean, className?: 
  * Clicking can navigate to steps as long as the user doesn't try to access an uncomplete step
  * active, complete, and uncomplete steps all have different color schemes
  */
-const _FormPath = ({ currentStep, latestStep, className }: Props) => {
+const _FormPath = ({ currentStep, latestStep, className, isSubmitting }: Props) => {
     const router = useRouter();
 
     // only allows navigation to completed step - stepTo < latestStep
@@ -58,15 +59,19 @@ const _FormPath = ({ currentStep, latestStep, className }: Props) => {
                         }
                         <div
                             onClick={() => handleClickStep(idx + 1)}
-                            className={`
+                            className={cn(
+                                `
                                     ${stepClasses}
-                                    ${isActiveStep && 'animate-pulsing'}
                                     ${isCompleteStep
                                     ? completeColorClasses
                                     : isActiveStep
                                         ? activeColorClasses
                                         : defaultColorClasses}
-                                `}
+                                `,
+                                isSubmitting && completeColorClasses, !
+                                isSubmitting && isActiveStep && 'animate-pulsing',
+
+                            )}
                         >
                             {stepIcon}
                         </div>
@@ -75,7 +80,7 @@ const _FormPath = ({ currentStep, latestStep, className }: Props) => {
                     </div>
                 )
             })}
-            <div className="relative">🏋️</div>
+            <div className={cn('relative', isSubmitting && 'animate-pulsing')}>🏋️</div>
         </div>
     );
 }

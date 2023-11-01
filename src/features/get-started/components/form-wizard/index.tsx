@@ -24,7 +24,7 @@ export const BASE_URL = '/get-started'
 export const GetStartedFormWizard = ({ currentStep }: Props) => {
     const router = useRouter();
 
-    const [submitting, setSubmitting] = useState<boolean>(false)
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
     const [submitError, setSubmitError] = useState<string | undefined>(undefined)
 
     const methods = useForm<FormSchemaType>({})
@@ -65,12 +65,12 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
         // only pass in the units provided for the relevant selected unit
         // ie. weight_lbs with unit === imperial
         if (isLastStep) {
-            setSubmitting(true)
+            setIsSubmitting(true)
             const { programId, error } = await submitForm()
             if (programId) {
                 router.push(`/program/${programId}`)
             } else {
-                setSubmitting(false)
+                setIsSubmitting(false)
                 setSubmitError(error)
             }
         } else {
@@ -103,16 +103,17 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
                 <FormMobileHeader
                     currentStep={currentStep}
                     latestStep={latestStep}
+                    isSubmitting={isSubmitting}
                 />
                 <div className="container pt-6 md:pt-8" >
-                    {submitting ? <Loading /> : <StepComponent />}
+                    {isSubmitting ? <Loading /> : <StepComponent />}
                 </div>
                 <FormNavFooter
                     currentStep={currentStep}
                     handlePrevious={handlePrevious}
                     isLastStep={isLastStep}
                     submitError={submitError}
-                    submitting={submitting}
+                    isSubmitting={isSubmitting}
                 />
             </form>
         </FormProvider>

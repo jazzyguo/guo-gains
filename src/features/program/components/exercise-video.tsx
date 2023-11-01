@@ -5,7 +5,6 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 
 export const _ExerciseVideo = ({ exercise }: { exercise: Exercise }) => {
     const { gifUrl, poster, videoUrls } = exercise
-    console.log({ videoUrls })
 
     return (
         <div>

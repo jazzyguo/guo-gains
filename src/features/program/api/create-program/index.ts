@@ -35,7 +35,6 @@ export const createProgram = async (
     programIntensity,
   );
 
-  console.log(programDays);
   try {
     const program = await prisma.program.create({
       data: {
