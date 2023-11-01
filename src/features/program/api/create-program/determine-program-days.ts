@@ -9,11 +9,13 @@ import {
   EXERCISE_ORDER,
 } from "../../lib/consts";
 
+type ExerciseWithTags = Exercise & { tags?: BaseTag[] };
+
 type CreatedExercise = {
   order?: number;
   reps: number;
   sets: number;
-  exercise: Exercise & { tags?: BaseTag[] };
+  exercise: ExerciseWithTags;
 };
 
 type CreatedProgramDay = {
@@ -22,27 +24,58 @@ type CreatedProgramDay = {
   workouts: CreatedExercise[];
 };
 
+const filterExercisesByCategory = (
+  exercises: CreatedExercise[],
+  category: string,
+): CreatedExercise[] => {
+  const filtered = exercises.filter(
+    ({ exercise }) => exercise.category === category,
+  );
+  return filtered;
+};
+
 const sortAndOrderExercises = (
   exercises: CreatedExercise[],
 ): CreatedExercise[] => {
-  const sortedExercises = [...exercises];
-  // const uniqueExercises = new Set();
+  const accessoryExercises = filterExercisesByCategory(exercises, "accessory");
 
-  // for (const order of EXERCISE_ORDER) {
-  //   for (const exercise of exercises) {
-  //     if (
-  //       (exercise.exercise.category === order ||
-  //         (exercise.exercise.category === "accessory" &&
-  //           exercise.exercise.tags!.some((tag) => tag.slug === order))) &&
-  //       !uniqueExercises.has(exercise.exercise.id)
-  //     ) {
-  //       sortedExercises.push(exercise);
-  //       uniqueExercises.add(exercise.exercise.id);
-  //     }
-  //   }
-  // }
+  // iterate through order and add unique instances of exercise
+  const sortedAccessoryExercises = EXERCISE_ORDER.reduce(
+    (acc: CreatedExercise[], order: string) => {
+      const foundExercises = accessoryExercises.filter(
+        ({ exercise: { tags } }) =>
+          tags?.map(({ slug }) => slug).includes(order),
+      );
 
-  const mappedExercises = sortedExercises.map((exercise, index) => ({
+      for (const foundExercise of foundExercises) {
+        const exists = acc.find(
+          ({ exercise: { id } }) => id === foundExercise.exercise.id,
+        );
+
+        if (!exists) {
+          acc.push(foundExercise);
+        }
+      }
+
+      return acc;
+    },
+    [],
+  );
+
+  // add compound in beggining and body-weight categories at end
+  const compoundExercises = filterExercisesByCategory(exercises, "compound");
+  const bodyWeightExercises = filterExercisesByCategory(
+    exercises,
+    "body-weight",
+  );
+
+  const orderedExercises = [
+    ...compoundExercises,
+    ...sortedAccessoryExercises,
+    ...bodyWeightExercises,
+  ];
+
+  const mappedExercises = orderedExercises.map((exercise, index) => ({
     ...exercise,
     order: index + 1,
   }));
@@ -73,6 +106,7 @@ const getMainCompoundExercise = async (
 
   if (compoundExercise) {
     result = {
+      order: 1,
       reps: 6,
       sets: 5,
       exercise: compoundExercise,
@@ -116,21 +150,16 @@ const getRandomRequiredExercises = async (
       });
     }
   }
-  console.log({ requiredExercises });
+
   return requiredExercises;
 };
 
 const getAdditionalExercises = async (
   tagSlugs: string[],
   numberNeeded: number,
-  exercisesCount: number,
   currentExercises: CreatedExercise[],
 ): Promise<CreatedExercise[]> => {
   const additionalExercises: CreatedExercise[] = [];
-
-  // // fetch additional exercises based on tag slugs and numberNeeded
-  // // through a random iteration of tagSlugs
-  // const randomExerciseSkip = Math.floor(Math.random() * exercisesCount);
 
   const exercises = await prisma.exercise.findMany({
     where: {
@@ -150,7 +179,6 @@ const getAdditionalExercises = async (
       tags: true,
     },
     take: numberNeeded,
-    //  skip: randomExerciseSkip,
   });
 
   for (const exercise of exercises) {
@@ -207,20 +235,11 @@ export const determineProgramDays = async (
       const numberOfExercisesNeeded =
         NUMBER_EXERCISES_BY_INTENSITY[programIntensity];
 
-      const exercisesCount = await prisma.exercise.count({
-        where: {
-          slug: {
-            in: tagSlugs,
-          },
-        },
-      });
-
       if (exercisesToAdd.length < numberOfExercisesNeeded) {
         const numberToFetch = numberOfExercisesNeeded - exercisesToAdd.length;
         const additionalExercises = await getAdditionalExercises(
           tagSlugs,
           numberToFetch,
-          exercisesCount,
           exercisesToAdd,
         );
 
@@ -235,12 +254,6 @@ export const determineProgramDays = async (
         day: dayNumber,
         workouts: orderedExercises,
       };
-
-      console.log({
-        createdProgramDay,
-        exercisesToAdd,
-        requiredExercisesToAdd,
-      });
 
       createdDays.push(createdProgramDay);
     }

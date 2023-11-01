@@ -1,27 +1,28 @@
 import { type RestDay, type ProgramIntensity } from "@/features/program/types";
 
 export const EXERCISE_ORDER: string[] = [
-  "compound",
-
   // push
-  "chest",
-  "deltoids",
+  "chest-mid",
+  "chest-upper",
+  "chest-lower",
+  "deltoids-side",
+  "deltoids-front",
   "triceps",
 
   // pull
   "back-upper",
   "back-lower",
   "lats",
+  "deltoids-rear",
   "biceps",
   "traps",
 
   // legs
+  "glutes",
   "quads",
   "hamstring",
   "hips",
   "calves",
-
-  "body-weight",
 ];
 
 export const REST_DAY: RestDay = {
