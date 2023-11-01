@@ -8,7 +8,7 @@ export const _ExerciseVideo = ({ exercise }: { exercise: Exercise }) => {
 
     return (
         <div>
-            <video muted playsInline autoPlay loop poster={poster!} className="mx-auto">
+            <video muted playsInline autoPlay loop poster={poster!} className="w-full h-full mx-auto">
                 <source src={gifUrl!} />
             </video>
             <div>
