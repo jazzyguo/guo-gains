@@ -18,7 +18,7 @@ const ProgramPage: NextPage<{ params: PageParams }> = async ({ params }) => {
     if (!program) {
         throw new Error('Program not found')
     }
-    console.log({ program })
+
     const { days } = program
 
     const dayNumberInt = Number(dayNumber)

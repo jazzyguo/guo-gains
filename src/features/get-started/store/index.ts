@@ -59,8 +59,6 @@ export const useGetStartedStore = create<StoreState, Middleware>(
 
           const formData = FormSchema.parse(state);
 
-          console.log("Submitting Form:", formData);
-
           const response = await fetch("/api/get-started", {
             method: "POST",
             headers: {
