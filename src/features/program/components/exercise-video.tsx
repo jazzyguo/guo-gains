@@ -35,7 +35,9 @@ export const _ExerciseVideo = ({ exercise }: { exercise: Exercise }) => {
                                 style={{ display: "block" }}
                                 className="hover:opacity-50"
                             >
-                                <YouTubeIcon className="fill-red-500 mr-1" />
+                                <YouTubeIcon className="mr-1" sx={{
+                                    fill: '#ef4444'
+                                }} />
                                 Video {videoUrls.length > 1 ? index + 1 : ''}
                             </Link>
                         ))}
