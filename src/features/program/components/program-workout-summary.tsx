@@ -8,7 +8,7 @@ type Props = {
     day: ProgramDay;
 };
 
-const _DaySummary = ({ day }: Props) => (
+const _ProgramWorkoutSummary = ({ day }: Props) => (
     <div className="max-w-screen-sm flex flex-col gap-8">
         {day.name !== REST_DAY.name ? (
             (day as ProgramWorkoutDay).workouts.map((workout: Workout) => {
@@ -56,4 +56,4 @@ const _DaySummary = ({ day }: Props) => (
     </div>
 );
 
-export const DaySummary = memo(_DaySummary);
+export const ProgramWorkoutSummary = memo(_ProgramWorkoutSummary);

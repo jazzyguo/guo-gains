@@ -1,4 +1,4 @@
-import { ProgramSummary, WorkoutDayNav } from "@/features/program"
+import { ProgramWorkoutSummary, WorkoutDayNav } from "@/features/program"
 import { type NextPage } from "next";
 import { redirect } from 'next/navigation'
 import { type ProgramDay } from "@/features/program/types";
@@ -38,9 +38,8 @@ const ProgramPage: NextPage<{ params: PageParams }> = async ({ params }) => {
                 dayNumberInt={dayNumberInt}
             />
             <div className="container text-lg flex flex-col items-center mx-auto max-w-screen-lg">
-                <ProgramSummary
-                    program={program}
-                    selectedDay={selectedDay}
+                <ProgramWorkoutSummary
+                    day={selectedDay}
                 />
             </div>
         </div>

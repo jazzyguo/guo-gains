@@ -11,6 +11,7 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
+import { CopyButton } from "@/components/copy-button"
 import { cn } from "@/lib/utils"
 import { getDayData } from '@/features/program/lib/utils';
 
@@ -30,13 +31,19 @@ const DAY_NUMBERS = [1, 2, 3, 4, 5, 6, 7]
  */
 const _WorkoutDayNav = ({ dayNumberInt, days, programId, selectedDay }: Props) =>
 (
-    <div className="py-4 lg:py-0 w-full flex justify-center sticky top-0 bg-neutral-100 border-t border-gray-200 z-[60]">
+    <div className="py-4 lg:py-0 w-full flex justify-center sticky top-0 bg-neutral-100 border-t border-gray-200 z-[60] flex-col">
         <div
-            className="hidden lg:grid w-full gap-6 container max-w-screen-lg container"
+            className="hidden lg:grid w-full gap-6 container max-w-screen-lg container relative"
             style={{
                 gridTemplateColumns: "repeat(auto-fill, minmax(115px, 1fr))"
             }}
         >
+            <CopyButton
+                textToCopy={`${process.env.VERCEL_URL}/program/${programId}`}
+                label="Share this program"
+                textToShow="Click to copy URL"
+                className="absolute top-40 right-[0]"
+            />
             {DAY_NUMBERS.map((dayNumber) => {
                 const isSelected = dayNumberInt === dayNumber
                 const dayData = getDayData(days, dayNumber)
@@ -60,6 +67,11 @@ const _WorkoutDayNav = ({ dayNumberInt, days, programId, selectedDay }: Props) =
             })}
         </div>
         <div className="relative w-full flex lg:hidden gap-4 px-4 justify-end container">
+            <CopyButton
+                textToCopy={`${process.env.VERCEL_URL}/program/${programId}`}
+                label="Share"
+                className="absolute top-14 right-0"
+            />
             <div className="text-xl font-bold">
                 {selectedDay.name}
             </div>

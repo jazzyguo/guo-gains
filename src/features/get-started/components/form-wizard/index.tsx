@@ -27,7 +27,7 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
     const [submitting, setSubmitting] = useState<boolean>(false)
     const [submitError, setSubmitError] = useState<string | undefined>(undefined)
 
-    const methods = useForm<FormSchemaType>()
+    const methods = useForm<FormSchemaType>({})
 
     const latestStep = useGetStartedStore(state => state.latestStep);
     const setLatestStep = useGetStartedStore(state => state.setLatestStep)
