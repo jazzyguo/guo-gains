@@ -20,7 +20,7 @@ export const EXERCISE_ORDER: string[] = [
   // legs
   "glutes",
   "quads",
-  "hamstring",
+  "hamstrings",
   "hips",
   "calves",
 ];
