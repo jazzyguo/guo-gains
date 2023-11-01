@@ -39,7 +39,7 @@ const _WorkoutDayNav = ({ dayNumberInt, days, programId, selectedDay }: Props) =
             }}
         >
             <CopyButton
-                textToCopy={`${process.env.VERCEL_URL}/program/${programId}`}
+                textToCopy={`${process.env.NEXT_BASE_URL}/program/${programId}`}
                 label="Share this program"
                 textToShow="Click to copy URL"
                 className="absolute top-40 right-[0]"
