@@ -14,9 +14,10 @@ type ExerciseWithAlternatives = Exercise & {
 };
 
 export type Workout = {
+  minutes?: number;
   order: number;
-  reps: number;
-  sets: number;
+  reps?: number;
+  sets?: number;
   exercise: ExerciseWithAlternatives;
 };
 

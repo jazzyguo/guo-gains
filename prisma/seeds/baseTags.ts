@@ -22,6 +22,7 @@ const tags = [
   "traps",
   "push",
   "pull",
+  "cardio",
 ];
 
 export const seedBaseTags = async () => {

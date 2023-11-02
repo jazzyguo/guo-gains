@@ -1,11 +1,11 @@
-import { PrismaClient, Exercise } from "@prisma/client";
+import { PrismaClient, type Exercise } from "@prisma/client";
 const prisma = new PrismaClient();
 
 type ExerciseSeed = Omit<Exercise, "id" | "videoUrls"> & {
   alternatives?: string[];
   tags?: string[];
   videoUrls?: string[];
-  category: "compound" | "accessory" | "body-weight";
+  category: "compound" | "accessory" | "body-weight" | "cardio";
 };
 
 const exercises: ExerciseSeed[] = [
@@ -763,6 +763,73 @@ const exercises: ExerciseSeed[] = [
     alternatives: [],
     tags: ["calves"],
     category: "accessory",
+  },
+  {
+    name: "High-Intensity Interval Training (HIIT)",
+    poster: "",
+    gifUrl: "",
+    description:
+      "HIIT is a high-intensity cardio workout that alternates short bursts of intense exercise with brief periods of rest or lower-intensity activity.",
+    directions:
+      "Perform intense exercises for a short duration (e.g., 30 seconds) followed by a brief rest (e.g., 10 seconds) and repeat.",
+    slug: "hiit",
+    alternatives: [],
+    tags: [],
+    category: "cardio",
+  },
+  {
+    name: "Treadmill Running",
+    poster: "",
+    gifUrl: "",
+    description:
+      "Treadmill running is a classic cardio exercise that involves running on a motorized treadmill.",
+    directions:
+      "Set your desired speed and run on the treadmill. Adjust the incline for added intensity.",
+    slug: "treadmill-running",
+    alternatives: ["stair-master"],
+    tags: [],
+    category: "cardio",
+  },
+  {
+    name: "Stair Master",
+    poster: "",
+    gifUrl: "",
+    description:
+      "The Stair Master is a cardio exercise that involves using a specialized exercise machine with moving stairs to simulate stair climbing.",
+    directions:
+      "Step onto the Stair Master machine, set your desired intensity level, and start climbing the moving stairs.",
+    slug: "stair-master",
+    alternatives: ["treadmill-running"],
+    tags: [],
+    category: "cardio",
+  },
+  {
+    name: "Rowing",
+    poster: "",
+    gifUrl: "",
+    description:
+      "Rowing is a full-body cardio workout that involves using a rowing machine with cables to simulate rowing on water.",
+    directions:
+      "Sit on the rowing machine, grab the handles, and perform a rowing motion with your legs and arms.",
+    slug: "rowing",
+    alternatives: ["assault-bike"],
+    tags: [],
+    category: "cardio",
+  },
+  {
+    name: "Assault Bike",
+    poster:
+      "https://media.musclewiki.com/media/uploads/og-male-Cardio-cardio-assault-bike-side.png",
+    gifUrl:
+      "https://media.musclewiki.com/media/uploads/videos/branded/male-Cardio-cardio-assault-bike-side.mp4#t=0.1",
+    description:
+      "The Assault Bike is a cardio exercise that involves using a stationary bike with handles for both upper and lower body workouts. It provides a full-body, high-intensity workout.",
+    directions:
+      "Sit on the Assault Bike, grip the handles, and pedal with your legs while pushing and pulling the handles to engage your upper body.",
+    slug: "assault-bike",
+    alternatives: ["rowing"],
+    tags: [],
+    category: "cardio",
   },
 ];
 

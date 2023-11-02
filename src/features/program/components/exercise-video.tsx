@@ -4,30 +4,36 @@ import Link from "next/link";
 import YouTubeIcon from '@mui/icons-material/YouTube';
 
 export const _ExerciseVideo = ({ exercise }: { exercise: Exercise }) => {
-    const { gifUrl, poster, videoUrls } = exercise
+    const { gifUrl, poster, videoUrls, id } = exercise
+
+    if (!gifUrl && !poster) {
+        return null
+    }
 
     return (
         <div>
             <video muted playsInline autoPlay loop poster={poster!} className="w-full h-full mx-auto">
                 <source src={gifUrl!} />
             </video>
-            <div>
-                <Link
-                    href="https://musclewiki.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-blue-400"
-                >
-                    Source
-                </Link>
-            </div>
+            {gifUrl && gifUrl.includes('musclewiki') &&
+                <div>
+                    <Link
+                        href="https://musclewiki.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-blue-400"
+                    >
+                        Source
+                    </Link>
+                </div>
+            }
             {videoUrls && !!videoUrls.length && (
                 <div className="flex items-center text-sm gap-1">
                     <span>Video Tutorials:</span>
                     <div className="flex gap-2">
                         {videoUrls.map((url, index) => (
                             <Link
-                                key={index}
+                                key={`video-${id}`}
                                 href={url}
                                 target="_blank"
                                 rel="noopener noreferrer"

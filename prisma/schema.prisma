@@ -116,8 +116,9 @@ model ProgramDay {
 model ProgramDayWorkout {
     id    String @id @default(cuid())
     order Int
-    reps  Int
-    sets  Int
+    reps  Int?
+    sets  Int?
+    minutes Int?
 
     exercise     Exercise?   @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
     exerciseId   String?

@@ -80,6 +80,12 @@ export const workoutDays: SeededWorkoutDay[] = [
     ],
     requiredTags: ["chest-mid", "quads", "lats", "biceps", "triceps"],
   },
+  {
+    slug: "cardio-day",
+    name: "Cardio Day",
+    tags: ["cardio"],
+    requiredTags: [],
+  },
 ];
 
 export const seedWorkoutDays = async () => {

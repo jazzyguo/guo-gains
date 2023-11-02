@@ -1,20 +1,24 @@
 import { type BaseTag, type Exercise } from "@prisma/client";
 import {
-  type ProgramIntensity,
   type WorkoutSplitWithAssociations,
+  type ProgramIntensity,
+  type WorkoutSplitDayWithAssociations,
 } from "../../types";
 import { prisma } from "@/lib/prisma";
 import {
   NUMBER_EXERCISES_BY_INTENSITY,
   EXERCISE_ORDER,
 } from "../../lib/consts";
+import sampleSize from "lodash/sampleSize";
+import sample from "lodash/sample";
 
 type ExerciseWithTags = Exercise & { tags?: BaseTag[] };
 
 type CreatedExercise = {
   order?: number;
-  reps: number;
-  sets: number;
+  reps?: number;
+  sets?: number;
+  minutes?: number;
   exercise: ExerciseWithTags;
 };
 
@@ -141,10 +145,7 @@ const getRandomRequiredExercises = async (
       },
     });
 
-    const randomReqExercise =
-      exercisesByRequiredTag[
-        Math.floor(Math.random() * exercisesByRequiredTag.length)
-      ];
+    const randomReqExercise = sample(exercisesByRequiredTag);
 
     if (randomReqExercise) {
       requiredExercises.push({
@@ -196,6 +197,98 @@ const getAdditionalExercises = async (
   return additionalExercises;
 };
 
+// add cardio days instead of a normal program split day if weight loss is wanted
+// based on 25% of the users picked # of days to workout
+const addCardioDays = async (
+  days: WorkoutSplitDayWithAssociations[],
+): Promise<WorkoutSplitDayWithAssociations[]> => {
+  const updatedDays = [...days];
+
+  const cardioDay = await prisma.workoutDay.findFirst({
+    include: {
+      tags: true,
+      requiredTags: true,
+    },
+    where: {
+      tags: {
+        some: {
+          slug: {
+            in: ["cardio"],
+          },
+        },
+      },
+    },
+  });
+
+  if (cardioDay) {
+    const cardioSplitDay = {
+      id: "cardio-day",
+      name: "Cardio Day",
+      hasMainExercise: false,
+      workoutSplitId: "",
+      workoutDayId: cardioDay.id,
+      workoutDay: cardioDay,
+    };
+
+    // we just replace days 1 & 5 with cardio
+    const daysOfCardio = Math.min(Math.ceil(days.length * 0.25), 2);
+
+    for (let i = 0; i < daysOfCardio; i++) {
+      const dayToReplace = i === 0 ? 1 : 5;
+      const dayToReplaceIndex = days.findIndex(
+        ({ day }) => day === dayToReplace,
+      );
+      updatedDays[dayToReplaceIndex] = {
+        ...cardioSplitDay,
+        day: dayToReplace,
+      };
+    }
+  }
+
+  return updatedDays;
+};
+
+const getCardioDayExercises = async (): Promise<CreatedExercise[]> => {
+  const hiitExercise = await prisma.exercise.findFirst({
+    include: {
+      tags: true,
+    },
+    where: {
+      slug: "hiit",
+    },
+  });
+
+  const cardioExercises = await prisma.exercise.findMany({
+    include: {
+      tags: true,
+    },
+    where: {
+      category: "cardio",
+      slug: {
+        not: "hiit",
+      },
+    },
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  const randomCardioExercises = sampleSize(cardioExercises, 2) as Exercise[];
+
+  const hiitExerciseToAdd = {
+    order: 1,
+    minutes: 15,
+    exercise: hiitExercise,
+  };
+
+  const cardioExercisesToAdd = randomCardioExercises.map(
+    (cardioExercise, index) => ({
+      order: index + 2,
+      minutes: 20,
+      exercise: cardioExercise,
+    }),
+  );
+
+  return [hiitExerciseToAdd as CreatedExercise, ...cardioExercisesToAdd];
+};
 /**
  * The goal is iterate through each day and add exercises
  * we add a main exercise if needed,
@@ -205,12 +298,21 @@ const getAdditionalExercises = async (
 export const determineProgramDays = async (
   programSplit: WorkoutSplitWithAssociations,
   programIntensity: ProgramIntensity,
+  fitnessGoal: string,
 ): Promise<CreatedProgramDay[]> => {
   const createdDays = [];
-  const { days } = programSplit;
+  const { days }: { days: WorkoutSplitDayWithAssociations[] } = programSplit;
+
+  const shouldIncludeCardio = fitnessGoal === "lose-weight";
+
+  let programDays = [...days];
+
+  if (shouldIncludeCardio) {
+    programDays = await addCardioDays(days);
+  }
 
   // iterate through the days in the workout split
-  for (const day of days) {
+  for (const day of programDays) {
     if (day) {
       // get information about each day and get tags
       const { hasMainExercise, workoutDay, day: dayNumber } = day;
@@ -229,37 +331,46 @@ export const determineProgramDays = async (
         }
       }
 
-      const requiredExercisesToAdd =
-        await getRandomRequiredExercises(requiredTags);
+      if (!tagSlugs.includes("cardio")) {
+        const requiredExercisesToAdd =
+          await getRandomRequiredExercises(requiredTags);
 
-      exercisesToAdd.push(...requiredExercisesToAdd);
+        exercisesToAdd.push(...requiredExercisesToAdd);
 
-      // now we add exercises depending on program intensity
-      // making sure to not hit dupes
-      const numberOfExercisesNeeded =
-        NUMBER_EXERCISES_BY_INTENSITY[programIntensity];
+        // now we add exercises depending on program intensity
+        // making sure to not hit dupes
+        const numberOfExercisesNeeded =
+          NUMBER_EXERCISES_BY_INTENSITY[programIntensity];
 
-      if (exercisesToAdd.length < numberOfExercisesNeeded) {
-        const numberToFetch = numberOfExercisesNeeded - exercisesToAdd.length;
-        const additionalExercises = await getAdditionalExercises(
-          tagSlugs,
-          numberToFetch,
-          exercisesToAdd,
-        );
+        if (exercisesToAdd.length < numberOfExercisesNeeded) {
+          const numberToFetch = numberOfExercisesNeeded - exercisesToAdd.length;
+          const additionalExercises = await getAdditionalExercises(
+            tagSlugs,
+            numberToFetch,
+            exercisesToAdd,
+          );
 
-        exercisesToAdd.push(...additionalExercises);
+          exercisesToAdd.push(...additionalExercises);
+        }
+
+        // with all appended exercises, we must now order them based on EXERCISE_ORDER
+        const orderedExercises = sortAndOrderExercises(exercisesToAdd);
+
+        const createdProgramDay = {
+          name,
+          day: dayNumber,
+          workouts: orderedExercises,
+        };
+
+        createdDays.push(createdProgramDay);
+      } else {
+        const cardioExercises = await getCardioDayExercises();
+        createdDays.push({
+          name,
+          day: dayNumber,
+          workouts: cardioExercises,
+        });
       }
-
-      // with all appended exercises, we must now order them based on EXERCISE_ORDER
-      const orderedExercises = sortAndOrderExercises(exercisesToAdd);
-
-      const createdProgramDay = {
-        name,
-        day: dayNumber,
-        workouts: orderedExercises,
-      };
-
-      createdDays.push(createdProgramDay);
     }
   }
 

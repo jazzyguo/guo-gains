@@ -17,7 +17,7 @@ import { determineProgramDays } from "./determine-program-days";
 export const createProgram = async (
   formData: CreateProgramSchemaType,
 ): Promise<GeneratedProgram | { message: string }> => {
-  const { daysCountGoal } = formData;
+  const { daysCountGoal, fitnessGoal } = formData;
 
   // choose split based on day
   const programSplit = await determineProgramSplit(daysCountGoal);
@@ -33,6 +33,7 @@ export const createProgram = async (
   const programDays = await determineProgramDays(
     programSplit,
     programIntensity,
+    fitnessGoal,
   );
 
   try {
@@ -54,6 +55,7 @@ export const createProgram = async (
                 order: programDayWorkout.order!,
                 reps: programDayWorkout.reps,
                 sets: programDayWorkout.sets,
+                minutes: programDayWorkout.minutes,
                 exercise: {
                   connect: {
                     id: programDayWorkout.exercise.id,
