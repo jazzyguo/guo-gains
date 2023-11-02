@@ -275,7 +275,7 @@ const getCardioDayExercises = async (): Promise<CreatedExercise[]> => {
 
   const hiitExerciseToAdd = {
     order: 1,
-    minutes: 15,
+    minutes: 10,
     exercise: hiitExercise,
   };
 
