@@ -38,7 +38,7 @@ export const _CopyButton = ({ textToCopy, className, label, textToShow }: Props)
         >
             <span className="text-sm font-bold">{copied ? 'Copied!' : label}</span>
             {textToShow &&
-                <span className="bg-white rounded-full p-2 text-sm font-bold">
+                <span className="bg-white rounded-full p-2 text-xs font-bold">
                     {textToShow}
                 </span>
             }

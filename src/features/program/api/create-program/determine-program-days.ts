@@ -87,8 +87,9 @@ const getMainCompoundExercise = async (
   tagSlugs: string[],
 ): Promise<CreatedExercise | undefined> => {
   let result;
-  // check if there is a main exercise to add
-  const compoundExercise = await prisma.exercise.findFirst({
+
+  // add a random compound lift
+  const compoundExercises = await prisma.exercise.findMany({
     where: {
       tags: {
         some: {
@@ -104,12 +105,15 @@ const getMainCompoundExercise = async (
     },
   });
 
-  if (compoundExercise) {
+  const randomCompoundExercse =
+    compoundExercises[Math.floor(Math.random() * compoundExercises.length)];
+
+  if (randomCompoundExercse) {
     result = {
       order: 1,
       reps: 6,
       sets: 5,
-      exercise: compoundExercise,
+      exercise: randomCompoundExercse,
     };
   }
   return result;
