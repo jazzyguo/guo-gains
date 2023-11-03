@@ -159,6 +159,13 @@ const getRandomRequiredExercises = async (
   return requiredExercises;
 };
 
+//!!todo, when i render alternatives, i need to update
+// this function and the cardio function
+// to not include alternative exercises
+// i can do that by looping # of exercises times that i need to add
+// and reduce the current array of exercises/additional exercises alternatives 
+// into a single array to filter the query on with slug notIn. ill have to change to a findFirst,
+// using a random skip value so i dont query all exercises on each iteration.
 const getAdditionalExercises = async (
   tagSlugs: string[],
   numberNeeded: number,

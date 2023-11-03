@@ -154,9 +154,9 @@ const exercises: ExerciseSeed[] = [
   {
     name: "Front Delt Dumbbell Raise",
     poster:
-      "https://media.musclewiki.com/media/uploads/og-male-dumbbell-front-raise-front.png",
+      "https://media.musclewiki.com/media/uploads/og-male-Dumbbells-dumbbell-front-raise-side.png",
     gifUrl:
-      "https://media.musclewiki.com/media/uploads/videos/branded/male-dumbbell-front-raise-front.mp4#t=0.1",
+      "https://media.musclewiki.com/media/uploads/videos/branded/male-Dumbbells-dumbbell-front-raise-side.mp4#t=0.1",
     description:
       "The front delt dumbbell raise is an exercise for the front deltoid muscles. Hold a dumbbell in each hand and lift them forward.",
     directions:
@@ -451,9 +451,9 @@ const exercises: ExerciseSeed[] = [
   {
     name: "Single Arm Dumbbell Row",
     poster:
-      "https://media.musclewiki.com/media/uploads/og-male-dumbbell-single-arm-row-side.png",
+      "https://media.musclewiki.com/media/uploads/og-male-Dumbbells-dumbbell-single-arm-row-side.png",
     gifUrl:
-      "https://media.musclewiki.com/media/uploads/videos/branded/male-dumbbell-single-arm-row-side.mp4#t=0.1",
+      "https://media.musclewiki.com/media/uploads/videos/branded/male-Dumbbells-dumbbell-single-arm-row-side.mp4#t=0.1",
     description:
       "The single arm dumbbell incline row is an effective exercise to target the upper back and lats. It is performed on a bench with dumbbells.",
     directions:
@@ -467,9 +467,9 @@ const exercises: ExerciseSeed[] = [
   {
     name: "Dumbbell Rear Lateral Raise",
     poster:
-      "https://media.musclewiki.com/media/uploads/og-male-dumbbell-rear-delt-fly-side.png",
+      "https://media.musclewiki.com/media/uploads/og-male-Dumbbells-dumbbell-rear-delt-fly-side.png",
     gifUrl:
-      "https://media.musclewiki.com/media/uploads/videos/branded/male-dumbbell-rear-delt-fly-side.mp4#t=0.1",
+      "https://media.musclewiki.com/media/uploads/videos/branded/male-Dumbbells-dumbbell-rear-delt-fly-side.mp4#t=0.1",
     description:
       "The dumbbel rear lateral raises are an effective exercise to target your rear delts. It is performed standing up and bent over.",
     directions:
@@ -561,9 +561,9 @@ const exercises: ExerciseSeed[] = [
   {
     name: "Standing Barbell Curl",
     poster:
-      "https://media.musclewiki.com/media/uploads/og-male-barbell-curl-front.png",
+      "https://media.musclewiki.com/media/uploads/og-male-Barbell-barbell-curl-side.png",
     gifUrl:
-      "https://media.musclewiki.com/media/uploads/videos/branded/male-barbell-curl-front.mp4#t=0.1",
+      "https://media.musclewiki.com/media/uploads/videos/branded/male-Barbell-barbell-curl-side.mp4#t=0.1",
     description:
       "The standing barbell curl is a classic bicep exercise that isolates the biceps. Use a barbell to perform this exercise.",
     directions:
