@@ -614,9 +614,9 @@ const exercises: ExerciseSeed[] = [
   {
     name: "Dumbbell Shrug",
     poster:
-      "https://media.musclewiki.com/media/uploads/og-male-dumbbell-shrug-front_8g0TOxX.png",
+      "https://media.musclewiki.com/media/uploads/og-male-Dumbbells-dumbbell-shrug-front.png",
     gifUrl:
-      "https://media.musclewiki.com/media/uploads/videos/branded/male-dumbbell-shrug-front_8g0TOxX.mp4#t=0.1",
+      "https://media.musclewiki.com/media/uploads/videos/branded/male-Dumbbells-dumbbell-shrug-front.mp4#t=0.1",
     description:
       "Dumbbell shrugs target the trapezius muscles. Hold a dumbbell in each hand and perform shrugging motions.",
     directions:
