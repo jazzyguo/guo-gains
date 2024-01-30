@@ -1,5 +1,7 @@
+"use client"
+
 import { memo, type MouseEvent } from 'react';
-import { useGetStartedStore } from '@/features/get-started';
+import { useGetStartedStore } from '../../store';
 import { Button } from '@/components/ui/button';
 import { FormPath } from './form-path';
 import { useFormState, } from "react-hook-form";

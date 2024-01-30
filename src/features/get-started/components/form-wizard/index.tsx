@@ -1,18 +1,21 @@
+"use client"
+
 import { useEffect, type MouseEvent, useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
-import { useGetStartedStore, NUMBER_STEPS } from '@/features/get-started';
 import { type FormSchemaType } from '../../lib/schema';
 import { useForm, FormProvider } from 'react-hook-form';
+import { useGetStartedStore } from '../../store';
+import { NUMBER_STEPS, BASE_URL } from '../../lib/consts';
+
 import { Loading } from '@/components/ui/loading';
 import { FormMobileHeader } from './form-mobile-header';
 import { FormNavFooter } from './form-nav-footer';
+import { GetStartedFormWizardHydrator } from './hydrator';
 
 type Props = {
     currentStep: number;
 }
-
-export const BASE_URL = '/get-started'
 
 /**
  * Renders the appropriate step in the current form
@@ -21,7 +24,7 @@ export const BASE_URL = '/get-started'
  * 
  * react-hook-form handles form validation/errors
  */
-export const GetStartedFormWizard = ({ currentStep }: Props) => {
+const GetStartedFormWizard = ({ currentStep }: Props) => {
     const router = useRouter();
 
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
@@ -89,8 +92,8 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
             return () => <></>;
         }), {
         loading: () => <Loading />,
-        ssr: false,
     });
+
 
     return (
         <FormProvider {...methods}>
@@ -122,3 +125,11 @@ export const GetStartedFormWizard = ({ currentStep }: Props) => {
         </FormProvider>
     )
 }
+
+export const HydratedGetStartedFormWizard = (props: {
+    currentStep: number
+}) => (
+    <GetStartedFormWizardHydrator>
+        <GetStartedFormWizard {...props} />
+    </GetStartedFormWizardHydrator>
+) 

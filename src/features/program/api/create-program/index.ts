@@ -1,3 +1,5 @@
+"use server"
+
 import { prisma } from "@/lib/prisma";
 import { type UserInformation } from "@prisma/client";
 
@@ -16,7 +18,7 @@ import { determineProgramDays } from "./determine-program-days";
  */
 export const createProgram = async (
   formData: CreateProgramSchemaType,
-): Promise<GeneratedProgram | { message: string }> => {
+): Promise<GeneratedProgram> => {
   const { daysCountGoal, fitnessGoal } = formData;
 
   // choose split based on day

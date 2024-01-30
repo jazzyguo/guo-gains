@@ -1,3 +1,5 @@
+"use client"
+
 import { AgeSlider } from '../components/age-slider';
 import { GenderSelector } from '../components/gender-selector';
 import { WeightHeightSlider } from '../components/weight-height-slider';

@@ -1,3 +1,5 @@
+"use client"
+
 import { FormPath } from './form-path';
 
 type Props = {

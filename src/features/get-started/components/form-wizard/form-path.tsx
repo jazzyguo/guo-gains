@@ -1,7 +1,9 @@
+"use client"
+
 import { memo } from 'react';
 import { useRouter } from 'next/navigation';
 import { cn } from "@/lib/utils"
-import { BASE_URL } from '.';
+import { BASE_URL } from '../../lib/consts';
 
 type Props = {
     currentStep: number;

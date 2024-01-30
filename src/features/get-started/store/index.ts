@@ -3,6 +3,10 @@ import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { FormSchema, type FormSchemaType } from "../lib/schema";
 import { type GeneratedProgram } from "@/features/program/types";
+import { createProgram } from "@/features/program/api/create-program";
+import {
+  CreateProgramSchema,
+} from "@/features/program/lib/schema";
 
 // tracks flow of the steps form
 // as well as the form data across steps
@@ -58,24 +62,16 @@ export const useGetStartedStore = create<StoreState, Middleware>(
         submitForm: async () => {
           const state = get();
 
-          const formData = FormSchema.parse(state);
+          const parsed = CreateProgramSchema.parse(state);
 
-          const response = await fetch("/api/get-started", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-          });
+          const program: GeneratedProgram = await createProgram(parsed);
 
-          if (response.status === 200) {
-            const data = (await response.json()) as {
-              program: GeneratedProgram;
-            };
-            const programId = data.program.id;
+          if (program) {
+            const programId = program.id;
             return { programId };
+          } else {
+            return { error: "Failed to submit." };
           }
-          return { error: "Failed to submit." };
         },
         reset: () => set(() => ({ ...initialState })),
       })),
