@@ -38,7 +38,7 @@ export type UserWithInformation = User & {
 };
 
 export type GeneratedProgram = Program & {
-  id?: string;
+  id: string;
   user: UserWithInformation;
   days: ProgramWorkoutDay[];
 };
